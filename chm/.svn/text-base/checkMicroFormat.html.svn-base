@@ -1,0 +1,112 @@
+<html><head><title>Check that an input data structure is a valid "Micro Evaluation" structure</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>checkMicroFormat(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   checkMicroFormat">
+<param name="keyword" value=" Check that an input data structure is a valid 'Micro Evaluation' structure">
+</object>
+
+
+<h2>Check that an input data structure is a valid 'Micro Evaluation' structure</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>checkMicroFormat</code> checks that a given data frame meets certain criteria and returns either a modified version
+of that data frame or an "empty" micro evaluation frame with given dose data and column names.  See the details section below
+for more information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+checkMicroFormat(doses, dat, doseCol = "DOSE", microColumnNames = c(doseCol, "MEAN", "SE", "LOWER", "UPPER", "N"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>doses</code></td>
+<td>
+(Required) A vector of doses for which the input data should contain results </td></tr>
+<tr valign="top"><td><code>dat</code></td>
+<td>
+(Required) A data frame to check for validity </td></tr>
+<tr valign="top"><td><code>doseCol</code></td>
+<td>
+(Optional) The "Dose" variable name within the supplied data.  "DOSE" by default </td></tr>
+<tr valign="top"><td><code>microColumnNames</code></td>
+<td>
+(Optional) The names of the columns that should exist in the supplied data frame.  By default, the function will look for variables "MEAN", "SE", "LOWER", "UPPER" and "N" in addition to the "dose" variable specified by argument "doseCol" </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>checkMicroFormat</code> will first perform a series of basic checks on <code>dat</code>.  If any of these fail it will call <code>createEmptyMicro(doses, doseCol, microColumnNames)</code> to generate an "empty" micro evaluation data frame for the given dose vector and column names.  
+</p>
+<p>
+The checks for a valid structure are as follows: 
+(1) <code>dat</code> has at least 1 row
+(2) <code>dat</code> contains all of the columns specified by <code>microColumnNames</code> 
+(3) <code>dat</code>'s "Dose" column should not have any duplicate entries.
+</p>
+<p>
+If all of these checks pass, then <code>checkMicroFormat</code> will construct a new data frame with the following characteristics:
+(1) It will have the same column names as <code>dat</code>, 
+(2) It will have all of those rows, and only those rows of dat that have a dose column entry that matches some element of <code>doses</code>
+(3) Its dose column will contain any elements of <code>doses</code> that are missing from <code>dat</code>'s <code>DOSE</code> column by inserting additional rows padded out by NA as necessary
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame as described above</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createEmptyMicro.html">createEmptyMicro</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  
+  # Check structure of a return object from createEmptyMicro
+  checkMicroFormat(dat = createEmptyMicro(doses = c(10,20,30)),doses=c(10,20))
+  
+  # Construct example dataset
+  x &lt;- data.frame(INTERIM=rep(0, 5), INTERIMC=rep(4, 5), D=c(0, 10, 25, 50, 100), MEAN=1:5, SE=1:5, LOWER=1:5, UPPER=1:5, N=rep(50, 5), DROPPED=rep(0, 5), STOPPED=rep(0, 5)) 
+  #  &gt; x
+  #  INTERIM INTERIMC   D MEAN SE LOWER UPPER  N DROPPED STOPPED
+  #1       0        4   0    1  1     1     1 50       0       0
+  #2       0        4  10    2  2     2     2 50       0       0
+  #3       0        4  25    3  3     3     3 50       0       0
+  #4       0        4  50    4  4     4     4 50       0       0
+  #5       0        4 100    5  5     5     5 50       0       0
+
+  # Check structure
+  checkMicroFormat(dat = x, doses = c(10, 15, 50, 80), doseCol = "D", microColumnNames = c("INTERIM","INTERIMC","D","MEAN","SE","LOWER" ,"UPPER","N","DROPPED","STOPPED"))
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,68 @@
+<html><head><title>Checks if a matrix is symmetric and positive definite</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>checkSymmetricPDMatrix(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   checkSymmetricPDMatrix">
+<param name="keyword" value=" Checks if a matrix is symmetric and positive definite">
+</object>
+
+
+<h2>Checks if a matrix is symmetric and positive definite</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Checks if a matrix is symmetric and positive definite using
+an eigen value decomposition.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ checkSymmetricPDMatrix(mat, tol = 1e-06)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mat</code></td>
+<td>
+(Required) The matrix to check </td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+(Optional) The tolorence to use when comparing the value to 0.  The default is "1e-06" </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+The function does not return anything. It only generate an error 
+if something goes wrong.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>## Not run: 
+  checkSymmetricPDMatrix( diag(4), 4)
+  ## Not run: 
+    checkSymmetricPDMatrix( -diag(4),4 )
+  
+## End(Not run)
+## End(Not run)</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

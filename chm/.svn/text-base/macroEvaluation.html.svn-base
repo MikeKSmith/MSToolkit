@@ -1,0 +1,88 @@
+<html><head><title>Macro Evaluation</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>macroEvaluation(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   macroEvaluation">
+<param name="keyword" value=" Macro Evaluation">
+</object>
+
+
+<h2>Macro Evaluation</h2>
+
+
+<h3>Description</h3>
+
+<p>
+The macro evaluation gives a short summary of all analysis performed for a single 
+replicate of data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+macroEvaluation(data, macroCode, interimCol = "INTERIM", doseCol = "DOSE")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+(Required) Data set to use, typically returned from a micro evaluation step. </td></tr>
+<tr valign="top"><td><code>macroCode</code></td>
+<td>
+(Required) Code used to summrize the micro data. </td></tr>
+<tr valign="top"><td><code>interimCol</code></td>
+<td>
+(Optional) Name of the interim column, should be a valid name ("INTERIM" by default). See <code><a href="validNames.html">validNames</a></code> </td></tr>
+<tr valign="top"><td><code>doseCol</code></td>
+<td>
+(Optional) Name of the dose column, should be a valid name ("DOSE" by default). See <code><a href="validNames.html">validNames</a></code> </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The macro code is first studied to make sure that it is a function that takes a <code>data</code> argument. 
+The code is then executed against the micro data, and should produce a data frame containing a single 
+row. This is further checked using the <code><a href="checkMacroFormat.html">checkMacroFormat</a></code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame that complies with <code><a href="checkMacroFormat.html">checkMacroFormat</a></code></p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # example of micro data with interim
+  microData &lt;- read.csv( 
+    system.file( "Runit", "data", "macroEvaluation", "micro0001.csv" , package = "MSToolkit") ) 
+  mCode &lt;- function(data) {
+    diffMeans &lt;- data$MEAN[ data$DOSE == 100 &amp; data$INTERIM == 0] - 
+    data$MEAN[ data$DOSE == 0 &amp; data$INTERIM == 0  ]
+    data.frame( SUCCESS = diffMeans &gt; 10, NFINAL = sum(data$N) )
+  }
+  out &lt;- macroEvaluation( microData, mCode)
+  stopifnot( nrow(out) == 1 )
+    
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

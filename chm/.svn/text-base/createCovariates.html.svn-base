@@ -1,0 +1,129 @@
+<html><head><title>Create covariates</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createCovariates(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createCovariates">
+<param name="keyword" value=" Create covariates">
+</object>
+
+
+<h2>Create covariates</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Function to create covariates. Discrete, continuous and/or from an external
+file. This function acts as a wrapper for the functions : 
+<code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code>, <code><a href="createDiscreteCovariates.html">createDiscreteCovariates</a></code> and
+<code><a href="createExternalCovariates.html">createExternalCovariates</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createCovariates(subjects, conNames = NULL, conMean, conCov, conRange = NULL, conDigits, 
+  conMaxDraws = 100, disNames = NULL, disValues, disProbs, disProbArray, extNames = NULL,
+  extFile, extSubset, extRefCol, extSameRow = TRUE, extDataId = idCol, workingPath = getwd(), idCol = "SUBJ", 
+  seed = .deriveFromMasterSeed())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Subjects for which to create covariates </td></tr>
+<tr valign="top"><td><code>conNames,conMean,conCov,conRange,conDigits,conMaxDraws</code></td>
+<td>
+(Optional) Arguments for the <code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code> function.  The <code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code> function is not called if these arguments are not provided </td></tr>
+<tr valign="top"><td><code>disNames,disValues,disProbs,disProbArray</code></td>
+<td>
+(Optional) Arguments for the <code><a href="createDiscreteCovariates.html">createDiscreteCovariates</a></code> function.  The <code><a href="createDiscreteCovariates.html">createDiscreteCovariates</a></code> function is not called if these arguments are not provided </td></tr>
+<tr valign="top"><td><code>extNames,extFile,extSubset,extRefCol,extSameRow,extDataId</code></td>
+<td>
+(Optional) Arguments for the <code><a href="createExternalCovariates.html">createExternalCovariates</a></code> function.  The <code><a href="createExternalCovariates.html">createExternalCovariates</a></code> function is not called if these arguments are not provided </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) Working directory from which to import covariate data.  By default, the current working directory is used </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Name of the subject column. Must be a valid R name (See <code><a href="validNames.html">validNames</a></code>) and not be found in anyone of <code>conNames</code>, <code>extNames</code> or <code>disNames</code>.  "SUBJ" is used by default </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random seed to use by all the lower-level functions.  By default, this is derived from the current random seed </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+According to the presence of each "names" argument, the function calls lower-level functions to generate covariates.
+Foe example, if <code>conNames</code> is given, the function will attempt to generate covariates from
+a continuous distribution using the <code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code> function.
+</p>
+<p>
+If no names is given, a data frame containing only the subject column will be created.
+</p>
+<p>
+Arguments are systematically passed to lower-level function according to a name convention. 
+For example, the <code>conRange</code> argument is passed to <code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code> as the <code>range</code> argument, 
+the <code>extFile</code> is passed to the <code><a href="createExternalCovariates.html">createExternalCovariates</a></code> as the <code>file</code> argument, ...
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Data frame merging the results from the lower-level functions :<code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code>, <code><a href="createDiscreteCovariates.html">createDiscreteCovariates</a></code>
+and <code><a href="createExternalCovariates.html">createExternalCovariates</a></code></p>
+
+<h3>Warning</h3>
+
+<p>
+The function will generate an error if there is any duplicated names between 
+<code>conNames</code>, <code>extNames</code>, <code>disNames</code> and <code>idCol</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code>, 
+<code><a href="createDiscreteCovariates.html">createDiscreteCovariates</a></code> and
+<code><a href="createExternalCovariates.html">createExternalCovariates</a></code>  for details about each source of covariate and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  ## unit tests for the covariates component of the MSToolkit package 
+  ## Not run: 
+    file.show( system.file( "Runit", "runit.data.covariates.R", package = "MSToolkit") )
+  
+    wPath &lt;- system.file( "Runit", "data", "createCovariates", package = "MSToolkit") 
+    dAll &lt;- createCovariates( 30, 
+      conNames = "X,Y", conMean = "0,0" , conCov = "1,0,1", conRange = "-1&lt;X&lt;1",    # continuous
+      disNames = "P1,P2", disValues = "1,2#3,5,6" , disProbs = ".5,.5#.3,.3,.4",    # discrete
+      extNames = "X1", extFile = "testCovariates.csv", workingPath = wPath )        # external  
+ 
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

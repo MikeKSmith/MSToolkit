@@ -1,0 +1,110 @@
+<html><head><title>Unit/System Tests suite for the MSToolkit package</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>mstoolkitUnitTests(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   mstoolkitUnitTests">
+<param name="keyword" value=" Unit/System Tests suite for the MSToolkit package">
+</object>
+
+
+<h2>Unit/System Tests suite for the MSToolkit package</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function enables the user of the MSToolkit package to run the 
+unit tests of the package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mstoolkitUnitTests(htmlreport = FALSE, showdetails = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>htmlreport</code></td>
+<td>
+(Optional) A logical value.  Print an html report for unit and system tests?  FALSE by default </td></tr>
+<tr valign="top"><td><code>showdetails</code></td>
+<td>
+(Optional) A logical value.  Print the details in the text summary of the unit tests?  TRUE by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The unit tests are based on the RUnit framework.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The function does not return anything. It writes two files: <code>reportUT.html</code> for the unit tests
+and <code>reportST.html</code> for the system tests.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Matthias Burger, Klaus Juenemann and Thomas Koenig (2007). 
+RUnit: R Unit test framework. R package version 0.4.17.
+https://sourceforge.net/projects/runit/
+</p>
+<p>
+RUnit and R CMD check 
+http://wiki.r-project.org/rwiki/doku.php?id=developers:runit
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('RUnit', 'runTestSuite.html')" style="text-decoration: underline; color: blue; cursor: hand">runTestSuite</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  ## Not run: 
+    mstoolkitUnitTests( htmlhelp = TRUE )
+    
+    # unit tests
+    browseURL("reportUT.html")
+    
+    # system tests
+    browseURL("reportST.html")
+    
+  
+## End(Not run)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

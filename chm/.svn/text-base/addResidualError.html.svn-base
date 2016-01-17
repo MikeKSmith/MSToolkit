@@ -1,0 +1,100 @@
+<html><head><title>Add residual error to the response.</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>addResidualError(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   addResidualError">
+<param name="keyword" value=" Add residual error to the response.">
+</object>
+
+
+<h2>Add residual error to the response.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Adds residual error to a generated response, based on a supplied variance-covariance matrix
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addResidualError(response, covariance, errStruc = "additive", seed = .deriveFromMasterSeed())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>response</code></td>
+<td>
+(Required) Numeric vector of response data </td></tr>
+<tr valign="top"><td><code>covariance</code></td>
+<td>
+(Required) Residual error (co)variance.  This would be the lower-triangle of the matrix, or the matrix itself. The function <code><a href="parseCovMatrix.html">parseCovMatrix</a></code> is used to ensure that the matrix is in the right format. </td></tr>
+<tr valign="top"><td><code>errStruc</code></td>
+<td>
+(Optional) Function describing how to apply residual error: "Additive" or "Proportional".   "Additive" is the default</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random seed to use.  Derived from the current random seed by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The first step in the algorithm will be to set the random number seed to 
+the "seed" argument.  
+Then, a number of samples will be drawn from a multivariate normal 
+distribution with mean 0 and covariance set by the (parsed) <code>covariance</code> input. 
+The number of samples to take will be set by the number of elements in the 
+"response" vector.
+</p>
+<p>
+Based on the "errStruc" input, the algorithm should continue as follows. 
+If it is Additive, the residual errors should be added to the response vector. If 
+it is Proportional, the residual errors should be added to the response vector,
+then the vector should be exponentiated
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A numeric vector</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+This function is typically not directly called by the user, but rather called 
+by the function <code><a href="createResponse.html">createResponse</a></code> that is the high-level function 
+for the response component. 
+</p>
+<p>
+The function <code><a href="createResponseVariable.html">createResponseVariable</a></code> is also in the response component. 
+It create the the response onto which <code>addResidualError</code> adds error.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  myVec &lt;- 1:10
+  addResidualError(response = myVec, covariance = "1" )
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

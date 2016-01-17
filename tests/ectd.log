@@ -1,0 +1,20 @@
+[2007-07-13 19:24:00.0200] Analysing file ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.0900] Analysing file ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.1600] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0002.csv
+[2007-07-13 19:24:00.2300] Analysing file doesnotexist.csv
+[2007-07-13 19:24:00.3000] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0003.csv
+[2007-07-13 19:24:00.3700] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.4410] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.5110] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.5810] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.6610] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.7310] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.8110] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.8810] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:00.9610] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:01.0310] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:01.1120] Analysing file ../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv
+[2007-07-13 19:24:04.8070] ..(createContinuousCovariates) iteration 1 , 23 generated ( 76.67%)
+[2007-07-13 19:24:04.8170] ..(createContinuousCovariates) iteration 2 , 30 generated (100.00%)
+[2007-07-13 19:24:04.8270] ..(createContinuousCovariates) iteration 1 , 23 generated ( 76.67%)
+[2007-07-13 19:24:04.8270] ..(createContinuousCovariates) iteration 2 , 30 generated (100.00%)

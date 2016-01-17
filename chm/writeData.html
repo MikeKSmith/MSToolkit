@@ -1,0 +1,91 @@
+<html><head><title>Write scenario data</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>writeData(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   writeData">
+<param name="keyword" value=" Write scenario data">
+</object>
+
+
+<h2>Write scenario data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Writes a single element of scenario data (replicate, micro evaluation or macro evaluation) to a file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+writeData(dat, dataNumber, dataType = c("ReplicateData", "MacroEvaluation", "MicroEvaluation"), 
+ workingPath = getwd(), append = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dat</code></td>
+<td>
+(Required) A data frame containing the data to be written </td></tr>
+<tr valign="top"><td><code>dataNumber</code></td>
+<td>
+(Required) The entry number of the data - this must be a whole number between 1 and 9999 </td></tr>
+<tr valign="top"><td><code>dataType</code></td>
+<td>
+(Optional) The type of data to be written - this must be either "MacroEvaluation" "MicroEvaluation" or "ReplicateData" (default is "ReplicateData") </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) The path of the current scenario.  The working directory is used by default </td></tr>
+<tr valign="top"><td><code>append</code></td>
+<td>
+(Optional) A logical value.  If the file for the entry of data you are specifying already exists, setting append to TRUE will cause writeData to append to the end of that file.  Otherwise it will overwrite the file.  The default is FALSE </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns TRUE if the file was successfully created</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="readData.html">readData</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  ## Not run: 
+    createDirectories()
+    x &lt;- matrix(data = c(0,0,0,0,0,4,4,4,4,4,0,10,25,50,100,0.76,16.91,33.12,49.39,65.73,0.21,1.3,2.44,2.33,4.55,
+    -6.96,9.19,25.4,41.67,58,8.48,24.63,40.84,57.12,73.45,50,50,50,50,50,0,0,0,0,0,0,0,0,0,0), nrow = 5, ncol = 10)
+    x &lt;- as.data.frame(x)
+    colnames(x) &lt;- c("INTERIM","INTERIMC","D","MEAN","SE","LOWER","UPPER","N","DROPPED","STOPPED")
+    writeData(dat = x, dataNumber = 199, dataType = "Micro")
+    
+    x &lt;- as.data.frame(matrix(c(0,1),ncol=2,nrow=1))
+    colnames(x) &lt;- c("Dropped", "Stopped")
+    writeData(dat = x, dataNumber = 5, dataType = "Macro")
+  
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

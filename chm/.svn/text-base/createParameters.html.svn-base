@@ -1,0 +1,175 @@
+<html><head><title>Create parameter data for subjects in a simulated trial</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createParameters(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createParameters">
+<param name="keyword" value=" Create parameter data for subjects in a simulated trial">
+</object>
+
+
+<h2>Create parameter data for subjects in a simulated trial</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates parameter effects data for each subject in a simulated trial, either based on an external file or generated based on a multivariate normal distribution
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createParameters(subjects, genNames, genFixedMean, genFixedCov, genFixedRange, 
+genBetweenNames, genBetweenMean, genBetweenCov, genBetweenRange, genErrStruc = "None", 
+genMaxDraws = 10, extFile, extNames, extBetween, extBetweenNums, extSubset, 
+extErrStruc = "None", extRefCol, extRefColName, extIndEffects, extDataId=idCol, workingPath = getwd(), 
+suffix = ".Between", idCol = "SUBJ", seed = .deriveFromMasterSeed(), flagName = "PAROMIT")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Vector of subjects (or number of subjects) for which to create parameters</td></tr>
+<tr valign="top"><td><code>genNames</code></td>
+<td>
+(Optional) Names of fixed effects to generate.  Default is missing</td></tr>
+<tr valign="top"><td><code>genFixedMean</code></td>
+<td>
+(Optional) Means for generating fixed parameters.  Default is missing</td></tr>
+<tr valign="top"><td><code>genFixedCov</code></td>
+<td>
+(Optional) Covariance Matrix for generating fixed parameter.  Default is missing</td></tr>
+<tr valign="top"><td><code>genFixedRange</code></td>
+<td>
+(Optional) Range of Acceptable values for derived fixed effects.  Default is missing</td></tr>
+<tr valign="top"><td><code>genBetweenNames</code></td>
+<td>
+(Optional) Names of between subjects effects to generate (must be a subset of the "genNames" input).  Default is missing</td></tr>
+<tr valign="top"><td><code>genBetweenMean</code></td>
+<td>
+(Optional) Means for generated between subject effects.  Default is missing</td></tr>
+<tr valign="top"><td><code>genBetweenCov</code></td>
+<td>
+(Optional) Between subject effect covariance matrix.  Default is missing</td></tr>
+<tr valign="top"><td><code>genBetweenRange</code></td>
+<td>
+(Optional) Range of acceptable values for the bw efects.  Default is missing</td></tr>
+<tr valign="top"><td><code>genErrStruc</code></td>
+<td>
+(Optional) Error structure for mapping generated fixed and between subject effects: None, Additive or Proportional.  Default is "None" </td></tr>
+<tr valign="top"><td><code>genMaxDraws</code></td>
+<td>
+(Optional) Maximum number of draws to take when trying to generate values within a specified range.  Default is 10 </td></tr>
+<tr valign="top"><td><code>extFile</code></td>
+<td>
+(Optional) Name of external file from which to import parameter data.  Default is missing</td></tr>
+<tr valign="top"><td><code>extNames</code></td>
+<td>
+(Optional) Names of parameters to import from the external data file.  Default is missing</td></tr>
+<tr valign="top"><td><code>extBetween</code></td>
+<td>
+(Optional) Between subject effect variables in the data.  Default is missing</td></tr>
+<tr valign="top"><td><code>extBetweenNums</code></td>
+<td>
+(Optional) Integer mapping between imported fixed and "between subject" effects.  Default is missing</td></tr>
+<tr valign="top"><td><code>extSubset</code></td>
+<td>
+(Optional) Subset to be applied to imported data before sampling.  Default is missing</td></tr>
+<tr valign="top"><td><code>extErrStruc</code></td>
+<td>
+(Optional) (None) Error structure for mapping imported fixed and between subject effects: None, Additive or Proportional.  Default is "None" </td></tr>
+<tr valign="top"><td><code>extRefCol</code></td>
+<td>
+(Optional) Column of reference in imported data.  Default is missing</td></tr>
+<tr valign="top"><td><code>extRefColName</code></td>
+<td>
+(Optional) Reference column name in imported data.  Default is missing</td></tr>
+<tr valign="top"><td><code>extIndEffects</code></td>
+<td>
+(Optional) Individual effects flag: do the external fixed effects represent individualised parameters.  Default is missing</td></tr>
+<tr valign="top"><td><code>extDataId</code></td>
+<td>
+(Optional) Subject variable name in external data file.  Default is same as "idCol" input </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) Working directory from which to import external parameter data.  By default, the current working directory is used </td></tr>
+<tr valign="top"><td><code>suffix</code></td>
+<td>
+(Optional) Suffix to use for retained "between subject" effects.  By default, ".Between" is used as the suffix </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Subject variable name ("SUBJ" by default) </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random number generate seed.  By default, this is derived from the current random seed </td></tr>
+<tr valign="top"><td><code>flagName</code></td>
+<td>
+(Optional) Name for "parameter omit" flag ("PAROMIT" by default) </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is a wrapper for 2 lower level functions: <code><a href="createNormalParameters.html">createNormalParameters</a></code> and <code><a href="createExternalParameters.html">createExternalParameters</a></code> 
+The function passes the "gen" arguments to <code><a href="createNormalParameters.html">createNormalParameters</a></code> and checks the return structure.
+It then passed the "ext" arguments to <code><a href="createExternalParameters.html">createExternalParameters</a></code> and again checks the return structure.
+If only one of <code><a href="createNormalParameters.html">createNormalParameters</a></code> or <code><a href="createExternalParameters.html">createExternalParameters</a></code> are called, the single data structure is returned.
+If both <code><a href="createNormalParameters.html">createNormalParameters</a></code> and <code><a href="createExternalParameters.html">createExternalParameters</a></code> have been called, the inputs are combined into a single dataset for return.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame with a subject variable, a "parameter omit" flag and derived/imported parameter variables</p>
+
+<h3>Note</h3>
+
+
+
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createNormalParameters.html">createNormalParameters</a></code> and <code><a href="createExternalParameters.html">createExternalParameters</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>## Not run: 
+
+# Generated parameters only
+createParameters( subjects = 50, genNames = "X,Y,Z", genFixedMean = "0,0,0", genFixedCov = "1", 
+  genBetweenNames = "X,Y,Z", genBetweenCov = "1", genBetweenMean = "0,0,0", genErrStruc = "a" )
+
+# Imported parameters only
+createParameters( subjects = 50, extNames = "E0,ED50,EMAX", extFile = "testParam.csv", 
+  extErrStruc = "Additive", extBetween = "B1,B2", extBetweenNums = "1,3")
+
+# Both generated and imported parameters
+createParameters( subjects = 50, 
+  extNames = "E0,ED50,EMAX", extFile = "testParam.csv", extErrStruc = "Additive", extBetween = "B1,B2", extBetweenNums = "1,3", 
+  genNames = "X,Y,Z", genFixedMean = "0,0,0", genFixedCov = "1", genBetweenNames = "X,Y,Z", genBetweenCov = "1", 
+  genBetweenMean = "0,0,0", genErrStruc = "a" )
+  
+## End(Not run)</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

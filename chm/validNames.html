@@ -1,0 +1,72 @@
+<html><head><title>Check if a character string is a valid R variable name</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>validNames(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   validNames">
+<param name="keyword" value=" Check if a character string is a valid R variable name">
+</object>
+
+
+<h2>Check if a character string is a valid R variable name</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Checks if a character string is a valid R variable name using regular expressions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  validNames(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+(Required) A collection of character vectors to be checked </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A valid R name starts with a letter or a dot followed by a non-numerical character and contains only letters, numbers and dots.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+None. The function is simply generates an error if an invalid name is passed to it.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # correct name
+  validNames("DOSE")
+  ## Not run: 
+    # wrong name
+    validNames(".334fsedqw")
+  
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

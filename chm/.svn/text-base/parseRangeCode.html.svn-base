@@ -1,0 +1,107 @@
+<html><head><title>Parse a numerical range expression</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>parseRangeCode(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   parseRangeCode">
+<param name="keyword" value="R:   parseRCode">
+<param name="keyword" value=" Parse a numerical range expression">
+</object>
+
+
+<h2>Parse a numerical range expression</h2>
+
+
+<h3>Description</h3>
+
+<p>
+parseRangeCode: Converts inequalities of up to two comparators stored in a vector of strings into an executable R expression.  For
+instance, parseRangeCode(c("1 &lt; Y &lt; 20", "40 &lt; Y")) will yield the expression (1&lt;Y)&amp;(Y&lt;20)&amp;(40&lt;Y).
+parseRCode: simply parse an R string into an expression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parseRangeCode(code)
+parseRCode(code)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>code</code></td>
+<td>
+(Required) For parseRangeCode: A vector of strings that contain inequalities along with various seperators (see below).  Each inequality should have either 1 or 2 comparators. For parseRCode: a code string. For <code>parseRCode</code> a character vector containing code. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The <code>parseRangeCode</code> function converts various kinds of ranges/inequalities that are normally not handled by R into R-executable
+expressions.  For instance it will convert inequalities of the form "A &lt; B &lt; C" into (A &lt; B) &amp; (B &lt; C), where &lt; may be replaced with 
+any comparator.  Moreover it allows inqualities to be concatenated by the symbols "&amp;", ";" or "," which are all treated as equivalent
+to the logical "and" (i.e. "&amp;").  Thus "A &lt; B &lt;C &amp; D &gt; E, F &lt;= G" will be converted into (A &lt; B)&amp;(B &lt; C)&amp;(D &gt; E)&amp;(F &lt;= G). In 
+addition if <code>code</code> is a vector with more than one element, each element will be parsed and then concatenated into a
+single expression with "&amp;".  Hence c("1 &lt; Y", "2 &lt; Z &lt;= 5") would become <code>(1 &lt; Y)&amp;(2 &lt; Z)&amp;(Z &lt;= 5)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An expression constructed as detailed above.</p>
+
+<h3>Warning</h3>
+
+<p>
+The character "|" is not allowed in any of the expressions contained in "code" for the <code>parseRangeCode</code> function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('base', 'subset.html')" style="text-decoration: underline; color: blue; cursor: hand">subset</a></code>, <code><a onclick="findlink('base', 'parse.html')" style="text-decoration: underline; color: blue; cursor: hand">parse</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Examples of using subsets
+exData &lt;- data.frame( Y = rnorm(200), B = rnorm( 200 ) )
+subs1 &lt;- parseRangeCode("1 &lt; Y &lt; 10 &amp; 1 &gt; B &gt; -2")
+exData[ eval(subs1, exData), ]
+
+subs2 &lt;- parseRangeCode(c("1 &lt; Y &lt; 10", "1 &gt; B &gt; -2"))
+exData[ eval(subs1, exData), ]
+
+expr &lt;- parseRCode("rnorm(30)")
+eval( expr ) 
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

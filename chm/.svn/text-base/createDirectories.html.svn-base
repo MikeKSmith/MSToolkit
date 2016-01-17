@@ -1,0 +1,77 @@
+<html><head><title>Create replicate data, micro evaluation, and macro evaluation directories</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createDirectories(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createDirectories">
+<param name="keyword" value=" Create replicate data micro evaluation and macro evaluation directories">
+</object>
+
+
+<h2>Create replicate data micro evaluation and macro evaluation directories</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function creates directories for holding data for the current scenario.  These directories
+will hold the replicate data, the micro evaluation data and the macro evaluation data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createDirectories(dirNames = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"), workingPath = getwd(), warn = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dirNames</code></td>
+<td>
+(Optional) A vector of directories to create under the "workingPath" directory.  By default, directories "ReplicateData", "MicroEvaluation" and "MacroEvaluation" are created </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) The working directory in which to create directories.  The current working directory is used by default </td></tr>
+<tr valign="top"><td><code>warn</code></td>
+<td>
+(Optional) A logical value.  Should warnings from the directory creation be shown?  FALSE by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Attempts to create directories named in character vector "dirNames" within the "workingPath" directory
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A logical vector the same length as "dirNames", indicating whether or not the corresponding directories were successfully created</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  ## Not run: 
+    # Create 2 of the 3 directories
+    createDirectories(dirNames = c("ReplicateData", "MicroEvaluation"))
+  
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

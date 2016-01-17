@@ -1,0 +1,80 @@
+<html><head><title>interim Analysis</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>interimAnalysis(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   interimAnalysis">
+<param name="keyword" value=" interim Analysis">
+</object>
+
+
+<h2>interim Analysis</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function runs the interimCode to takes decisions on dose to drop for 
+next interim step, the decision take can also potentially be to stop 
+the analysis at this interim stage.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+interimAnalysis(data, interimCode)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+(Required) Dataset to analyze  </td></tr>
+<tr valign="top"><td><code>interimCode</code></td>
+<td>
+(Required) Function to execute against the data that should produce a list structure as described below</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+The output of the interim code should be an R "list" structure.  
+<br>
+If an empty list is returned, this signifies that there are no instructions to apply following this interim analysis (ie. don't stop the trial and do not drop any doses)
+<br>
+If the return list contains a "STOP" element, and the "STOP" element is a logical value of length 1, this will be used to determine whether the trial should be stopped at this interim.
+<br>
+If the return list contains a "DROP" element, and the "DROP" element is a vector of dose values, this will be used to determine which doses to drop before the next interim.
+<br>
+Any list elements other than "DROP" or "STOP" will be ignored.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  myData &lt;- data.frame(DOSE=c(0, 15, 30), TEST = 1:3)
+  myFun &lt;- function(data) {
+    outList &lt;- list()
+    outList$STOP &lt;- any(data$TEST) &gt; 5
+    myTest &lt;- data$TEST &gt; 2
+    if (any(myTest)) outList$DROP &lt;- data$DOSE[myTest]
+    outList
+  }
+  interimAnalysis(myData, myFun )
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

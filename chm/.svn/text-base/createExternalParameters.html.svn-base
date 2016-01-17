@@ -1,0 +1,134 @@
+<html><head><title>Sample parameters from an external file</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createExternalParameters(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createExternalParameters">
+<param name="keyword" value=" Sample parameters from an external file">
+</object>
+
+
+<h2>Sample parameters from an external file</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Create parameters for a simulated population by sampling them from an external file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  createExternalParameters(subjects, file, names, betNames, betNums, errStruc = "None", 
+  suffix = ".Between", subset = NULL, refCol, refColName, idCol = "SUBJ", 
+  seed = .deriveFromMasterSeed(), flagName = "PAROMIT", refColSuffix = "refCol", 
+  dataId = idCol, workingPath = getwd())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Number of subjects for which to create parameters </td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+(Required) External file from which to extract parameters </td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+(Required) Names of parameters to import (refers to variables in the input data) </td></tr>
+<tr valign="top"><td><code>betNames</code></td>
+<td>
+(Required) Between subject effects variables in the data </td></tr>
+<tr valign="top"><td><code>betNums</code></td>
+<td>
+(Required) Integer vector mapping between subject effects onto fixed effects </td></tr>
+<tr valign="top"><td><code>errStruc</code></td>
+<td>
+(Optional) (None) Function to map between subject effects: Additive, Proportional or None </td></tr>
+<tr valign="top"><td><code>suffix</code></td>
+<td>
+(Optional) Suffix to use for retained between subject effects variables.  By default, ".Between" is used as the default </td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+(Optional) Subset to apply to the data.  By default, no subset is applied </td></tr>
+<tr valign="top"><td><code>refCol</code></td>
+<td>
+(Optional) Vector of data to be matched to the reference column for sampling (no reference data by default) </td></tr>
+<tr valign="top"><td><code>refColName</code></td>
+<td>
+(Optional) Column name in data for referenced sampling (no reference column by default) </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Subject variable name in the data ("SUBJ" by default) </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random number seed.  Derived from the current seed by default </td></tr>
+<tr valign="top"><td><code>flagName</code></td>
+<td>
+(Optional) Name for "parameter omit" flag ("PAROMIT" by default) </td></tr>
+<tr valign="top"><td><code>refColSuffix</code></td>
+<td>
+(Optional) Suffix to add to reference variable in the data ("refCol" by default) </td></tr>
+<tr valign="top"><td><code>dataId</code></td>
+<td>
+(Optional) The subject variable name in the data.  By default, this is taken to be the same as the "idCol" input </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) Working path from which to import covariate file.  By default, the working path will be used </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The data is first imported from the specified file, and any subset applied to it.  The function next checks that all required variables specifed appear in the imported data.
+Fixed effects (specified using names) are selected from the file along with between subject effects (if they are also identified).
+If both fixed and between subject parameters have been selected, the function will use the errStruc input as follows:
+* None = Keep between subject effect seperate (and use the "suffix" suppied to name the variables)
+* Additive = Add each specified between subject effects to the corresponding fixed effect (based on the mapping specified in betNums)
+* Proportional = Add each between subject effect to the corresponding fixed effect (based on the mapping specified in betNums) then exponentiate the result  
+</p>
+<p>
+If the relCol input is specified, this variable should also be retained in the result.
+The "parameter omit" flag will contain repeated "0" elements in the return result.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame containing a subject variable, a "parameter omit flag" and a set of extracted parameters</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createParameters.html">createParameters</a></code> and <code><a href="createNormalParameters.html">createNormalParameters</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  wPath &lt;- system.file( "Runit", "data", "createParameters", package = "MSToolkit" ) 
+ 
+  createExternalParameters( subjects = 100, names = "E0,ED50", 
+    file = "testParam.csv", errStruc = "None", betNames = "B1,B2", workingPath = wPath )
+## End(Not run)</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

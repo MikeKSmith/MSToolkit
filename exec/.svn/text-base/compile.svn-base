@@ -1,0 +1,118 @@
+#!/bin/env perl
+
+use Getopt::Long;
+
+$assumeUnique = 0;
+$type="Micro";
+$unique=1;
+$path=".";
+$repvec="";
+
+GetOptions ('unique' => \$assumeUnique,
+            'type=s' => \$type, 
+            'path=s' => \$path,
+            'reps=s' => \$repvec);
+
+$type =~ /^M[ia]cro$/ or die( "wrong type, must be 'Micro' or 'Macro'" ) ;
+
+## read the replicates to process
+%reps=();
+if($repvec){
+  foreach $item ( split(/,/, $repvec ) ){
+    $reps{$item}=1;
+  }
+}
+
+%unames=();
+open( HEADERS, "head -n1 -q $path/${type}Evaluation/*.csv |" ) ;
+# read first header
+$_=<HEADERS> ;
+chomp;
+$first=$_;
+@variables=();
+$count=0;
+unless( $assumeUnique ){
+  foreach $header (split(/,/) ){
+    $unames{$header}=1;
+    $variables[$count++]=$header;
+  }
+  while(<HEADERS>){
+    chomp;
+    next if $_ eq $first ;
+    $unique = 0;
+    foreach $header (split(/,/) ){
+      unless( $unames{$header} ) {
+        $unames{$header}=1;
+        $variables[$count++]=$header;
+      }
+    }
+  }
+}
+
+if( $unique ){
+  print "Replicate,".$first."\n";
+  foreach ( `ls -1 $path/${type}Evaluation` ){
+    chomp;
+    # open the file for reading
+    open( MICRO, "$path/${type}Evaluation/$_ " ) or die( "cannot open $_ for reading $!\n") ;
+    # find the replicate number (the number in the file) 
+    s/.*(\d{4})\.csv$/$1/g ;
+    ( $rep = $_ ) =~ s/^0+//g;
+    next unless !$repvec || $reps{$rep};
+    
+    <MICRO>; # this is the header line, don't need it
+    while(<MICRO>){
+      print "$rep,$_";
+    }
+  }
+  exit(0);
+}
+
+# continue here is the header lines are not unique
+
+print '"Replicate"';
+foreach $var (@variables){
+  print ",$var";
+}
+print "\n";
+
+foreach ( `ls -1 $path/${type}Evaluation` ){
+  chomp;
+  # open the file for reading
+  open( MICRO, "$path/${type}Evaluation/$_" ) or die( "cannot open $_ for reading $!\n") ;
+
+  # find the replicate number (the number in the file) 
+  s/.*(\d{4})\.csv$/$1/g ;
+  ( $rep = $_ ) =~ s/^0+//g;
+  
+  next unless !$repvec || $reps{$rep};
+  
+  # find the variables in that file
+  $_=<MICRO> ;
+  chomp;
+  @thisfilevariables = split( /,/ );
+  
+  %seen=();
+  $count=1;
+  foreach $key ( @thisfilevariables ){
+    $seen{$key} = $count++;
+  }
+  
+  while(<MICRO>){
+    chomp;
+    my $place=0;
+    @line = split(/,/) ;
+    print "$rep" ;
+    foreach $var ( @variables ){
+      print "," ;
+      $place = $seen{$var};
+      if( $place ){
+        print $line[$place-1] ; 
+      } else {
+        print "NA" ;
+      }
+    }
+    print "\n";
+  }
+}
+

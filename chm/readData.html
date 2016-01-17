@@ -1,0 +1,80 @@
+<html><head><title>Read scenario data</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>readData(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   readData">
+<param name="keyword" value=" Read scenario data">
+</object>
+
+
+<h2>Read scenario data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Reads a single element of replicate, macro evaluation or micro evaluation data from the current scenario
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+readData(dataNumber, dataType = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"), variables = NULL, workingPath = getwd())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataNumber</code></td>
+<td>
+(Required) The number of the data entry you wish to read.  This number must be between 0 and 9999 </td></tr>
+<tr valign="top"><td><code>dataType</code></td>
+<td>
+(Optional) The type of data you wish to read - either "ReplicateData", "MacroEvaluation" or "MicroEvaluation".  By default, "ReplicateData" is used </td></tr>
+<tr valign="top"><td><code>variables</code></td>
+<td>
+(Optional) The variables that must be in the data to continue.  No variables are provided by default (so no variable check is performed) </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) The working path of the current scenario.  By default, the current working directory is used </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+readData will return a data frame containing the desired element of data if it exists.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="writeData.html">writeData</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+        ## Not run: 
+   readData(dataNumber = 10, dataType = "Macro")
+         readData(dataNumber = 1, dataType = "Replicate")
+         readData(dataNumber = 800, dataType = "Micro")
+ 
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

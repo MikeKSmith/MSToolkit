@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/transitional.dtd">
+<html><head><title>RUNIT TEST PROTOCOL--Fri Jul 13 19:24:18 2007</title>
+</head>
+<body><h1 TRUE>RUNIT TEST PROTOCOL--Fri Jul 13 19:24:18 2007</h1>
+<p>Number of test functions: 49</p>
+<p style=color:red>Number of errors: 12</p>
+<p style=color:red>Number of failures: 1</p>
+<hr>
+<h3 TRUE>1 Test suite</h3>
+<table border="1" width="60%" >
+<tr><th width="30%">Name</th>
+<th width="30%">Test functions</th>
+<th width="20%">Errors</th>
+<th width="20%">Failures</th>
+</tr>
+<tr><td><a href="#MSToolkit unit testing">MSToolkit unit testing</a></td>
+<td>49</td>
+<td bgcolor="red">12</td>
+<td bgcolor="red">1</td>
+</tr>
+</table>
+<hr>
+<h3 TRUE>Errors</h3>
+<table border="1" width="100%" >
+<tr><th width="30%">Test suite : test function</th>
+<th width="70%">message</th>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.analyzeRep.R_test.analyseRep">MSToolkit unit testing : test.analyseRep</a></td>
+<td>Error in checkCsvFile(infile, doseCol) : The file `../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > analyzeRep > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.ext">MSToolkit unit testing : test.data.covariates.ext</a></td>
+<td>Error in checkCsvFile(file, c(dataId, names)) : 
+	The file `../MSToolkit/Runit/data/createCovariates/testCovariates.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > checkTrue > eval > all > createExternalCovariates > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.wrapper">MSToolkit unit testing : test.data.covariates.wrapper</a></td>
+<td>Error in checkCsvFile(file, c(dataId, names)) : 
+	The file `../MSToolkit/Runit/data/createCovariates/testCovariates.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalCovariates > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.parameter.R_test.data.param.ext">MSToolkit unit testing : test.data.param.ext</a></td>
+<td>Error in checkCsvFile(file, allnames) : The file `../MSToolkit/Runit/data/createParameters/testParam.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalParameters > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.parameter.R_test.data.param.wrap">MSToolkit unit testing : test.data.param.wrap</a></td>
+<td>Error in checkCsvFile(file, allnames) : The file `../MSToolkit/Runit/data/createParameters/testParam.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalParameters > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.readAllMicroData">MSToolkit unit testing : test.readAllMicroData</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.readData">MSToolkit unit testing : test.readData</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeRepData">MSToolkit unit testing : test.removeRepData</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeSingleRepData">MSToolkit unit testing : test.removeSingleRepData</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.writeData">MSToolkit unit testing : test.writeData</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.macroEvaluation.R_test.analysis.macro">MSToolkit unit testing : test.analysis.macro</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.checkMicroFormat">MSToolkit unit testing : test.checkMicroFormat</a></td>
+<td>Error in file(file, "r") : unable to open connection
+</td>
+</tr>
+</table>
+<hr>
+<h3 TRUE>Failures</h3>
+<table border="1" width="100%" >
+<tr><th width="30%">Test suite : test function</th>
+<th width="70%">message</th>
+</tr>
+<tr><td><a href="#MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.initialChar">MSToolkit unit testing : test.initialChar</a></td>
+<td>Error in checkEquals(initialChar("2352435�$!A"), "a") : 
+	1 string mismatches 
+</td>
+</tr>
+</table>
+<hr>
+<h3 TRUE>Details</h3>
+<p><a name="MSToolkit unit testing"><h5 TRUE>Test Suite: MSToolkit unit testing</h5>
+</a>Test function regexp: ^test.+<br/>Test file regexp: ^runit.+\.[rR]$<br/>Involved directory:<br/>C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit<br/><ul><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.analyzeRep.R">Test file: runit.analyzeRep.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.analyzeRep.R_test.analyseRep"><u style=color:red>test.analyseRep: ERROR !!  </u></a>Error in checkCsvFile(infile, doseCol) : The file `../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > analyzeRep > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>analyzeRep(replicate = 1, analysisCode = anaCode, interimCode = interimCode, infile = "../MSToolkit/Runit/data/analyseRep/ReplicateData/replicate0001.csv")</li><li>checkCsvFile(infile, doseCol)</li><li>ectdStop("The file `$file` does not exist")</li></ol></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.allocate.R">Test file: runit.data.allocate.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.allocate.R_test.data.allocate.inputs">test.data.allocate.inputs: ... OK (0.41 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.allocate.R_test.data.allocate.names">test.data.allocate.names: ... OK (0.07 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.allocate.R_test.data.allocate.ordered">test.data.allocate.ordered: ... OK (0.02 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.covariates.R">Test file: runit.data.covariates.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.cont">test.data.covariates.cont: ... OK (0.65 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.disc">test.data.covariates.disc: ... OK (0.42 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.ext"><u style=color:red>test.data.covariates.ext: ERROR !!  </u></a>Error in checkCsvFile(file, c(dataId, names)) : 
+	The file `../MSToolkit/Runit/data/createCovariates/testCovariates.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > checkTrue > eval > all > createExternalCovariates > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>checkTrue(all(createExternalCovariates(20, names = "X1", subset = "X1 > 0", file = "../MSToolkit/Runit/data/createCovariates/testCovariates.csv")$X1 > 0), msg = "subset correctly applied")</li><li>eval(expr)</li><li>all(createExternalCovariates(20, names = "X1", subset = "X1 > 0", file = "../MSToolkit/Runit/data/createCovariates/testCovariates.csv")$X1 > 0)</li><li>createExternalCovariates(20, names = "X1", subset = "X1 > 0", file = "../MSToolkit/Runit/data/createCovariates/testCovariates.csv")</li><li>checkCsvFile(file, c(dataId, names))</li><li>ectdStop("The file `$file` does not exist")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.covariates.R_test.data.covariates.wrapper"><u style=color:red>test.data.covariates.wrapper: ERROR !!  </u></a>Error in checkCsvFile(file, c(dataId, names)) : 
+	The file `../MSToolkit/Runit/data/createCovariates/testCovariates.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalCovariates > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>createExternalCovariates(80, names = "X1", subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"), file = "../MSToolkit/Runit/data/createCovariates/testCovariates.csv")</li><li>checkCsvFile(file, c(dataId, names))</li><li>ectdStop("The file `$file` does not exist")</li></ol></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.interim.R">Test file: runit.data.interim.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.interim.R_test.data.interim.1">test.data.interim.1: ... OK (0.25 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.interim.R_test.data.interim.2">test.data.interim.2: ... OK (0.21 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.interim.R_test.data.interim.3">test.data.interim.3: ... OK (0.01 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.interim.R_test.data.interim.4">test.data.interim.4: ... OK (0.02 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.interim.R_test.data.interim.5">test.data.interim.5: ... OK (0.01 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.missing.R">Test file: runit.data.missing.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.missing.R_test.data.checkDropuOutFun">test.data.checkDropuOutFun: ... OK (0.52 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.missing.R_test.data.missing.drop">test.data.missing.drop: ... OK (0.94 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.missing.R_test.data.missing.mcar">test.data.missing.mcar: ... OK (0.38 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.parameter.R">Test file: runit.data.parameter.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.parameter.R_test.data.param.ext"><u style=color:red>test.data.param.ext: ERROR !!  </u></a>Error in checkCsvFile(file, allnames) : The file `../MSToolkit/Runit/data/createParameters/testParam.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalParameters > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>createExternalParameters(20, names = "E0,ED50", file = "../MSToolkit/Runit/data/createParameters/testParam.csv", errStruc = "n", betNames = "B1,B2", seed = 2)</li><li>checkCsvFile(file, allnames)</li><li>ectdStop("The file `$file` does not exist")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.parameter.R_test.data.param.norm">test.data.param.norm: ... OK (1.47 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.parameter.R_test.data.param.wrap"><u style=color:red>test.data.param.wrap: ERROR !!  </u></a>Error in checkCsvFile(file, allnames) : The file `../MSToolkit/Runit/data/createParameters/testParam.csv` does not exist
+----------------------------------------------------------------------
+source > eval.with.vis > eval.with.vis > runTestSuite > .sourceTestFile > .executeTestCase > try > system.time > eval > eval > func > createExternalParameters > checkCsvFile > ectdStop
+----------------------------------------------------------------------
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>createExternalParameters(20, names = "E0,ED50,EMAX", file = "../MSToolkit/Runit/data/createParameters/testParam.csv", errStruc = "a", betNames = "B1,B2", betNums = "1,3", seed = 81)</li><li>checkCsvFile(file, allnames)</li><li>ectdStop("The file `$file` does not exist")</li></ol></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.response.R">Test file: runit.data.response.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.response.R_test.data.response.addResidualError">test.data.response.addResidualError: ... OK (0.39 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.response.R_test.data.response.createResponse">test.data.response.createResponse: ... OK (0.54 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.response.R_test.data.response.createResponseVariable">test.data.response.createResponseVariable: ... OK (0.5 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.data.treatment.R">Test file: runit.data.treatment.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.treatment.R_test.data.treatments.1">test.data.treatments.1: ... OK (0.39 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.treatment.R_test.data.treatments.crossover">test.data.treatments.crossover: ... OK (0.2 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.data.treatment.R_test.data.treatments.parallel">test.data.treatments.parallel: ... OK (0.01 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.datastorage2.R">Test file: runit.datastorage2.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.createDirectories">test.createDirectories: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.readAllMacroData">test.readAllMacroData: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.readAllMicroData"><u style=color:red>test.readAllMicroData: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(file.path(testDir, "microSummary.csv"), row.names = 1)</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.readData"><u style=color:red>test.readData: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(paste(testDir, "microSummary.csv", sep = ""))</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeMacroDirectory">test.removeMacroDirectory: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeMicroDirectory">test.removeMicroDirectory: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeRepData"><u style=color:red>test.removeRepData: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(paste(testDir, "ReplicateSample.csv", sep = ""))</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.removeSingleRepData"><u style=color:red>test.removeSingleRepData: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(paste(testDir, "ReplicateSample.csv", sep = ""))</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.datastorage2.R_test.writeData"><u style=color:red>test.writeData: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(paste(testDir, "/ReplicateSample.csv", sep = ""))</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.interimAnalysis.R">Test file: runit.interimAnalysis.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.interimAnalysis.R_test.interimAnalysis">test.interimAnalysis: ... OK (0.74 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.macroEvaluation.R">Test file: runit.macroEvaluation.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.macroEvaluation.R_test.analysis.macro"><u style=color:red>test.analysis.macro: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv("../MSToolkit/Runit/data/macroEvaluation/micro0001.csv", header = TRUE)</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.performAnalysis.R">Test file: runit.performAnalysis.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.performAnalysis.R_test.performAnalysis">test.performAnalysis: ... OK (0 seconds)<br/></a></li></ul></li><li><a href="C:/temp/myprofile/my splus/ectd/MSToolkit/tests/../inst/Runit/runit.supportfunctions.R">Test file: runit.supportfunctions.R</a><ul><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.checkCsvFile">test.checkCsvFile: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.checkMicroFormat"><u style=color:red>test.checkMicroFormat: ERROR !!  </u></a>Error in file(file, "r") : unable to open connection
+<br/>Call Stack:<br/><ol><li>eval(expr, envir = loc.frame)</li><li>eval(expr, envir, enclos)</li><li>func()</li><li>read.csv(paste(testdata.supportfunctions.dir, "micro0001.csv", sep = "/"))</li><li>read.table(file = file, header = header, sep = sep, quote = quote, dec = dec, fill = fill, ...)</li><li>file(file, "r")</li></ol></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.checkSymmetricPDMatrix">test.checkSymmetricPDMatrix: ... OK (0.32 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.createEmptyMicro">test.createEmptyMicro: ... OK (0.32 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.ectdStop">test.ectdStop: ... OK (0.06 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.ectdWarning">test.ectdWarning: ... OK (0 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.initialChar"><u style=color:red>test.initialChar: FAILURE !! (check number 1)  </u></a>Error in checkEquals(initialChar("2352435�$!A"), "a") : 
+	1 string mismatches 
+<br/></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.parseCharInput">test.parseCharInput: ... OK (0.24 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.parseCovMatrix">test.parseCovMatrix: ... OK (0.13 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.parseHashString">test.parseHashString: ... OK (0.18 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.parseRangeCode">test.parseRangeCode: ... OK (0.19 seconds)<br/></a></li><li><a name="MSToolkit unit testing_C:_temp_myprofile_my splus_ectd_MSToolkit_tests_.._inst_Runit_runit.supportfunctions.R_test.validNames">test.validNames: ... OK (0.2 seconds)<br/></a></li></ul></li></ul><hr>
+<table border="0" width="80%" >
+<tr><th>Name</th>
+<th>Value</th>
+</tr>
+<tr><td>platform</td>
+<td>i386-pc-mingw32</td>
+</tr>
+<tr><td>arch</td>
+<td>i386</td>
+</tr>
+<tr><td>os</td>
+<td>mingw32</td>
+</tr>
+<tr><td>system</td>
+<td>i386, mingw32</td>
+</tr>
+<tr><td>status</td>
+<td></td>
+</tr>
+<tr><td>major</td>
+<td>2</td>
+</tr>
+<tr><td>minor</td>
+<td>3.1</td>
+</tr>
+<tr><td>year</td>
+<td>2006</td>
+</tr>
+<tr><td>month</td>
+<td>06</td>
+</tr>
+<tr><td>day</td>
+<td>01</td>
+</tr>
+<tr><td>svn rev</td>
+<td>38247</td>
+</tr>
+<tr><td>language</td>
+<td>R</td>
+</tr>
+<tr><td>version.string</td>
+<td>Version 2.3.1 (2006-06-01)</td>
+</tr>
+<tr><td>host</td>
+<td>RICHARD-PUGH</td>
+</tr>
+<tr><td>gcc</td>
+<td>/cygdrive/c/PROGRA~1/RTools/tools/bin/cat: C:\PROGRA~1\R\R-23~1.1/etc/Makeconf: No such file or directory</td>
+</tr>
+</table>
+</body>
+</html>

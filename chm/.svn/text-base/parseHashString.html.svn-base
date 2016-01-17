@@ -1,0 +1,90 @@
+<html><head><title>Process a string seperated by hash symbols or a vector (or list) of strings not containing any hash symbols</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>parseHashString(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   parseHashString">
+<param name="keyword" value=" Process a string seperated by hash symbols or a vector (or list) of strings not containing any hash symbols">
+</object>
+
+
+<h2>Process a string seperated by hash symbols or a vector (or list) of strings not containing any hash symbols</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>parseHashString</code> constructs a list of numerical vectors from a single string that stores these vectors as comma separated
+substrings delimited by a hash symbols.  Alternatively if it is passed a list or vector of strings each of which is a comma-separated
+list of numbers, it will produce a list of numerical vectors by processing these strings with <code>parseCharInput</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  parseHashString(input, ..., missingMsg)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>input</code></td>
+<td>
+(Required) A string to process </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+(Optional) Additional arguments to pass to parseCharInput.  No additional arguments passed by default </td></tr>
+<tr valign="top"><td><code>missingMsg</code></td>
+<td>
+(Optional) Message to display if the input is not provided.  A standard message is displayed by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+parseHashString does one of four things depending on the arguments passed to it: (1) If the input is a single string
+composed of commas, numbers and hash symbols, it will split the string into along the hash symbols and then process the resulting
+strings with <code>parseCharInput</code>.  The result will be a list of numerical vectors.  For example, <code>parseHashString("1,2\#3,4")</code>
+will create a list with elements c(1,2) and c(3,4). (2) If the input is a vector of strings that don't have any hash symbols,
+it will it will simply apply parseCharInput to each element of the vector and construct a list from the result.  Thus the same
+list created in the previous example could also be created by calling <code>parseHashString(c("1,2", "3,4")</code>.  (3) If the input
+is a list of character strings, it functions essentially the same as in (2).  (4) If the input is a list of numerical vectors,
+it returns the input without modification.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A list of numerical vectors.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="parseCharInput.html">parseCharInput</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+parseHashString("1.5, 2, 3.2\#5, 4.2\#10,11")
+parseHashString(c("1.5, 2, 3.2","5, 4.2","10,11"))
+parseHashString(list("1.5, 2, 3.2","5, 4.2","10,11"))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

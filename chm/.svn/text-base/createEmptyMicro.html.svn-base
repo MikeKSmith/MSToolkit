@@ -1,0 +1,84 @@
+<html><head><title>Create an empty micro evaluation data frame</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createEmptyMicro(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createEmptyMicro">
+<param name="keyword" value=" Create an empty micro evaluation data frame">
+</object>
+
+
+<h2>Create an empty micro evaluation data frame</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates an "empty" (i.e. filled in with NA values) micro evaluation data frame that has its column names 
+and dose column name given by arguments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createEmptyMicro(doses, doseCol = "DOSE", microColumnNames = c("doseName" = doseCol, "MEAN", "SE", "LOWER", "UPPER", "N"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>doses</code></td>
+<td>
+(Required) A mixed numeric or character vector of dose data that will be the dose column of the data frame.  It must not contain any duplicate entries. </td></tr>
+<tr valign="top"><td><code>doseCol</code></td>
+<td>
+(Optional) A string indicating the name of the column which will hold the "doses" vector.  "DOSE" by default </td></tr>
+<tr valign="top"><td><code>microColumnNames</code></td>
+<td>
+(Optional) A character vector containing the names of the columns of the micro evaluation data frame.  By default, variables "MEAN", "SE", "LOWER", "UPPER" and "N" are created in addition to the dose variable </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+createEmptyMicro will return a data frame whose column names are given by microColumnNames, and such that the first column will
+contain the "doses" vector by default.  The data frame will have as many rows as there are entries in "doses".  All of the
+frame's other entries will be NA.     This function will generate an error if "doses" contains duplicate entries or if the dose
+column name specified by "doseCol" doeses not occur in "microColumnNames".
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+createEmptyMicro returns a data frame that is as described above.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="checkMicroFormat.html">checkMicroFormat</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  createEmptyMicro(doses = c(10, 20 ,30, 40))
+  createEmptyMicro(doses = c(5, 25), doseCol = "D", microColumnNames = c("D", "MEAN", "SE", "LOWER"))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

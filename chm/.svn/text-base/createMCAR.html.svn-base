@@ -1,0 +1,104 @@
+<html><head><title>Missing Completely at Random</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createMCAR(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createMCAR">
+<param name="keyword" value=" Missing Completely at Random">
+</object>
+
+
+<h2>Missing Completely at Random</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function adds (or modifies) a "MISSING" flag to a dataset to simulate 
+a missing completely at random behaviour.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createMCAR(data, prop = 0, rule = paste(timeCol, "&gt; 0"), 
+  seed = .deriveFromMasterSeed(), timeCol = "TIME", flagName = "MISSING")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+(Required) Data frame to which to add missingness </td></tr>
+<tr valign="top"><td><code>prop</code></td>
+<td>
+(Optional) proportion of missingness between 0 and 1.  The default is "0" (so no missingness is generated) </td></tr>
+<tr valign="top"><td><code>rule</code></td>
+<td>
+(Optional) Only observations matching the rule can be flagged as missing.  Be default, <code>rule = "TIME&gt;0"</code> is used, which means that a missing flag will only be added after the time 0. </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random seed to use.  Based on the current random seed by default </td></tr>
+<tr valign="top"><td><code>timeCol</code></td>
+<td>
+(Optional) Time variable name ("TIME" by default) </td></tr>
+<tr valign="top"><td><code>flagName</code></td>
+<td>
+(Optional) name of the missing flag ("MISSING" by default) </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The missing data is either added to the dataset or modified if it already exist. In the latter
+case, the function only overwrites data that is not already missing.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+the <code>data</code> argument to which a MISSING flag is added or modified.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createDropout.html">createDropout</a></code> for drop out missingness.
+</p>
+<p>
+<code><a href="parseRangeCode.html">parseRangeCode</a></code> to handle the <code>rule</code> argument.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  
+myData &lt;- data.frame( 
+  SUBJ   = rep(1:3, each = 3), 
+  TIME = rep(0:2, 3)  ) 
+createMCAR( myData, prop = 0.1, rule = "TIME &gt; 0")  
+
+## Not run: 
+ ## more examples in the unit tests
+ file.show( system.file( "Runit", "runit.data.missing.R" , package = "MSToolkit") ) 
+## End(Not run)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

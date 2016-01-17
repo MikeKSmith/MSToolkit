@@ -1,0 +1,160 @@
+<html><head><title>Create parameters based on a multivariate normal distribution</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createNormalParameters(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createNormalParameters">
+<param name="keyword" value=" Create parameters based on a multivariate normal distribution">
+</object>
+
+
+<h2>Create parameters based on a multivariate normal distribution</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates a set of fixed (and optionally between subject) parameter variables by sampling from a multivariate normal distribution
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createNormalParameters(subjects, names, mean, covariance, range, betNames, betMean, betCov, betRange, 
+errStruc = "None", suffix = ".Between", idCol = "SUBJ", maxDraws = 10, seed = .deriveFromMasterSeed(), 
+flagName = "PAROMIT", digits = 3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Subjects for which to create parameters </td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+(Required) Names of parameters to generate </td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+(Required) Means for fixed parameters </td></tr>
+<tr valign="top"><td><code>covariance</code></td>
+<td>
+(Optional) Covariance matrix for fixed parameters.  By default, this is a matrix of zeros, representing no error to be included </td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+(Optional) Range of acceptable values.  Missing by default, resulting in no "range" of values is applied to the data </td></tr>
+<tr valign="top"><td><code>betNames</code></td>
+<td>
+(Optional) Between subject effects to create.  Default is to not create between subject data </td></tr>
+<tr valign="top"><td><code>betMean</code></td>
+<td>
+(Optional) Means for the between subject effects.  Default is to not create between subject data  </td></tr>
+<tr valign="top"><td><code>betCov</code></td>
+<td>
+(Optional) Covariance matrix for the between subject effects.  Default is to not create between subject data  </td></tr>
+<tr valign="top"><td><code>betRange</code></td>
+<td>
+(Optional) Range of acceptable values for the between subject effects.  Default is to not create between subject data  </td></tr>
+<tr valign="top"><td><code>errStruc</code></td>
+<td>
+(Optional) Function to map effect: Additive, Proportional, or None (default is "None") </td></tr>
+<tr valign="top"><td><code>suffix</code></td>
+<td>
+(Optional) Suffix to use for retain between subject effects (default is ".Between") </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Subject variable name for return data ("SUBJ" by default) </td></tr>
+<tr valign="top"><td><code>maxDraws</code></td>
+<td>
+(Optional) Maximum number of iterations for valid parameters (10 by default) </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random number generation seed.  By default, this is dervied from the current random seed </td></tr>
+<tr valign="top"><td><code>flagName</code></td>
+<td>
+(Optional) Flag name for parameters out of bounds ("PAROMIT" by default) </td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+(Optional) Number of digits to which to round generated continuous parameters.  Can be an atomic integer, in which case all variables are rounded according to it. Can be a numeric vector of the same length of the number of fixed parameters, in which case each parameter is rounded according to its value.  The default is 3 </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function will first create a single set of fixed effects, to be repeated for each subject specified.  This single set of fixed effects will be taken from a multivariate normal distribution with mean and covariance matrix supplied.
+If the "range" argument is provided, the function will take "maxDraws" samples of fixed effects and select one set of effect where the values are all "in range".  If none of the derived sets satisfy the "range" condition, the function will stop and return an error.
+</p>
+<p>
+If the "betNames" input has been suppied, and the "betNames" vector is a subset of the fixed effect names, between subject effects will be derived.
+If the "betMean" input has not been supplied, the mean of the between effects distribution will be 0.  Samples for each subject will be taken from a multivariate normal distribution with mean "betMean" and covariate matrix  "betCov".
+If the "betRange" input has been specified, the function will repetitively attempt to create between subject effects within the given range.  If, after "maxDraws" attempts there are still values outside of the range, the "parameter omit" flag will be set to "1" to signify and "out of range" element.
+</p>
+<p>
+If fixed and between subject effects have been generated, the "errStruc" input will specify how the between subject effects are to be applied:
+* None = Keep between subject effect seperate (and use the "suffix" suppied to name the variables)
+* Additive = Add each between subject effect to the corresponding fixed effect
+* Proportional = Add each between subject effect to the corresponding fixed effect, then exponentiate the result
+</p>
+
+
+<h3>Value</h3>
+
+
+<h3>Note</h3>
+
+
+
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createParameters.html">createParameters</a></code> and <code><a href="createExternalParameters.html">createExternalParameters</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+createNormalParameters(5, "E0,ED50,EMAX", mean = c(0, 50, 100), covariance = diag(c(1, 5, 10)))
+#  SUBJ       E0     ED50     EMAX   PAROMIT
+#1    1 -0.8356286 50.41064 98.01898       0
+#2    2 -0.8356286 50.41064 98.01898       0
+#3    3 -0.8356286 50.41064 98.01898       0
+#4    4 -0.8356286 50.41064 98.01898       0
+#5    5 -0.8356286 50.41064 98.01898       0
+createNormalParameters(5, "E0,ED50,EMAX", mean = c(0, 50, 100), covariance = diag(c(1, 5, 10)), betNames = c("E0", "EMAX"), betCov = diag(2), errStruc = "Additive")
+#  SUBJ       E0     ED50     EMAX   PAROMIT
+#1    1  0.7596522 50.41064 98.59476       0
+#2    2 -0.5061208 50.41064 97.71359       0
+#3    3 -1.6560970 50.41064 99.53076       0
+#4    4 -0.3481996 50.41064 98.40882       0
+#5    5 -0.0973039 50.41064 97.39774       0
+
+# no covariance by default 
+createNormalParameters(5, "E0,ED50,EMAX", mean = c(0, 50, 100) )  
+#  SUBJ E0 ED50 EMAX PAROMIT
+#1    1  0   50  100       0
+#2    2  0   50  100       0
+#3    3  0   50  100       0
+#4    4  0   50  100       0
+#5    5  0   50  100       0
+
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,69 @@
+<html><head><title>Generates and analyzes simulated trial data</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>MSToolkit-package(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   MSToolkit-package">
+<param name="keyword" value="R:   MSToolkit">
+<param name="keyword" value=" Generates and analyzes simulated trial data">
+</object>
+
+
+<h2>Generates and analyzes simulated trial data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Originally built for Pfizer by Mango Solutions, the MSToolkit library generates and analyzes simulated trial data.
+</p>
+
+
+<h3>Details</h3>
+
+<p>
+<table summary="Rd table">
+<tr>
+  <td align="left">Package: </td>  <td align="left"> MSToolkit</td>
+</tr>
+<tr>
+  <td align="left"> Type: </td>  <td align="left"> Package</td>
+</tr>
+<tr>
+  <td align="left"> Version: </td>  <td align="left"> 1.6</td>
+</tr>
+<tr>
+  <td align="left"> Date: </td>  <td align="left"> 2007-08-29</td>
+</tr>
+<tr>
+  <td align="left"> License: </td>  <td align="left"> What license is it under?</td>
+</tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>
+MSToolkit Support (mstoolkit@gmail.com)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+Neal Thomas' "DoseResponse" library
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,121 @@
+<html><head><title>create the interim flag</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createInterims(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createInterims">
+<param name="keyword" value=" create the interim flag">
+</object>
+
+
+<h2>create the interim flag</h2>
+
+
+<h3>Description</h3>
+
+<p>
+That function creates the <EM>INTERIM</EM> flag that identifies 
+which subject is included in the analysis at every interim stage.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createInterims(subjects, proportion, seed = .deriveFromMasterSeed(), 
+  idCol = "SUBJ", interimCol = "INTERIM", method = "Sample")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Vector of subjects or number of subjects </td></tr>
+<tr valign="top"><td><code>proportion</code></td>
+<td>
+(Required) Vector of proportions of subjects in each interim.  This is a vector of cumulative proportions </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) The random number generation seed to use.  By default, this is derived from the current random seed </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Name of the subject column ("SUBJ" by default) </td></tr>
+<tr valign="top"><td><code>interimCol</code></td>
+<td>
+(Optional) Name of the interim column ("INTERIM" by default) </td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+(Optional) Method to use. Must be one of <EM>Sample</EM> or <EM>Proportion</EM>.  Default is <EM>Sample</EM> </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+If the "method" argument is set to "Sample", the interim numbers should be assigned using the following algorithm:
+Store the number of subjects (nSubjects) and the number of interims (nInterims)
+Append a zero to the start of the proportions and take differences to get a vector of "non-cumulative" probabilities
+Take "nSubjects" samples from the values "1" to "nInterims" with probabilities set to the derived "non-cumulative" probabilities
+Replace the "interim" variable with these values.
+</p>
+<p>
+If the "method" argument is set to "Proportion", the interim numbers should be assigned using the following algorithm:
+Store the number of subjects (nSubjects) and the number of interims (nInterims)
+Convert the cumulative proportions to "non-cumulative" probabilities
+Allocate a "base" number of subjects to each interim (found by multiplying nSubjects by the set of probabilities, then take the floor of the resulting values)
+If any subjects are left at this stage, use the "sample" method (below) to allocate the remaining subjects to interims
+"Shuffle" the interim variable so that the results are not ordered.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame containing the following variables:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>SUBJ</code></td>
+<td>
+Subject identifier, named after <code>idCol</code>.</td></tr>
+<tr valign="top"><td><code>INTERIM </code></td>
+<td>
+Interim flag, named after <code>interimCol</code>.</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="generateData.html">generateData</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # first interim with 10
+  # second with 30
+  # third with 60
+  createInterims(100, proportion  = ".1,.3,.6" )
+  
+  ## Not run: 
+    ## more examples in the unit tests
+    file.show( system.file("Runit", "runit.data.interim.R",  package = "MSToolkit") )
+  
+## End(Not run)
+  
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

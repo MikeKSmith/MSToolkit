@@ -1,0 +1,117 @@
+<html><head><title>check the user supplied drop out function</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>checkDropOutFun(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   checkDropOutFun">
+<param name="keyword" value=" check the user supplied drop out function">
+</object>
+
+
+<h2>check the user supplied drop out function</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function performs checks to ensire that the user-supplied dropout 
+function is correct.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+checkDropOutFun(fun, data, sizeSubset = 5, useSubset= TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fun</code></td>
+<td>
+(Required) Function to check for validity </td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+(Required) Dataset to use for performing the valildity check </td></tr>
+<tr valign="top"><td><code>sizeSubset</code></td>
+<td>
+(Optional) Number of "initial" rows from the provided data to use in the test for the validity of the function.  The default is "5" </td></tr>
+<tr valign="top"><td><code>useSubset</code></td>
+<td>
+(Optional) Should the check operate on a subset of the data, as opposed to the entire dataset?  TRUE by default </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+(Optional) Extra arguments to be passed directly to the function being tested.  No extra arguments are passed by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A correct dropout function must have at least a <code>data</code> argument, and
+it must return a numeric vector containing the values 0 and 1 having as its length 
+the number of rows of the dataset it is given.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Nothing. Function only used for the sied effect of generating an error 
+if the function is not correct.</p>
+
+<h3>Note</h3>
+
+<p>
+if <code>useSubset</code> is set to TRUE, only a subset of the data 
+is used to perform the check. The size of the subset is then 
+the minimum of the <code>sizeSubset</code> and the number of rows in the dataset.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createDropout.html">createDropout</a></code> calls this function before creating the drop out flag.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  dFun &lt;- function(data, prop) sample(0:1, nrow(data), TRUE, c(1-prop, prop))
+   testData &lt;- data.frame(
+     SUBJ=rep(1:10, each=5), 
+     TIME=rep(0:4, 10), 
+     VALUE=rnorm(50))
+  checkDropOutFun( dFun, testData, prop = .2 )
+  
+  ## Not run: 
+    # wrong function
+    checkDropOutFun( max, testData )
+    
+    # function that does not exist
+    checkDropOutFun( "XXXX", testData )
+    
+    # function that does not exist
+    checkDropOutFun( XXXX, testData )
+    
+  
+## End(Not run)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,138 @@
+<html><head><title>Create covariates from a discrete distribution</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createDiscreteCovariates(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createDiscreteCovariates">
+<param name="keyword" value=" Create covariates from a discrete distribution">
+</object>
+
+
+<h2>Create covariates from a discrete distribution</h2>
+
+
+<h3>Description</h3>
+
+
+
+
+<h3>Usage</h3>
+
+<pre>
+createDiscreteCovariates(subjects, names, values, probs, probArray, 
+  seed = .deriveFromMasterSeed(), idCol = "SUBJ", includeIDCol = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>subjects</code></td>
+<td>
+(Required) Vector of subjects (or number of subjects) for which to create covariates </td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+(Required) Names of the discrete covariates to be created.  All the names should be valid R names. See <code>link{validNames}</code>.</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+(Required) Values that the covariates can take. See details section. </td></tr>
+<tr valign="top"><td><code>probs</code></td>
+<td>
+(Optional) Probabilities for each covariates. See details section. </td></tr>
+<tr valign="top"><td><code>probArray</code></td>
+<td>
+(Optional) Probability array for uneven sampling. See details section. </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random seed to use.  By default, it is based on the current random seed </td></tr>
+<tr valign="top"><td><code>idCol</code></td>
+<td>
+(Optional) Name of the subject column.  Must be a valid R name (see <code><a href="validNames.html">validNames</a></code>) and not be duplicated with any <code>names</code>.  "SUBJ" by default </td></tr>
+<tr valign="top"><td><code>includeIDCol</code></td>
+<td>
+(Optional) A logical value. Should the subject column be included. Typically, the <code><a href="createCovariates.html">createCovariates</a></code> function would set this to FALSE as it does not need it.  TRUE by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The <code>values</code> and <code>probs</code> argument are parsed using the <code><a href="parseHashString.html">parseHashString</a></code> helper
+function. They could be either : 
+- a vector giving the values for each variable. 
+</p>
+<p>
+<code>c("1,2", "1,2,3")</code> would mean that the first variable takes values 1 and 2, 
+and the second variable takes values 1, 2 and 3.
+</p>
+<p>
+- a list giving the values for each variable. 
+<code>list(c(1,2), c(1,2,3))</code> would mean that the first variable takes values 1 and 2, 
+and the second variable takes values 1, 2 and 3.
+</p>
+<p>
+- a compact notation using the hash symbol to separate variables
+<code>"1,2#1,2,3"</code>
+</p>
+<p>
+Additionally for the <code>probs</code> argument, a check is performed to make sure that each 
+variable probability sums to 1.
+</p>
+<p>
+Alternatively, a <code>probArray</code> argument can be given. This should be a data frame containing 
+one more column (named "prob") than the number of variables to create. Each variable has a column
+which contains the values it can take. The prob column gives the probability for each combination.
+See examples. The prob column should sum up to one.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createContinuousCovariates.html">createContinuousCovariates</a></code>, 
+<code><a href="createExternalCovariates.html">createExternalCovariates</a></code>, and 
+<code><a href="createCovariates.html">createCovariates</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  
+  # 10 samples of X and Y where: 
+  # P[ X = 1 ] = .1
+  # P[ X = 2 ] = .9
+  # -
+  # P[ Y = 7 ] = .5
+  # P[ Y = 8 ] = .4
+  # P[ Y = 9 ] = .1
+  dat &lt;- createDiscreteCovariates( 10 , names = "X, Y", probs = ".1,.9#.5,.4,.1", values = "1,2#7,8,9")
+  print(dat)
+  stopifnot( all( dat$X %in% c(1,2)) )
+  stopifnot( all( dat$Y %in% c(7,8,9)) )
+  
+  
+  # using the probArray version
+  pa &lt;- data.frame( F1 = rep(0:1, 3), F2 = rep(1:3, each = 2), PROB = c(.1,.2,.1,.2,.2,.2) )
+  print( pa )
+  createDiscreteCovariates( 100 , probArray = pa )
+  
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,162 @@
+<html><head><title>Analyse a single replicate of data</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>analyzeRep(MSToolkit)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   analyzeRep">
+<param name="keyword" value=" Analyse a single replicate of data">
+</object>
+
+
+<h2>Analyse a single replicate of data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+The <code>analyzeRep</code> function analyzes a single replicate of data, possibly at different interim levels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  analyzeRep(analysisCode, replicate, removeMissing = TRUE, removeParOmit = TRUE, 
+  removeRespOmit = TRUE, interimCode, software = c("R", "SAS"), seed = .deriveFromMasterSeed(), 
+  parOmitFlag = "PAROMIT", respOmitFlag = "RESPOMIT", missingFlag = "MISSING", interimCol = "INTERIM", doseCol = "DOSE", 
+  infile = .dataGetFullPath( replicate, dataType="Replicate", workingPath = workingPath), workingPath = getwd())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>analysisCode</code></td>
+<td>
+(Required) File containing analysis code (for R or SAS) or an R function for analysis (R only) </td></tr>
+<tr valign="top"><td><code>replicate</code></td>
+<td>
+(Required) Replicate number of data to be analyzed </td></tr>
+<tr valign="top"><td><code>removeMissing</code></td>
+<td>
+(Optional) Should rows marked as 'Missing' during the data generation step be removed from the data before analysis is performed?  TRUE by default </td></tr>
+<tr valign="top"><td><code>removeParOmit</code></td>
+<td>
+(Optional) Should any rows marked as 'Omitted' during the parameter data generation step (ie. parameters out of range) be removed from the data before analysis is performed?  TRUE by default </td></tr>
+<tr valign="top"><td><code>removeRespOmit</code></td>
+<td>
+(Optional) Should any rows marked as 'Omitted' during the response generation step (ie. responses out of range) be removed from the data before analysis is performed?  TRUE by default </td></tr>
+<tr valign="top"><td><code>interimCode</code></td>
+<td>
+(Optional) An R function to be applied to interim datasets in order to creation interim decisions.  See the help file for the <code><a href="interimAnalysis.html">interimAnalysis</a></code> function for more information.  By default, no functions is provided, resulting in no interim analyses being performed </td></tr>
+<tr valign="top"><td><code>software</code></td>
+<td>
+(Optional) The software to be used for analysis: either "R" or "SAS".  "R" is the default software used </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+(Optional) Random number seed to use for the analysis.  Based on the current random seed by default </td></tr>
+<tr valign="top"><td><code>parOmitFlag</code></td>
+<td>
+(Optional) Parameter omit flag name.  "PAROMIT" by default </td></tr>
+<tr valign="top"><td><code>respOmitFlag</code></td>
+<td>
+(Optional) Response omit flag name.  "RESPOMIT" by default </td></tr>
+<tr valign="top"><td><code>missingFlag</code></td>
+<td>
+(Optional) Missing flag name.  "MISSING" by default </td></tr>
+<tr valign="top"><td><code>interimCol</code></td>
+<td>
+(Optional) Interim variable name.  "INTERIM" by default </td></tr>
+<tr valign="top"><td><code>doseCol</code></td>
+<td>
+(Optional) Dose variable name.  "DOSE" by default </td></tr>
+<tr valign="top"><td><code>infile</code></td>
+<td>
+(Optional) Data file to use in the analysis, automatically populated using the replicate number.  Derived from the "replicate" number and working path by default </td></tr>
+<tr valign="top"><td><code>workingPath</code></td>
+<td>
+(Optional) Root directory in which replicate data is stored, and in which we should perform the analysis.  Current working directory is used by default </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The <code><a href="analyzeRep.html">analyzeRep</a></code> function calls the <code><a href="performAnalysis.html">performAnalysis</a></code> function in order to analyze and summarize a single simulated replicate dataset (held in the "ReplicateData" subdirectory of the specified working path).
+</p>
+<p>
+The first step of the analysis is to use the removeMissing, removeParOmit and removeRespOmit flags (together with the missingFlag, parOmitFlag and respOmitFlag inputs) in order to subset the data if required.  For example, we may wish to remove all observations flagged as "missing" in an earlier simulation of subject dropout.  The subset is applied to the data before the analysis.
+</p>
+<p>
+The analysis code must be either an R function, a reference to an external R script, or a reference to an external SAS script.  If the software is set as "SAS", it is assumed that the analysisCode is an external SAS script.
+If the analysis code is a SAS script, it must accept a singe dataset called work.infile, and create an output dataset called work.outfile.  The work.outfile dataset must be a valid "Micro Evaluation" structure as specified in the help file for <code><a href="checkMicroFormat.html">checkMicroFormat</a></code>.    
+If the software is "R", the analysis code input must be either an R function or an R script.  The R analysis code must also return a valid "Micro Evaluatoin" structure as specified in function <code><a href="checkMicroFormat.html">checkMicroFormat</a></code> 
+</p>
+<p>
+The first step in <code><a href="analyzeRep.html">analyzeRep</a></code> is to perform a full analysis on the data (which has possibly been subset be the remove* inputs).  Following the analysis, the <code><a href="checkMicroFormat.html">checkMicroFormat</a></code> function is used to ensure the return data is a valid "Micro Evaluation" data structure.
+The return structure is appended with drop and stop flags (set to 0) and with interim variables (where interim is "FULL").
+</p>
+<p>
+If the interimCode has been specified, and the "interimCol" variable is found in the data, interim analyses will be performed iteratively on sections of the data.  The interimCode input must be an R function that returns a suitable list structure as described in the <code><a href="interimAnalysis.html">interimAnalysis</a></code> help file.
+For each value of "interimCol", the analysis will be performed on a section of data (using a call to <code><a href="performAnalysis.html">performAnalysis</a></code>), and the return from the analysis will be checked (using a call to <code><a href="checkMicroFormat.html">checkMicroFormat</a></code>).  The "Micro Evaluation" output is then passed to the <code><a href="interimAnalysis.html">interimAnalysis</a></code> function and the return list checked for instruction.
+If any return interim list includes doses to "DROP", the doses will be removed from future analyses.  If the "STOP" flag in the list is set to "TRUE", the analysis is stopped at this interim.
+</p>
+<p>
+Finally, all micro evaluation outputs (with appended interim variables and drop/stop flags) are combined and returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A "Micro Evaluation" structure with additional variables (interim column, drop flag and stop flag)</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mango Solutions &lt;mstoolkit@mango-solutions.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="performAnalysis.html">performAnalysis</a></code> is called by <code>analyzeRep</code> to perform
+each analysis on the subset of data. <code><a href="interimAnalysis.html">interimAnalysis</a></code> executes the 
+<code>interimCode</code> and updates the data changes accordibgly.
+</p>
+<p>
+<code><a href="analyzeData.html">analyzeData</a></code> calls <code>analyzeRep</code> sequentially.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  
+  # Analysis Code
+  emaxFun &lt;- function(data){
+    library(DoseResponse)
+    with( data, {
+      uniDoses &lt;- sort( unique(D))                                                                    
+      eFit &lt;- emaxalt( RESP, D )
+      outDf &lt;- data.frame( D = uniDoses, 
+        MEAN = eFit$dm[as.character(uniDoses)], 
+        SE = eFit$dsd[as.character(uniDoses)] )
+      outDf$LOWER &lt;- outDf$MEAN - 2 * outDf$SE
+      outDf$UPPER &lt;- outDf$MEAN + 2 * outDf$SE
+      outDf$N     &lt;- table(DOSE)[ as.character(uniDoses) ]
+      outDf 
+     }) 
+   }                                                                                                                   
+  
+  analyzeRep(replicate = 1, analysisCode = emaxFun)
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>MSToolkit</em> version 1.5-1 <a href="00Index.html">Index]</a></div>
+
+</body></html>
