@@ -1,4 +1,4 @@
-context("Supplementary testtthat tests")
+context("testthat covariate tests")
 
 test_that("Recurring fractions allowed in arm assignment probs", {
   
