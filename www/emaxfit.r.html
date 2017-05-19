@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1038.25">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #042299}
+p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #042299; min-height: 17.0px}
+span.s1 {color: #042299}
+span.s2 {color: #c3892c}
+span.s3 {color: #b0140c}
+span.s4 {color: #055118}
+span.s5 {color: #000000}
+span.Apple-tab-span {white-space:pre}
+</style>
+</head>
+<body>
+<p class="p1">emax.fit<span class="s1">&lt;- </span><span class="s2">function</span><span class="s1"> (</span>y<span class="s1">, </span>dose<span class="s1">, </span>iparm<span class="s1"> = </span>c<span class="s1">(</span><span class="s3">"ed50"</span><span class="s1">, </span><span class="s3">"e0"</span><span class="s1">, </span><span class="s3">"emax"</span><span class="s1">), </span>ed50cutoff<span class="s1"> = </span><span class="s4">2.5</span><span class="s1"> * </span>max<span class="s1">(</span>doselev<span class="s1">))<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p2">{</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>dm<span class="s1"> &lt;- </span>tapply<span class="s1">(</span>y<span class="s1">, </span>dose<span class="s1">, </span>mean<span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>dsd<span class="s1"> &lt;- </span>sqrt<span class="s1">(</span>tapply<span class="s1">(</span>y<span class="s1">, </span>dose<span class="s1">, </span>var<span class="s1">))</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>intercept<span class="s1"> &lt;- </span>rep<span class="s1">(</span><span class="s4">1</span><span class="s1">, </span>length<span class="s1">(</span>dose<span class="s1">))</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>doselev<span class="s1"> &lt;- </span>sort<span class="s1">(</span>unique<span class="s1">(</span>dose<span class="s1">))</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s5">est3</span> &lt;- <span class="s5">rep</span>(<span class="s2">NA</span>, <span class="s4">3</span>)</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s5">estA</span> &lt;- <span class="s5">rep</span>(<span class="s2">NA</span>, <span class="s4">2</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">e0</span> &lt;- <span class="s5">min</span>(<span class="s5">dm</span>)</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">emax</span> &lt;- <span class="s5">max</span>(<span class="s5">dm</span>) - <span class="s5">e0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>ed50<span class="s1"> &lt;- </span>max<span class="s1">(</span>doselev<span class="s1">)/</span><span class="s4">2</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">Sparm</span> &lt;- <span class="s5">c</span>(<span class="s5">ed50</span> = <span class="s5">ed50</span>, <span class="s5">e0</span> = <span class="s5">e0</span>, <span class="s5">emax</span> = <span class="s5">emax</span>)</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">fit</span> &lt;- <span class="s5">try</span>(<span class="s5">nls</span>(<span class="s5">y</span> ~ <span class="s5">e0</span> + (<span class="s5">emax</span> * <span class="s5">dose</span>)/(<span class="s5">dose</span> + <span class="s5">ed50</span>),<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></span>start<span class="s1"> = </span>Sparm<span class="s1">, </span>control<span class="s1"> = </span>nls.control<span class="s1">(</span>maxiter<span class="s1"> = </span><span class="s4">100</span><span class="s1">),<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">trace</span> = <span class="s5">F</span>), <span class="s5">silent</span> = <span class="s5">T</span>)</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>AcceptConv<span class="s1"> &lt;- </span>F</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s2">if</span> (<span class="s5">class</span>(<span class="s5">fit</span>) == <span class="s3">"nls"</span>) {</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">est3</span> &lt;- <span class="s5">coef</span>(<span class="s5">fit</span>)</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s2">if</span> (<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] &gt; <span class="s4">0</span>) {</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s2">if</span> (<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] &lt;= <span class="s5">ed50cutoff</span>) {</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">vc</span> &lt;- <span class="s5">as.vector</span>(<span class="s5">vcov</span>(<span class="s5">fit</span>))</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">seout</span> &lt;- <span class="s5">SeEmax3</span>(<span class="s5">fit</span>, <span class="s5">doselev</span>)</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">fitpred</span> &lt;- <span class="s5">seout</span>$<span class="s5">fitpred</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">sdpred</span> &lt;- <span class="s5">seout</span>$<span class="s5">sdpred</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>sddif<span class="s1"> &lt;- </span>seout<span class="s1">$</span>sddif</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">AcceptConv</span> &lt;- <span class="s5">T</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>}</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>}</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s2">if</span> (!<span class="s5">AcceptConv</span>) {</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">fitL</span> &lt;- <span class="s5">lm</span>(<span class="s5">y</span> ~ <span class="s5">dose</span>)</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>sigL<span class="s1"> &lt;- </span>summary<span class="s1">(</span>fitL<span class="s1">)$</span>sigma</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>predobj<span class="s1"> &lt;- </span>predict<span class="s1">(</span>fitL<span class="s1">, </span>data.frame<span class="s1">(</span>dose<span class="s1"> = </span>doselev<span class="s1">), </span>se.fit<span class="s1"> = </span>T<span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>fitpred<span class="s1"> &lt;- </span>predobj<span class="s1">$</span>fit</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>sdpred<span class="s1"> &lt;- </span>predobj<span class="s1">$</span>se.fit</p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>sddif<span class="s1"> &lt;- </span>doselev<span class="s1"> * </span>sqrt<span class="s1">(</span>vcov<span class="s1">(</span>fitL<span class="s1">)[</span><span class="s4">2</span><span class="s1">, </span><span class="s4">2</span><span class="s1">])</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>return<span class="s1">(</span>list<span class="s1">(</span>fitpred<span class="s1"> = </span>fitpred<span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>sdpred<span class="s1"> = </span>sdpred<span class="s1">, </span>sddif<span class="s1"> = </span>sddif<span class="s1">))</span></p>
+<p class="p2">}</p>
+<p class="p3"><br></p>
+<p class="p1">SeEmax3<span class="s1">&lt;-</span><span class="s2">function</span><span class="s1"> (</span>fit<span class="s1">, </span>doselev<span class="s1">)<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p2">{</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s5">E0</span>&lt;-<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">2</span>]</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>ED50<span class="s1">&lt;-</span>coef<span class="s1">(</span>fit<span class="s1">)[</span><span class="s4">1</span><span class="s1">]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>EMAX<span class="s1">&lt;-</span>coef<span class="s1">(</span>fit<span class="s1">)[</span><span class="s4">3</span><span class="s1">]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>fitpred<span class="s1"> &lt;- </span>E0<span class="s1">+(</span>EMAX<span class="s1">*</span>doselev<span class="s1">)/(</span>ED50<span class="s1">+</span>doselev<span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>fitdif<span class="s1"> &lt;- </span>fitpred<span class="s1"> - </span>E0</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>vfcov<span class="s1"> &lt;- </span>vcov<span class="s1">(</span>fit<span class="s1">)</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s5">sddif</span> &lt;- <span class="s5">sqrt</span>((<span class="s5">fitdif</span>^<span class="s4">2</span>) * (<span class="s5">vfcov</span>[<span class="s4">3</span>, <span class="s4">3</span>]/<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">3</span>]^<span class="s4">2</span> +<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">vfcov</span>[<span class="s4">1</span>, <span class="s4">1</span>]/(<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] + <span class="s5">doselev</span>)^<span class="s4">2</span> - (<span class="s4">2</span> * <span class="s5">vfcov</span>[<span class="s4">1</span>,<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s4">3</span>])/(<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">3</span>] * (<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] + <span class="s5">doselev</span>))))</p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s5">covint</span> &lt;- -((<span class="s5">doselev</span> * <span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">3</span>])/(<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] + <span class="s5">doselev</span>)^<span class="s4">2</span>) *<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">vfcov</span>[<span class="s4">2</span>, <span class="s4">1</span>] + (<span class="s5">doselev</span>/(<span class="s5">coef</span>(<span class="s5">fit</span>)[<span class="s4">1</span>] + <span class="s5">doselev</span>)) * <span class="s5">vfcov</span>[<span class="s4">2</span>,<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s4">3</span>]</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>sdpred<span class="s1"> &lt;- </span>sqrt<span class="s1">(</span>vfcov<span class="s1">[</span><span class="s4">2</span><span class="s1">, </span><span class="s4">2</span><span class="s1">] + </span>sddif<span class="s1">^</span><span class="s4">2</span><span class="s1"> + </span><span class="s4">2</span><span class="s1"> * </span>covint<span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>return<span class="s1">(</span>list<span class="s1">(</span>fitpred<span class="s1"> = </span>fitpred<span class="s1">, </span>sdpred<span class="s1"> = </span>sdpred<span class="s1">, </span>fitdif<span class="s1"> = </span>fitdif<span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p2"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s5">sddif</span> = <span class="s5">sddif</span>))</p>
+<p class="p2">}</p>
+</body>
+</html>
+ 

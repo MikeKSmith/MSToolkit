@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1038.25">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 14.0px 0.0px; font: 20.0px Arial}
+p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Arial}
+p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; min-height: 16.0px}
+p.p4 {margin: 0.0px 0.0px 14.0px 0.0px; font: 16.0px Arial}
+span.s1 {text-decoration: underline}
+span.s2 {font: 14.0px Arial; text-decoration: underline}
+</style>
+</head>
+<body>
+<p class="p1"><span class="s1"><a href="analyzedata(...).html"><b>analyzeData(...)</b></a></span></p>
+<p class="p2"><span class="s1"><a href="analyzedata(...).html"><b>analyzeData</b><span class="s2">(...)</span></a></span> performs analysis of the individual replicate datasets. The <a href="usage.html"><span class="s1">Usage</span></a> page gives an overview of the analysis process, but in short the <a href="analyzedata(...).html"><span class="s1">analyzeData(...)</span></a> function analyses each replicate dataset in turn and applies the analysisCode function supplied to analyse the data. The analysisCode function need only be written in the context of analysing a single dataset. MSToolkit takes care of reading in each replicate dataset and writing back out the analysis results. <i>MSToolkit was written with the main purpose of evaluating operating characteristics of "learning" phase trials, where dose selection was the main aim we focus on returning inferences about dose effects and the output from the analysis must contain DOSE and some basic summary statistics below. In future versions of MSToolkit we will relax this criteria.</i></p>
+<p class="p2">The user must provide a valid R function which is to be used for analysing the generated dataset or an external file (.R or .SAS) which contains code for analysis of the data. The user must also provide functions for performing the micro- and macro-evaluation summary of trial performance.</p>
+<p class="p2">The <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> function automatically handles the data input / output, pointing the analytic function (<b>analysisCode</b>) to each replicate dataset in turn. The user doesn’t need to explicitly name the “replicate000x.csv” file for analysis. <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> takes the user-defined <b>analysisCode</b> function and loops through each replicate dataset in turn passing this to the <b>analysisCode</b> function which takes it as the argument “data”. The user then works with an data frame object called “data” in the analysisCode function. Examples are given below.</p>
+<p class="p2">The <b><i>analysisCode</i></b> <b>MUST</b> return 5 items: estimated mean (labelled <b>MEAN</b>), std. error (labelled <b>SE</b>) with lower (<b>LOWER</b>) and upper (<b>UPPER</b>) interval estimates and <b>N</b>, the number of subjects on each <b>DOSE</b>. These are required output for micro-evaluation. Other output can be carried along (e.g. Mean difference from placebo, Emax model parameter estimates), but these key measures are expected. The estimates should use the appropriate method for the used analytical technique. For example they could be LSMeans from a linear model or estimates based on the fitted dose-response model. Micro-evaluation results are used in cases where we may wish to drop doses at interim analysis - the decision to drop doses can then be based on the output interval estimates. For example we may wish to drop doses where the lower limit is less than zero (in a difference from baseline or comparison to placebo). Micro-evaluation is performed at each specified interim analysis. If several interim analyses are planned, then the Micro-evaluation is performed on the whole dataset (without dropping any doses), and after every interim. This allows comparisons in trial performance between the adapting and not adapting.</p>
+<p class="p2">The <b><i>macroCode</i></b> summarises the trial performance as a whole - it should provide a single assessment of the success or failure of a trial at the conclusion of the trial. For example, we may wish to summarise the proportion of simulated trials showing the maximal effect greater than a clinically meaningful effect. Similarly we may wish to show that the final estimates of model parameters are precise and unbiased. Macro-evaluation should summmarise trial performance at this level.</p>
+<p class="p2">The <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> function is different from the <a href="generatedata(...).html"><span class="s1"><b>generateData</b>(...)</span></a> function in that there are fewer low level functions that the user will typically want to access. The majority of the lower level functions for <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> govern the data input and output of the trial replicate data, and general "housekeeping" and submitting of the analysis jobs to the GRID.</p>
+<p class="p3"><br></p>
+<p class="p4"><b>Arguments</b></p>
+<p class="p2"><b>replicates</b> - Which replicates to use in the <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> step. <b>DEFAULT</b> is ALL replicates, but a vector of replicate numbers can be given to specify a subset for analysis.</p>
+<p class="p2"><b>analysisCode</b> - R function or SAS file of analytic code. MUST return mean, std.error, lower and upper interval estimates for each dose. Other parameters may be returned, but the core set as described must be in the dataset for use by interimCode. (<b>REQUIRED</b>)</p>
+<p class="p2"><b>macroCode</b> - Macro-evaluation code. Algorithm for defining trial level success. (<b>REQUIRED</b>)</p>
+<p class="p2"><b>interimCode</b> - Defines an algorithm for dropping doses at interim analyses.</p>
+<p class="p2"><b>software</b> - Software for analysis - could be R or SAS.</p>
+<p class="p2"><b>grid</b> - If running the MSToolkit from a UNIX node or via ePharm, then the user can choose to split the analysis across GRID nodes in order to speed up the analysis. If running MSToolkit locally on a laptop, this option cannot be accessed at this time.</p>
+<p class="p2"><b>removeMissing, removeRespOmit</b> - should missing data or subjects who have dropped out be included in analysis?</p>
+<p class="p2">If running <a href="analyzedata(...).html"><span class="s1"><b>analyzeData</b>(...)</span></a> on an LSF GRID then the analysis job will split the job into roughly equal sized numbers of replicates to run across GRID nodes. Running MSToolkit on an LSF GRID will require the <b>rlsf</b> package.</p>
+<p class="p2"><b><i>NOTE</i></b>: When running less than about 300 replicates, it may be <i>quicker</i> to run the MSToolkit simulations locally on a laptop / PC rather than on the GRID due to the GRID queueing system and overheads in data input and output.</p>
+</body>
+</html>
+ 

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1038.25">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Arial; min-height: 14.0px}
+p.p2 {margin: 0.0px 0.0px 16.0px 0.0px; font: 26.0px Arial}
+p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Arial}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial}
+p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; min-height: 16.0px}
+p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Arial; min-height: 16.0px}
+p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Helvetica}
+li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial}
+li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; min-height: 16.0px}
+span.s1 {text-decoration: underline}
+ul.ul1 {list-style-type: disc}
+</style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p1"><br></p>
+<p class="p2"><span class="s1"><a href="usage.html"><b>Usage</b></a></span></p>
+<p class="p3">The MSToolkit comprises a suite of low-level functions which are used to generate data and apply user-specified analysis functions or SAS analysis code to the generated data. High level functions are provided which wrap these functions together to perform the data generation and analysis steps.</p>
+<p class="p3">The <a href="generatedata(...).html"><span class="s1"><b>generateData(...)</b></span></a> function calls the low level generate data functinos to create sets of simulated data. The following components are called to create aspects of the simulated trial data:</p>
+<ul class="ul1">
+<li class="li4"><b>createTreatments(...):</b> Creates a dataset of all possible treatment regimes to be allocated to subjects</li>
+<li class="li4"><b>allocateTreatments(...):</b> Allocates treatments to subjects in the simulated study</li>
+<li class="li4"><b>createCovariates(...):</b> Creates a set of fixed covariates for a simulated population</li>
+<li class="li4"><b>createParameters(...):</b> Creates simulated fixed and between subject parameters for subjects in each replicate</li>
+<li class="li4"><b>createResponse(...):</b> Creates a simulated response variable based on available derived data</li>
+<li class="li4"><b>createMCAR(...):</b> Adds a simulated "missing" flag to the data</li>
+<li class="li4"><b>createDropout(...):</b> Adds a simulated "missing" flag to the data based on a dropout function</li>
+<li class="li4"><b>createInterims(...):</b> Assigns subjects in the study to interim analyses</li>
+<li class="li4"><b>createDirectories(...)</b>: creates ReplicateData directory under the current working directory.</li>
+<li class="li4"><b>writeData(...)</b>: Which writes out the simulation replicate data in CSV<span class="Apple-converted-space">&nbsp;</span></li>
+<li class="li5"><br></li>
+</ul>
+<p class="p3">Most users will start with the <a href="generatedata(...).html"><span class="s1"><b>generateData(...)</b></span></a> function which uses the functions described above to specify the design, allocation to treatments, generation of parameters, functional specification for generating data and controlling dropout and missing data. The function has a great number of arguments which control and pass information to the low level functions. Most of the time users will not have to dig into the lower level functions. However more complex designs can be generated using the low level functions e.g. Generating data for more than one drug in a trial. The <a href="generatedata(...).html"><span class="s1"><b>generateData(...)</b></span></a> function creates a directory with the replicate datasets stored as individual .CSV files.</p>
+<p class="p3">Once data has been generated, the next step is to analyse the replicate data using the <a href="analyzedata(...).html"><span class="s1"><b>analyzeData(...)</b></span></a> function. This function wraps together functions for performing user-specified analysis on the replicate datasets and also performing micro- and macro- level summaries of the analysis results. Micro-analysis summarises the analytic method at the dose or treatment level, giving the estimated mean, std. error and confidence limits for each dose / treatment and for each interim analysis (if specified). This allows the user to specify a rule for dropping doses or treatments at interim analysis. Macro-analysis summarises the analytic method at a study level, applying a user-specified rule to determine success or failure of the trial for assessing the operating characteristics of the trial. Unlike the <a href="generatedata(...).html"><span class="s1"><b>generateData(...)</b></span></a> function, <a href="analyzedata(...).html"><span class="s1"><b>analyzeData(...)</b></span></a> has limited functionality that will be accessible to most users - the low level functions here principally govern the data input and output in the analysis of the replicate datasets.<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p6"><br></p>
+<p class="p7"><img src="usage.Pasted%20Graphic.png" alt="Pasted Graphic.pdf"></p>
+<p class="p4">If interim analysis has been specified in the <a href="generatedata(...).html"><span class="s1"><b>generateData(...)</b></span></a> function (through specifying what proportion of the overall sample size to include in each interim cut) then users must also pass interimCode to the <a href="analyzedata(...).html"><span class="s1">analyzeData(...)</span></a> function. When it analyses each replicate dataset, MSToolkit will first apply the analysisCode to the complete dataset, then pass through applying to each interim cut of the data. interimCode is a function applied to the output of the analysisCode to determine which doses are to be dropped, or whether the study is to terminate at that interim. By first applying the analytical method in analysisCode to the complete dataset we can compare study outcomes in the presence and absence of interim analysis decision making. At each interim analysis, data from doses that are dropped are excluded from the following interim cut datasets, but existing data on those doses is carried forward into subsequent analyses.</p>
+<p class="p5"><br></p>
+<p class="p4">MSToolkit creates a directory called "ReplicateData" under the current R working directory for the output from the <a href="generatedata(...).html"><span class="s1">generateData(...)</span></a> function. The individual replicate datasets are stored in comma-separated variable (CSV) format in this directory and are named "replicate000x.csv". Up to 9999 replicate datasets can be created. MSToolkit creates two directories called "MicroEvaluation" and "MacroEvaluation" under the current R working directory for the output of the analysisCode ("Micro000x.csv") and macroCode ("Macro000x.csv") functions respectively. The <a href="analyzedata(...).html"><span class="s1">analyzeData(...)</span></a> function also collates each individual replicate output dataset into two summary files "MicroSummary.csv" and "MacroSummary.csv" in the current R working directory.</p>
+</body>
+</html>
+ 

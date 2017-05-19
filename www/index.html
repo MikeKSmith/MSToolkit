@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1038.32">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Lucida Grande'; min-height: 15.0px}
+p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Helvetica}
+p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Arial}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial}
+p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #053bee; min-height: 16.0px}
+p.p6 {margin: 0.0px 0.0px 14.0px 0.0px; font: 24.0px Arial}
+p.p8 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Arial; min-height: 14.0px}
+p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Lucida Grande'}
+p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Courier; min-height: 12.0px}
+p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 20.0px; font: 10.0px Courier; color: #35382a}
+p.p12 {margin: 0.0px 0.0px 16.0px 0.0px; line-height: 20.0px; font: 10.0px Courier; color: #35382a}
+p.p13 {margin: 0.0px 0.0px 15.9px 0.0px; line-height: 20.0px; font: 10.0px Courier; color: #35382a}
+li.li3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Arial}
+li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px Arial}
+span.s1 {text-decoration: underline}
+span.s2 {color: #013fe2}
+span.s3 {text-decoration: underline ; color: #000000}
+span.s4 {color: #000000}
+td.td1 {width: 335.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 2.0px 2.0px 2.0px 2.0px}
+ul.ul1 {list-style-type: disc}
+ul.ul2 {list-style-type: circle}
+</style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p2"><img src="index.600px-Mstoolkit_logo_04.jpg" alt="600px-Mstoolkit_logo_04.jpg"></p>
+<p class="p3">The MSToolkit R package has been written to help users simulate clinical trials, evaluate designs, analysis methodology and quantify operating characteristics through the application of dose and study level decision criteria.<span class="Apple-converted-space">&nbsp;</span></p>
+<ul class="ul1">
+<li class="li3">Can simulate parallel group, crossover and longitudinal designs</li>
+<li class="li3">Flexibility in defining data generation processes using parametric models</li>
+<li class="li3">Data generation model parameters can vary across simulation replicates; parameters can vary between subjects</li>
+<li class="li3">The data generation function specifies the linear predictor for the mean response given inputs (dose, time, covariates); inverse link functions allow generation of continuous, binary and count data. User-written inverse link functions allow data generation from a variety of other distributions.</li>
+<li class="li3">Model parameters and covariates for each subject / replicate can be generated from multivariate normal distributions or sampled from external data files e.g. existing data files.</li>
+</ul>
+<p class="p3">This wiki guides users through the use of the package. Help files for individual functions are provided with the package.</p>
+<p class="p4">An MSToolkit development page is maintained at <a href="http://r-forge.r-project.org/projects/mstoolkit/"><span class="s1">RForge</span></a>. The developers can be reached at <a href="mailto:mstoolkit@googlemail.com"><span class="s1">mstoolkit@googlemail.com</span></a></p>
+<p class="p5"><span class="s1"></span><br></p>
+<table cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="middle" class="td1">
+<p class="p6"><b>Contents</b></p>
+<ul class="ul1">
+<li class="li7"><span class="s2"><a href="status.html"><span class="s3">Status</span></a></span></li>
+<li class="li7"><span class="s2"><a href="installation.html"><span class="s3">Installation</span></a></span></li>
+<li class="li7"><a href="simulation%20overview.html"><span class="s1">Simulation overview</span></a></li>
+<li class="li7"><span class="s2"><a href="usage.html"><span class="s3">Usage</span></a></span></li>
+<ul class="ul2">
+<li class="li7"><span class="s2"><a href="generatedata(...).html"><span class="s3">generateData(...)</span></a></span></li>
+<li class="li7"><span class="s2"><a href="data%20generation_%20examples.html"><span class="s3">Data Generation: Examples</span></a></span></li>
+<li class="li7"><span class="s2"><a href="analyzedata(...).html"><span class="s3">analyzeData(...)</span></a></span></li>
+<li class="li7"><span class="s2"><a href="analysis_%20simple%20emax%20fit%20example.html"><span class="s4">Demo code: Simple Emax Fit Example</span></a></span></li>
+</ul>
+<li class="li7"><span class="s2"><a href="support.html"><span class="s3">Support</span></a></span></li>
+<li class="li7"><span class="s2"><a href="references.html"><span class="s3">References</span></a></span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="p8"><br></p>
+<p class="p9">MSToolkit was developed jointly by Mango Solutions and Pfizer Inc. Funding for the project was provided by Pfizer. MSToolkit is covered by the GNU Public License (GPL). (c) 2010.</p>
+<p class="p1"><br></p>
+<p class="p9">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p class="p1"><br></p>
+<p class="p9">This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<span class="Apple-converted-space">&nbsp; </span>See the GNU General Public License for more details.</p>
+<p class="p1"><br></p>
+<p class="p9">You should have received a copy of the GNU General Public License along with this program.<span class="Apple-converted-space">&nbsp; </span>If not, see <a href="http://www.gnu.org/licenses/"><span class="s1">http://www.gnu.org/licenses/</span></a>.</p>
+<p class="p10"><br></p>
+<p class="p11"><b>Disclaimer of Warranty:</b></p>
+<p class="p12">THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.</p>
+<p class="p11">Limitation of Liability:</p>
+<p class="p13">IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+</body>
+</html>
+ 

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1038.25">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #042299; min-height: 17.0px}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #4f4f4f}
+p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #b0140c}
+p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #042299}
+span.s1 {color: #042299}
+span.s2 {color: #055118}
+span.s3 {color: #b0140c}
+span.s4 {color: #000000}
+span.s5 {text-decoration: underline ; color: #000000}
+span.s6 {color: #c3892c}
+span.Apple-tab-span {white-space:pre}
+</style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p2"># MSToolkit will create ReplicateData, MicroData and MacroData directories<span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p2"># under the current working directory</p>
+<p class="p3">getwd()</p>
+<p class="p1"><br></p>
+<p class="p3">library<span class="s1">(</span>MSToolkit<span class="s1">)</span></p>
+<p class="p1"><br></p>
+<p class="p3">generateData<span class="s1">( </span>replicateN<span class="s1"> = </span><span class="s2">5</span><span class="s1">, </span>subjects<span class="s1"> = </span><span class="s2">100</span><span class="s1">, </span>treatDoses<span class="s1"> = </span>c<span class="s1">(</span><span class="s2">0</span><span class="s1">, </span><span class="s2">5</span><span class="s1">, </span><span class="s2">10</span><span class="s1">, </span><span class="s2">50</span><span class="s1">, </span><span class="s2">100</span><span class="s1">),<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>genParNames<span class="s1"> = </span><span class="s3">"E0,ED50,EMAX"</span><span class="s1">, </span>genParMean<span class="s1"> = </span>c<span class="s1">(</span><span class="s2">2</span><span class="s1">,</span><span class="s2">50</span><span class="s1">,</span><span class="s2">10</span><span class="s1">), </span>genParVCov<span class="s1"> = </span>c<span class="s1">(</span>.5<span class="s1">,</span><span class="s2">30</span><span class="s1">,</span><span class="s2">10</span><span class="s1">),<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span><span class="s4">respEqn</span><span class="s1"> = </span>"E0 + ((DOSE * EMAX)/(DOSE + ED50))"<span class="s1">,<span class="Apple-converted-space">&nbsp; </span></span><span class="s4">respVCov</span><span class="s1"> = </span><span class="s2">2</span><span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>interimSubj<span class="s1"> = </span><span class="s3">".3,.7"</span><span class="s1"><span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p5"><span class="Apple-converted-space">&nbsp; </span>)</p>
+<p class="p1"><br></p>
+<p class="p5">## Calls <a href="emaxfit.r.html"><span class="s5">emaxfit.R</span></a><span class="s4"> </span>- helper functions for fitting an emax model</p>
+<p class="p5">##<span class="Apple-converted-space">&nbsp; </span>or linear model if the emax fit does not converge</p>
+<p class="p5">## Also calculates standard error of predicted effect at each dose</p>
+<p class="p1"><br></p>
+<p class="p3">source<span class="s1">(</span><span class="s3">"<a href="emaxfit.r.html"><span class="s5">emaxfit.R</span></a></span>"<span class="s1">)</span></p>
+<p class="p1"><br></p>
+<p class="p3">emaxCode<span class="s1"> &lt;- </span><span class="s6">function</span><span class="s1">(</span>data<span class="s1">){</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>uniDoses<span class="s1"> &lt;- </span>sort<span class="s1">( </span>unique<span class="s1">(</span>data<span class="s1">$</span>DOSE<span class="s1">))<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>obsMean<span class="s1"> &lt;- </span>tapply<span class="s1">(</span>data<span class="s1">$</span>RESP<span class="s1">, </span>list<span class="s1">(</span>data<span class="s1">$</span>DOSE<span class="s1">), </span>mean<span class="s1">)</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="s4">obsSD</span> &lt;- <span class="s4">tapply</span>(<span class="s4">data</span>$<span class="s4">RESP</span>, <span class="s4">list</span>(<span class="s4">data</span>$<span class="s4">DOSE</span>), <span class="s4">sd</span>)<span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>eFit<span class="s1"> &lt;- </span>emax.fit<span class="s1">( </span>data<span class="s1">$</span>RESP<span class="s1">, </span>data<span class="s1">$</span>DOSE<span class="s1"> )</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>outDf<span class="s1"> &lt;- </span>data.frame<span class="s1">( </span>DOSE<span class="s1"> = </span>uniDoses<span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; </span></span>MEAN<span class="s1"> = </span>eFit<span class="s1">$</span>fitpred<span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; </span></span>SE<span class="s1"> = </span>eFit<span class="s1">$</span>sdpred<span class="s1">,</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">&nbsp; </span></span>SDDIF<span class="s1"> = </span>eFit<span class="s1">$</span>sddif<span class="s1">)</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>outDf<span class="s1">$</span>LOWER<span class="s1"> &lt;- </span>outDf<span class="s1">$</span>MEAN<span class="s1"> - </span><span class="s2">1.96</span><span class="s1">*</span>outDf<span class="s1">$</span>SE</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>outDf<span class="s1">$</span>UPPER<span class="s1"> &lt;- </span>outDf<span class="s1">$</span>MEAN<span class="s1"> + </span><span class="s2">1.96</span><span class="s1">*</span>outDf<span class="s1">$</span>SE</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; &nbsp; </span></span>outDf<span class="s1">$</span>N<span class="s1"> <span class="Apple-converted-space">&nbsp; &nbsp; </span>&lt;- </span>table<span class="s1">(</span>data<span class="s1">$</span>DOSE<span class="s1">)</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>outDf<span class="s1">$</span>OBSMEAN<span class="s1"> &lt;- </span>obsMean</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>outDf<span class="s1">$</span>OBSSD<span class="s1"> &lt;- </span>obsSD</p>
+<p class="p5"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s4">outDf</span><span class="Apple-converted-space">&nbsp;</span></p>
+<p class="p5">}<span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="p1"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="p3">macroCode<span class="s1"> &lt;- </span><span class="s6">function</span><span class="s1">(</span>data<span class="s1">) {</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span># Is effect at highest dose significant?</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>success<span class="s1"> &lt;- </span>data<span class="s1">$</span>LOWER<span class="s1">[</span>data<span class="s1">$</span>INTERIM<span class="s1">==</span>max<span class="s1">(</span>data<span class="s1">$</span>INTERIM<span class="s1">) &amp; </span>data<span class="s1">$</span>DOSE<span class="s1">==</span>max<span class="s1">(</span>data<span class="s1">$</span>DOSE<span class="s1">)] &gt; </span><span class="s2">7</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>data.frame<span class="s1">( </span>SUCCESS<span class="s1"> = </span>success<span class="s1"> )</span></p>
+<p class="p5">}</p>
+<p class="p1"><span class="Apple-converted-space">&nbsp;&nbsp;</span></p>
+<p class="p3">interimCode<span class="s1"> &lt;- </span><span class="s6">function</span><span class="s1">( </span>data<span class="s1"> ){</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span># DROP any doses where the lower bound of the difference from placebo is negative</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>dropdose<span class="s1"><span class="Apple-converted-space">&nbsp; </span>&lt;- </span>with<span class="s1">( </span>data<span class="s1"> , </span>DOSE<span class="s1"> [ </span>LOWER<span class="s1"> &lt; </span><span class="s2">0</span><span class="s1"> &amp; </span>DOSE<span class="s1"> != </span><span class="s2">0</span><span class="s1">] )</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>outList<span class="s1"> &lt;- </span>list<span class="s1">()</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span><span class="s6">if</span><span class="s1">( </span>length<span class="s1">(</span>dropdose<span class="s1">) &gt; </span><span class="s2">0</span><span class="s1"> ) </span>outList<span class="s1">$</span>DROP<span class="s1"> &lt;- </span>dropdose</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>outList<span class="s1">$</span>STOP<span class="s1"> &lt;- </span>length<span class="s1">(</span>dropdose<span class="s1">) == </span>nrow<span class="s1">(</span>data<span class="s1">)-</span><span class="s2">1</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>outList</p>
+<p class="p5">}</p>
+<p class="p1"><span class="Apple-converted-space">&nbsp; &nbsp;</span></p>
+<p class="p3">analyzeData<span class="s1">(</span>analysisCode<span class="s1"> = </span>emaxCode<span class="s1">, </span>macroCode<span class="s1"> = </span>macroCode<span class="s1">,<span class="Apple-converted-space">&nbsp;</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">&nbsp; </span></span>interimCode<span class="s1"> = </span>interimCode<span class="s1"> )</span></p>
+<p class="p1"><br></p>
+<p class="p1"><br></p>
+<p class="p3">parseCovMatrix<span class="s1">(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">)</span></p>
+<p class="p3">parseCovMatrix<span class="s1">(</span>c<span class="s1">(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">),</span><span class="s2">2</span><span class="s1">)</span></p>
+<p class="p3">parseCovMatrix<span class="s1">(</span>c<span class="s1">(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">0.8</span><span class="s1">,</span><span class="s2">2</span><span class="s1">),</span><span class="s2">2</span><span class="s1">)</span></p>
+<p class="p3">parseCovMatrix<span class="s1">(</span>c<span class="s1">(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">3</span><span class="s1">,</span><span class="s2">2</span><span class="s1">),</span><span class="s2">2</span><span class="s1">)</span></p>
+</body>
+</html>
+ 
