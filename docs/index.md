@@ -38,7 +38,7 @@ MSToolkit development page is hosted on GitHub at
 - [Usage](pages/usage.html)
 - [generateData](pages/generatedata.html)
 - [Data generation examples](pages/data_generation_examples.html)
-- [analyzeData](pages/analyzeData.html)
+- [analyzeData](pages/analyzedata.html)
 - [Demo code: Simple Emax fit example](pages/simple_emax_fit_example.html)
 - [Support](pages/support.html)
 - [References](pages/references.html)
