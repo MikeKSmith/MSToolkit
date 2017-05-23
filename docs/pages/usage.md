@@ -13,29 +13,29 @@ analysis steps.
 
 ### generateData
 
-The [generateData(...)](pages/generatedata.html)
+The [generateData](pages/generatedata.html)
 function calls the low level generate data functions to create sets of
 simulated data. The following components are called to create aspects of
 the simulated trial data:
   
-  * `createTreatments(...)`: Creates a dataset of all possible
+  * `createTreatments`: Creates a dataset of all possible
     treatment regimes to be allocated to subjects
-  * `allocateTreatments(...)`: Allocates treatments to subjects in the
+  * `allocateTreatments`: Allocates treatments to subjects in the
     simulated study
-  * `createCovariates(...)`: Creates a set of fixed covariates for a
+  * `createCovariates`: Creates a set of fixed covariates for a
     simulated population
-  * `createParameters(...)`: Creates simulated fixed and between
+  * `createParameters`: Creates simulated fixed and between
     subject parameters for subjects in each replicate
-  * `createResponse(...)`: Creates a simulated response variable based
+  * `createResponse`: Creates a simulated response variable based
     on available derived data
-  * `createMCAR(...)`: Adds a simulated "missing" flag to the data
-  * `createDropout(...)`: Adds a simulated "missing" flag to the data
+  * `createMCAR`: Adds a simulated "missing" flag to the data
+  * `createDropout`: Adds a simulated "missing" flag to the data
     based on a dropout function
-  * `createInterims(...)`: Assigns subjects in the study to interim
+  * `createInterims`: Assigns subjects in the study to interim
     analyses
-  * `createDirectories(...)`: creates ReplicateData directory under
+  * `createDirectories`: creates ReplicateData directory under
     the current working directory.
-  * `writeData(...)`: Which writes out the simulation replicate data
+  * `writeData`: Which writes out the simulation replicate data
     in CSV
   
 Most users will start with the [generateData](pages/generatedata.html)

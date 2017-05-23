@@ -30,8 +30,7 @@ This wiki guides users through the use of the package. Help files for
 individual functions are provided with the package.
 
 MSToolkit development page is hosted on GitHub at 
-https://github.com/MikeKSmith/MSToolkit.
-The developers can be reached at mstoolkit@gmail.com
+(https://github.com/MikeKSmith/MSToolkit).
 
 - [Status](pages/status.html)
 - [Installation](pages/installation.html)
@@ -55,9 +54,8 @@ option) any later version.
 
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<span
-class="Apple-converted-space">  </span>See the GNU General Public
-License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program. If not, see http://www.gnu.org/licenses.

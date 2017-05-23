@@ -11,7 +11,6 @@ GitHub. You can do this very easily using the `devtools` package.
 ```
 library(devtools)
 install_github(repo="MikeKSmith/MSToolkit")
-
 ```
   
 This will install MSToolkit into your R library.
@@ -57,17 +56,14 @@ rows:
 
 # This option allows the setting of the R execution binary on a Linux
 grid
-
 # Sys.setenv("RLSF_LINUX"=".")
 
 # This option allows the setting of the SAS execution path on a Unix
 machine
-
 # Sys.setenv("SASPATH_UNIX"=".")
 
 # This option allows the setting of the SAS execution path on a Windows
 machine
-
 # Sys.setenv("SASPATH_WIN"="C:\\Program Files\\SAS Institute\\SAS\\V8\\sas.exe")
 
 ```

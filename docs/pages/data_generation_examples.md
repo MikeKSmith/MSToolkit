@@ -68,7 +68,6 @@ generateData( replicateN = 100, subjects=100, treatSubj = rep(20,5),
 treatDoses = c(0, 5, 10, 50, 100),  
 genParNames = "E0,ED50,EMAX", genParMean = c(0,50,100), genParVCov=diag(c(10,10,10)),  
 respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  respVCov = 100)
-
 ```
   
 Like example 2, this code produces 100 replicates of 100 subjects. In
