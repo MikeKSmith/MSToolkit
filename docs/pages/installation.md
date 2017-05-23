@@ -1,102 +1,74 @@
-<span class="s1">[**Installation**](installation.html)</span>
+---
+layout: page
+title: Installation
+description: How to install MSToolkit
+---
 
-**From the R command prompt:**
+### From GitHub
+The best way to install MSToolkit currently, is to install directly from 
+GitHub. You can do this very easily using the `devtools` package.
+  
+```
+library(devtools)
+install_github(repo="MikeKSmith/MSToolkit")
 
-**For the** [<span
-class="s1">**CRAN**</span>](http://cran.r-project.org/) **production
-version:**
+```
+  
+This will install MSToolkit into your R library.
 
--   Type<span class="s2"> install.packages("MSToolkit") </span>from the
-    R prompt. Choose a [<span
-    class="s1">CRAN</span>](http://cran.r-project.org/) mirror site from
-    which to download the package.
+### How to store simulation results
+By default, MSToolkit writes the Replicate, Micro- and Maco-evaluation datasets
+out to CSV format files, one for each simulation replicate. These are written 
+to respective folders. The benefit of using CSV is the ability to easily view
+the simulated data or analysis results for each replicate, as well as the ability
+to share these with others. ***However***, clearly this means that there will be
+three times as many CSV files as simulation replicates, which may be undesirable.
 
-\
+There is also the option to write the replicate data (simulated data) as 
+.RData files or to keep the replicate data in memory. 
+Micro- and macro-evaluation datasets are always written as CSV files.
+  
+```
+# retrieve MSToolkit Data Method
+getEctdDataMethod(method = 'CSV')  
 
-**For the** [<span
-class="s1">**R-Forge**</span>](http://r-forge.r-project.org/projects/mstoolkit/)
-**development (daily build) version:**
+# change the MSToolkit Data Method
+setEctdDataMethod(method = 'CSV')  
+# or setEctdDataMethod(method = 'RData')
+# or setEctdDataMethod(method = 'Internal')  
+```
+  
+### Parallel processing of analyzeData
+The `analyzeData` function can use the `parallel` package to split analysis
+across CPUs across cores on the compute resource it is running on. Specifying
+`grid = TRUE` splits the job across either (number of cores - 1) or 
+`getOption("max.clusters")` whichever is the minimum. It is set to `FALSE` by
+default.
 
-<span class="s3">Type
-</span>install.packages("packagename",repos="[<span
-class="s1">http://R-Forge.R-project.org</span>](http://R-Forge.R-project.org)")<span
-class="s3"> from the R prompt.<span
-class="Apple-converted-space"> </span></span>
-
-\
-
-**Manually**:
-
-Download MSToolkit from [<span
-class="s1">R-Forge</span>](http://r-forge.r-project.org/projects/mstoolkit/).
-Save the zip file to the desktop.
-
--   Launch R on your local system
-
-<!-- -->
-
--   On the menu bar select “Packages”
--   Select “Install package(s) from local zip files”
--   Navigate to the folder where you saved the R package zip file above
--   Select the zip file and install (click open)
-
-The MSToolkit package is now installed on your local instance of R. Full
-instructions for use, and HELP files are included in the package. These
-are accessible using R’s “Help” menu.
-
-**R settings**
-
-If the package fails to load every time you start R you may need to
-change your RProfile and set it to load up the MSToolkit package every
-time you invoke R. To do this add the following line to your RProfile
-(or RProfile.Site) file in the \\etc directory of your R program (e.g.
-In Windows this may be **C:\\program files\\R\\R-2.9.1\\etc\\**. In Mac
-OSX this will be
-**\\library\\Frameworks\\R.framework\\Versions\\2.9\\**). This file MAY
-NOT EXIST in this directory and you may need to create a file with the
-following lines of code:
-
-.First \<- function(){
-
-<span class="Apple-converted-space">  </span>require ("MSToolkit")}
-<span class="Apple-converted-space"> </span>
-
-\
-
-If you have a **.First** function already set up, then simply add the
-line<span class="s2"> require("MSToolkit")</span>.
-
-**SAS and LSF GRID settings**
-
-Before using SAS as an analytical engine or using an LSF GRID
+### SAS
+Before using SAS as an analytical engine or using an external compute resource
 environment, it is important to set up preferences for the location of R
 and the SAS executable (if required). A file ECTD.ini is provided in the
 top directory of the library which should contain the following
-rows:<span class="Apple-converted-space"> </span>
+rows:
+  
+```
+# Instructions to set up environmental variables
 
-\# Instructions to set up environmental variables
-
-\# This option allows the setting of the R execution binary on a Unix
+# This option allows the setting of the R execution binary on a Linux
 grid
 
-\# Sys.setenv("RLSF\_UNIX"=".")
+# Sys.setenv("RLSF_LINUX"=".")
 
-\# This option allows the setting of the R execution binary on a Linux
-grid
-
-\# Sys.setenv("RLSF\_LINUX"=".") <span
-class="Apple-converted-space"> </span>
-
-\# This option allows the setting of the SAS execution path on a Unix
+# This option allows the setting of the SAS execution path on a Unix
 machine
 
-\# Sys.setenv("SASPATH\_UNIX"=".")
+# Sys.setenv("SASPATH_UNIX"=".")
 
-\# This option allows the setting of the SAS execution path on a Windows
+# This option allows the setting of the SAS execution path on a Windows
 machine
 
-\# Sys.setenv("SASPATH\_WIN"="C:\\\\Program Files\\\\SAS
-Institute\\\\SAS\\\\V8\\\\sas.exe")
+# Sys.setenv("SASPATH_WIN"="C:\\Program Files\\SAS Institute\\SAS\\V8\\sas.exe")
 
-\
-
+```
+  

@@ -1,5 +1,9 @@
-<span class="s1">[**Simulation
-Overview**](simulation%20overview.html)</span>
+---
+layout: page
+title: Simulation Overview
+description: An introduction to trial simulation, model parameter uncertainty
+and evaluating operating characteristics of trial + analysis method.
+---
 
 Clinical trial simulation (CTS) involves the generation of trial
 outcomes for artificial subjects based on given inputs, data generation
@@ -12,27 +16,21 @@ reflecting biological systems 14 but they may also be empirical,
 describing trends seen in the pre-existing data either from previous
 clinical trials or based on meta-analysis of related literature data.
 
-\
-
 CTS also requires specification of a trial design including doses given,
 dosage regimens, number of subjects to be studied, how these subjects
 are allocated to the different treatment arms and patient population
-characteristics if these influence the outcome.<span
-class="Apple-converted-space">  </span>Factors that affect the trial
+characteristics if these influence the outcome. Factors that affect the trial
 execution such as the presence of interim analyses, and subject level
 processes describing protocol adherence and missing data are also
 frequently used. All of these elements can be incorporated into a
 clinical trial simulation using appropriate mathematical models based on
 available data. Often the mathematical models for the different elements
-of the data generation process are developed separately.<span
-class="Apple-converted-space">  </span>The models describing these
-processes can often be validated only through simulation of existing
-trial designs (often using existing trial data structures) and
-comparison of the resulting simulated data with the observed data. This
+of the data generation process are developed separately. 
+The models describing these processes can often be validated only through 
+simulation of existing trial designs (often using existing trial data structures
+) and comparison of the resulting simulated data with the observed data. This
 model validation process is essential before embarking on simulations
 for novel trial designs and new scenarios.
-
-\
 
 The “classical” approach to clinical trial simulation is to consider the
 treatment effect fixed and known - it could also conceivably correspond
@@ -51,14 +49,8 @@ treatment effect or set of model parameters, and thus has a different
 “true” drug effect. In this latter case we may want to know what
 decision would be made for the “truth” i.e. for this particular drug
 effect or set of model parameters and compare this with the decision
-made for the particular trial design and analytical method<span
-class="s2"> (Williams and Ette 2003 – Determination of model
-appropriateness in "Simulation for Designing Clinical Trials" pp74-103,
-Kimko and Duffull eds, Marcel Dekker, NY)</span><span
-class="s3">.</span>
-
-\
-
+made for the particular trial design and analytical method
+  
 In CTS, the performance of different analytical methodologies can be
 evaluated on the same dataset, thus enabling comparison of performance
 metrics for these analytical methods using identical datasets and
@@ -67,15 +59,9 @@ data generation model (truth). The probability of making correct or
 incorrect decisions (operating characteristics) can then be
 characterised either using classical notions of statistical significance
 and Type I and Type II errors or with reference to clinical decision
-criteria around sufficient efficacy or acceptable tolerability<span
-class="s4"> </span><span class="s2">(Lalonde R, Kowalski K, Hutmacher M,
-Ewy W, Nichols D, Milligan P, et al. Model-based drug development.
-Clinical Pharmacology & Therapeutics 2007;82(1):21-32; Kowalski KG,
-Olson S, Remmers AE, Hutmacher MM. Modeling and simulation to support
-dose selection and clinical development of SC-75416, a selective COX-2
-inhibitor for the treatment of acute and chronic pain. Clinical
-Pharmacology & Therapeutics 2008;83(6):857-66)</span><span
-class="s3">.</span> CTS can be used to assess how often the correct dose
+criteria around sufficient efficacy or acceptable tolerability .
+
+CTS can be used to assess how often the correct dose
 choice would be made for a given design, analytical method and
 dose-selection decision criteria, and calibrate this against the “truth”
 for the current inputs and data generation model. For a given set of
@@ -89,12 +75,9 @@ nonlinear model but then analysed assuming a linear model?” In this
 case, CTS can be used to examine the robustness of scenarios where the
 assumptions of the data generation and analytic models are different,
 comparing these against a “base case” where assumptions are maintained
-in both the data generation and data analysis methodology.<span
-class="Apple-converted-space"> </span>
+in both the data generation and data analysis methodology.
 
-<span class="s3"></span>\
-
-<span class="s3">When generating data in CTS it is important to
+When generating data in CTS it is important to
 understand and to be able to quantify how different sources of
 variability (both random variability and covariate effects) impact the
 endpoint of interest. When we use parametric models to generate a
@@ -105,21 +88,16 @@ individual subjects, it is important to consider which factors impact
 the response variables - within subject and between subject effects. It
 is often helpful to think of the form of the analytical model used to
 analyse such data and then reconstruct the sources of variability
-between and within subjects from this model.</span>
+between and within subjects from this model.
 
-<span class="s3"></span>\
-
-<span class="s3">When examining the operating characteristics of trials,
+When examining the operating characteristics of trials,
 it is also frequently necessary to examine the robustness of designs and
 analytical methods to cases when the "base" assumptions do not hold. For
 example if we make an assumption of linear response in the analysis,
 what are the operating characteristics of a given trial design when we
-generate data with nonlinear response?<span
-class="Apple-converted-space"> </span></span>
+generate data with nonlinear response?
 
-<span class="s3"></span>\
-
-<span class="s3">MSToolkit also allows us to examine the operating
+MSToolkit also allows us to examine the operating
 characteristics of trials when we vary the parameters of the data
 generation process between trial replicates. If we keep the parameter
 values constant across trial replicates then we assume that the only
@@ -134,11 +112,16 @@ future trial is driven by the current state of knowledge about the
 parameters of the data generation model. Thus, when we generate
 parameters for generating data, we allow users to specify not just the
 mean of these parameters but a covariance matrix, specifying our between
-trial replicate uncertainty in these parameters.</span>
+trial replicate uncertainty in these parameters.
 
-<span class="s3"></span>\
-
-<span class="s3">In the hierarchy of data generation then we have three
+In the hierarchy of data generation then we have three
 levels where sources of uncertainty and variability can enter: between
 trial replicate variability, between subject variability, and within
-subject variability.</span>
+subject variability.
+
+[Williams and Ette 2003 – 'Determination of model appropriateness' in "Simulation for Designing Clinical Trials" pp74-103, Kimko and Duffull eds, Marcel Dekker, NY](https://www.crcpress.com/Simulation-for-Designing-Clinical-Trials-A-Pharmacokinetic-Pharmacodynamic/Kimko-Duffull/p/book/9780824708627)
+[Decision-Making in Drug Development: Application of a Model Based Framework for Assessing Trial Performance. Smith MK, French JL, Kowalski KG, Hutmacher MM, Ewy W. in "Clinical Trial Simulation - applications and trends" pp61-83, Kimko and Peck eds, Springer, NY](http://www.springer.com/gp/book/9781441974143)
+[A Quantitative Approach for Making Go/No-Go Decisions in Drug Development. Chuang-Stein C, Kirby S, French JL, Kowalski KG, Marshall SF, Smith MK, Bycott P, Beltangady M.Therapeutic Innovation & Regulatory Science  Vol 45, Issue 2, pp. 187 - 202](http://journals.sagepub.com/doi/abs/10.1177/009286151104500213)
+[Modeling and simulation to support dose selection and clinical development of SC-75416, a selective COX-2 inhibitor for the treatment of acute and chronic pain. Kowalski KG, Olson S, Remmers AE, Hutmacher MM. Clin Pharmacol Ther. 2008 Jun;83(6):857-66.](https://www.ncbi.nlm.nih.gov/pubmed/17882158);
+[Model-based drug development. Lalonde R, Kowalski K, Hutmacher M, Ewy W, Nichols D, Milligan P, et al. Clin Pharmacol Ther. 2007 Jul;82(1):21-32](https://www.ncbi.nlm.nih.gov/pubmed/17522597);
+[Model-based drug development: a rational approach to efficiently accelerate drug development. Milligan PA, Brown MJ, Marchant B, Martin SW, van der Graaf PH, Benson N, Nucci G, Nichols DJ, Boyd RA, Mandema JW, Krishnaswami S, Zwillich S, Gruben D, Anziano RJ, Stock TC, Lalonde RL. Clin Pharmacol Ther. 2013 Jun;93(6):502-14. doi: 10.1038/clpt.2013.54.](https://www.ncbi.nlm.nih.gov/pubmed/23588322);

@@ -5,7 +5,7 @@ description: An R package for simulating trial designs and
 evaluating operating characteristics.
 ---
 
-![MSToolkit logo](index.600px-Mstoolkit_logo_04.jpg)
+![MSToolkit logo](assets/index.600px-Mstoolkit_logo_04.jpg)
 
 The MSToolkit R package has been written to help users simulate clinical
 trials, evaluate designs, analysis methodology and quantify operating
