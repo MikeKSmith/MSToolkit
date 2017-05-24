@@ -8,4 +8,4 @@ The MSToolkit R package has been written to help users simulate clinical trials,
 * The data generation function specifies the linear predictor for the mean response given inputs (dose, time, covariates); inverse link functions allow generation of continuous, binary and count data. User-written inverse link functions allow data generation from a variety of other distributions.
 * Model parameters and covariates for each subject / replicate can be generated from multivariate normal distributions or sampled from external data files e.g. existing data files.
 
-[MSToolkit website and further information](http://mikeksmith.github.io/MSToolkit/)
+[MSToolkit website and further information](https://mikeksmith.github.io/MSToolkit/)
