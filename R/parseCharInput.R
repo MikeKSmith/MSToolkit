@@ -52,7 +52,8 @@ parseCharInput <- function(
   
   ## convert to numeric and sort if required
   if(checkProb  ){
-    if(!is.numeric(out) || sum(out) != 1 )
+    #if(!is.numeric(out) || sum(out) != 1 )
+    if(!is.numeric(out) || !all.equal(sum(out), 1) )
       ectdStop("Parsed values don't sum up to one")
   }
   if(sort) {

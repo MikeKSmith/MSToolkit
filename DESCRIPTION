@@ -1,12 +1,13 @@
 Package: MSToolkit
 Type: Package
 Title: The MSToolkit library for clinical trial design
-Version: 3.2.3
-Date: 2014-11-11
+Version: 3.2.4
+Date: 2016-04-08
 Author: Mike K Smith <mstoolkit@gmail.com>
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
 Description: MSToolkit library for Clinical Trial Design
 Depends: R (>= 2.14.0), MASS, methods
-Suggests: RUnit, parallel
+Suggests: RUnit, parallel,
+    testthat, digest
 Enhances: RNMImport
 License: GPL

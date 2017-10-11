@@ -27,7 +27,7 @@
 }
 
 .deriveFromMasterSeed <- function(){
-	sample(1:999, 1) 
+  runif(n=1,min=1, max=.Machine$integer.max )
 }
  
 ### regular expression toys
