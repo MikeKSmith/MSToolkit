@@ -41,7 +41,7 @@
 	macroCode <- .checkFun(macroCode, "data")
 	replicates <- .checkReplicates( replicates, workingPath = workingPath, method = method)
 
-	pb <- txtProgressBar(min = 0, max = replicates, style = 3)
+	pb <- txtProgressBar(min = 0, max = max(replicates,1), style = 3)
 
 	if (grid && !.checkGridAvailable()) grid <- FALSE
 	if (length(replicates) == 1) grid <- waitAndCombine <- FALSE
