@@ -35,8 +35,9 @@
 			if (method %in% c("Final", "Covariance")) ectdStop(paste("For '", method, "' method, a report file object or full run must be provided", sep=""))
 			thisProb <- run$problem[[1]]
 			thVals <- thisProb$Theta[,2]
-			omVals <- thisProb$Omega
-			sgVals <- thisProb$Sigma
+			names(thVals) <- row.names(thisProb$Theta)
+			omVals <- thisProb$Omega$initialMatrix
+			sgVals <- thisProb$Sigma$initialMatrix
 			theCov <- NULL
 		}, 
 		ectdStop("'run' input must be a NONMEM run object, a NONMEM contol file, or a NONMEM output file, as created by the RNMImport library")

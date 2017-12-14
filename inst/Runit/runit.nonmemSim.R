@@ -71,8 +71,9 @@ test.createNmParSamples <- function() {
 		checkTrue(all.equal(out1[[1]]$SIGMA, getSigmas(getRun)))
 		for (i in 2:10) checkTrue(identical(out1[[1]], out1[[i]]))
 		for (i in 2:10) checkTrue(identical(out2[[1]], out2[[i]]))
-		checkTrue(all(out1[[1]]$THETA == out2[[1]]$THETA))
 		
+		# THETA values may be named or not, but the values must be the same
+		checkTrue(all(as.vector(out1[[1]]$THETA) == as.vector(out2[[1]]$THETA)))
 		# Covariance method
 		N <- 50
 		for (i in 1:10) {
