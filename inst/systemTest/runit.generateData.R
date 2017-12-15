@@ -482,10 +482,9 @@ test.generateData.Version2.0 <- function() {
 			conCovVCov = diag(1:3), conCovCrit = "2 <= C <= 4",
 			conCovDigits = 1:3, covDiff = FALSE)
 	getData1 <- readAllData()
-	generateData(2, 40, treatDoses = 0, respEqn = "SUBJ",
-			conCovNames = LETTERS[1:3], conCovMean = 1:3,
-			conCovVCov = diag(1:3), conCovCrit = "2 <= C <= 4",
-			conCovDigits = 1:3, seed = 12345)
+	generateData(2, 1000, treatDoses = 0, respEqn = "SUBJ",
+			conCovNames = LETTERS[1:3], conCovMean = 5:7,
+			conCovVCov = diag(1,2,1),  conCovCrit = "5 <= C <= 9",)
 	getData2 <- readAllData()
 
 	# Tests: 1st data example should have same covariates in each replicate
@@ -507,11 +506,11 @@ test.generateData.Version2.0 <- function() {
 
 	# Tests: Check distribution of generated covariates
 	getData <- getData2[LETTERS[1:3]]
-	statTest1 <- t.test(getData$A, mu = 1)$p.value > .025
-	statTest2 <- t.test(getData$B, mu = 2)$p.value > .025
-	statTest3 <- t.test(getData$C, mu = 3)$p.value > .025
+	statTest1 <- t.test(getData$A, mu = 5)$p.value > .025
+	statTest2 <- t.test(getData$B, mu = 6)$p.value > .025
+	statTest3 <- t.test(getData$C, mu = 7)$p.value > .025
 	checkTrue(all(statTest1, statTest2, statTest3))
-	checkTrue(all(getData$C >= 2 & getData$C <= 4))
+	checkTrue(all(getData$C >= 5 & getData$C <= 9))
 	checkTrue(var(getData$B) > var(getData$A))
 
 	# Finish up
