@@ -484,7 +484,7 @@ test.generateData.Version2.0 <- function() {
 	getData1 <- readAllData()
 	generateData(2, 1000, treatDoses = 0, respEqn = "SUBJ",
 			conCovNames = LETTERS[1:3], conCovMean = 5:7,
-			conCovVCov = diag(1,2,1),  conCovCrit = "5 <= C <= 9",)
+			conCovVCov = diag(c(1,2,1)),  conCovCrit = "5 <= C <= 9",)
 	getData2 <- readAllData()
 
 	# Tests: 1st data example should have same covariates in each replicate
