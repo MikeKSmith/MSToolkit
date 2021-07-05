@@ -1,2 +1,24 @@
+# Date: 5th July 2021
+#' (Mike K Smith)
 
+##  AIMS for Dev Branch of MSToolkit:
+#' Modernise documentation for MSToolkit using ROxygen2 skeletons for .R files
+#'  then use {pkgdown} to create documentation website including reference
+#'  pages for each function and vignettes.
+#'
+#' Switch test framework from {RUnit} to {testthat}.
+#'
+#' Improve package contents to more modern requirements from CRAN and get the
+#' package ready for re-submission to CRAN.
+#'
+#' NOT really my intention to refactor code as a whole HOWEVER I will be
+#' removing NONMEM-centric code as I don't think this is required for future
+#' roadmap.
 
+## TO DO:
+#' Import .R files one by one, switch to ROxygen2 skeleton, convert tests to
+#'  use {testthat} and run R CMD CHECK / build.
+
+## DONE:
+#' The following .R scripts are already updated.
+#'   -

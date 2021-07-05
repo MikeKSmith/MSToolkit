@@ -1,13 +1,29 @@
 Package: MSToolkit
 Type: Package
-Title: The MSToolkit library for clinical trial design
-Version: 3.2.4
-Date: 2016-04-08
-Author: Mike K Smith <mstoolkit@gmail.com>
+Title: The MSToolkit Library For Clinical Trial Design
+Version: 3.3
+Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
+                    role = c("aut", "cre")),
+             person("Rich", "Pugh", email = "rpugh@mango-solutions.com",
+                    role = c("aut")),
+                  person("Roman", "Francois",
+                    role = c("aut")),
+                  person("Francisco", "Gochez", 
+                    role = c("aut")),
+                  person("Jian", "Li", 
+                    role = c("ctb"))
+                  )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
-Description: MSToolkit library for Clinical Trial Design
-Depends: R (>= 2.14.0), MASS, methods
-Suggests: RUnit, parallel,
-    testthat, digest
-Enhances: RNMImport
-License: GPL
+Description: Simulate data, analysis this data and assess operating 
+    characteristcs of clinical trials.
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0),
+    withr
+Imports: 
+    parallel,
+    MASS
+RoxygenNote: 7.1.1
+Config/testthat/edition: 3
+License: GPL (>= 3)

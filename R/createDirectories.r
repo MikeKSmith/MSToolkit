@@ -1,3 +1,34 @@
+#' Create replicate data, micro evaluation, and macro evaluation directories
+#'
+#' This function creates directories for holding data for the current scenario.
+#' These directories will hold the replicate data, the micro evaluation data
+#' and the macro evaluation data.
+#'
+#' Attempts to create directories named in character vector "dirNames" within
+#' the "workingPath" directory.  No action is taken if method is "Internal"
+#'
+#' @param dirNames (Optional) A vector of directories to create under the
+#' "workingPath" directory.  By default, directories "ReplicateData",
+#' "MicroEvaluation" and "MacroEvaluation" are created
+#' @param workingPath (Optional) The working directory in which to create
+#' directories.  The current working directory is used by default
+#' @param warn (Optional) A logical value.  Should warnings from the directory
+#' creation be shown?  FALSE by default
+#' @param method Data storage method (given by \link{getEctdDataMethod} by
+#' default). MSToolkit can work with externalised data (as .csv or .RData files)
+#' or internal data format, where the replicate data is stored as a list of
+#' data frames in an internal environment (.ectdEnv$DataStore)
+#' @return A logical vector the same length as "dirNames", indicating whether
+#' or not the corresponding directories were successfully created.
+#' @author Francisco Gochez
+#' @keywords data
+#' @examples
+#'
+#'   \dontrun{
+#'     # Create 2 of the 3 directories
+#'     createDirectories(dirNames = c("ReplicateData", "MicroEvaluation"))
+#'   }
+#'
 createDirectories <- function(
   dirNames = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"), 		#@ A vector containing the full names of the directories to be created.
   workingPath = getwd(), 													#@ Directory in which to create directories
@@ -9,7 +40,7 @@ createDirectories <- function(
   # Mango Solutions, Chippenham SN15 1BN 2009
   # createDirectories.R 03DEC09
   #
-  # Author: Francisco
+  # Author: Francisco Gochez
   ###############################################################################
   # DESCRIPTION: Tries to create named subdirectories for storing replicate, micro 
   # evaluation and macro evaluation data.  Returns a logical vector representing
