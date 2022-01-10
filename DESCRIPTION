@@ -18,6 +18,8 @@ Description: Simulate data, analysis this data and assess operating
     characteristcs of clinical trials.
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 2.14.0)
 Suggests: 
     testthat (>= 3.0.0),
     withr
@@ -26,4 +28,6 @@ Imports:
     MASS
 RoxygenNote: 7.1.1
 Config/testthat/edition: 3
-License: GPL (>= 3)
+License: GPL-3
+URL: https://github.com/MikeKSmith/MSToolkit
+BugReports: https://github.com/MikeKSmith/MSToolkit/issues
