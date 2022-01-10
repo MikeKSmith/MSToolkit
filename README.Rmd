@@ -19,12 +19,6 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 <!-- badges: end -->
 
-<style>
-body {
-text-align: justify
-}
-</style>
-
 ## Overview
 
 The MSToolkit R package has been written to help users simulate clinical trials, evaluate designs, analysis methodology and quantify operating characteristics through the application of dose and study level decision criteria.

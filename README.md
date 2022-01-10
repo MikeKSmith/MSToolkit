@@ -9,12 +9,6 @@
 status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 <!-- badges: end -->
 
-<style>
-body {
-text-align: justify
-}
-</style>
-
 ## Overview
 
 The MSToolkit R package has been written to help users simulate clinical
