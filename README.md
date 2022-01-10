@@ -4,7 +4,11 @@
 # MSToolkit
 
 <!-- badges: start -->
+
+[![R build
+status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 <!-- badges: end -->
+
 <style>
 body {
 text-align: justify
@@ -82,7 +86,7 @@ generateData(
   respVCov = 5, 
   interimSubj = ".3,.7")
 
-# This example generates 500 .CSV files with 400 subjects each to store the replicate datasets in the “ReplicateData” directory. 
+# This example generates 500 .CSV files with 400 subjects each to store the replicate datasets in the "ReplicateData" directory. 
 ```
 
 Once data has been generated, the next step is to analyze the replicate

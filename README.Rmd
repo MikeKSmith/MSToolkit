@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # MSToolkit
 
 <!-- badges: start -->
+[![R build status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 <!-- badges: end -->
 
 <style>
@@ -52,7 +53,7 @@ devtools::install_github("MikeKSmith/MSToolkit")
 
 Most users will start with the `generateData()` which generates data and controlls dropout and missing data by specifying the design, allocation to treatments, generation of parameters, and functional specification. The function has a great number of arguments which control and pass information to the low level functions. 
 
-The generateData function iteratively builds and combines the data components for each replicate, the replicate datasets would be stored as individual .CSV files (“replicate000x.csv”) in the “ReplicateData” subdirectory of the working directory.
+The generateData function iteratively builds and combines the data components for each replicate, the replicate datasets would be stored as individual .CSV files ("replicate000x.csv") in the "ReplicateData" subdirectory of the working directory.
 
 ```{r usage-generateDate, eval=FALSE}
 library(MSToolkit)
@@ -76,12 +77,12 @@ generateData(
   respVCov = 5, 
   interimSubj = ".3,.7")
 
-# This example generates 500 .CSV files with 400 subjects each to store the replicate datasets in the “ReplicateData” directory. 
+# This example generates 500 .CSV files with 400 subjects each to store the replicate datasets in the "ReplicateData" directory. 
 ```
 
-Once data has been generated, the next step is to analyze the replicate data using the `analyzeData()`. This function wraps together functions for performing user-specified analysis on the replicate datasets and also performing micro- and macro- level summaries of the analysis results. The summary files are named “MicroSummary.csv” and “MacroSummary.csv” respectively, and stored in the current R working directory. 
+Once data has been generated, the next step is to analyze the replicate data using the `analyzeData()`. This function wraps together functions for performing user-specified analysis on the replicate datasets and also performing micro- and macro- level summaries of the analysis results. The summary files are named "MicroSummary.csv" and "MacroSummary.csv" respectively, and stored in the current R working directory. 
 
-Besides, two directories called “MicroEvaluation” and “MacroEvaluation” are created under the current R working directory for the output of the analysisCode (“Micro000x.csv”) and macroCode (“Macro000x.csv”) functions respectively. 
+Besides, two directories called "MicroEvaluation" and "MacroEvaluation" are created under the current R working directory for the output of the analysisCode ("Micro000x.csv") and macroCode ("Macro000x.csv") functions respectively. 
 
 ```{r usage-analyzeData, eval=FALSE}
 # Standard analysis code
