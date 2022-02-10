@@ -1,8 +1,7 @@
 #' Analyze simulated data replicates
-#' 
+#'
 #' Analyzes a set of simulated trial data, possibly including interim analyses
-#' 
-#' 
+#'
 #' The first task of the function will be to check the options specifed: * If
 #' the "grid" network is unavailable or if the length of the "replicates" input
 #' is 1, the "grid" flag will be set to FALSE * If the "grid" flag is TRUE, the
@@ -10,7 +9,7 @@
 #' using the "parallel" library * If the length of the "replicates" vector is
 #' 1, the "waitAndCombine" flag will be set to FALSE * If the "waitAndCombine"
 #' flag is set to FALSE, the "cleanUp" flag will also be set to FALSE
-#' 
+#'
 #' The \code{\link{analyzeData}} function will iterate around each replicate
 #' specified in the "replicates" vector.  For each replicate, the function will
 #' first call the \code{\link{analyzeRep}} with the required inputs. The output
@@ -22,12 +21,14 @@
 #' further analysis. If the return from \code{\link{macroEvaluation}} is a
 #' valid "Macro Evaluation" dataset, it will be saved to the "MicroEvaluation"
 #' folder.
-#' 
+#'
 #' If the "waitAndCombine" flag is set to TRUE, the function will wait until
 #' all grid jobs are finished (if grid has been used), then compile the "Micro"
 #' and "Macro" evaluation results into single summary files (using the
 #' \code{\link{compileSummary}} function).
-#' 
+#'
+#' @aliases analyseData
+#'
 #' @param replicates (Optional) Vector of replicates on which to perform
 #' analysis: all replicates are analyzed by default
 #' @param analysisCode (Required) File containing analysis code (for R or SAS)
@@ -88,7 +89,7 @@
 #' however, many analysis, summary and log files will be produced.
 #' @note There are some restrictions on the code inputs to the
 #' \code{\link{analyzeData}} function.  These restrictions are discussed here:
-#' 
+#'
 #' Analysis Code: The "analysisCode" input must be either an R function or a
 #' reference to an external file.  If it is a reference to external file, it
 #' must contain either SAS code (if software is "SAS") or R code (if software
@@ -101,7 +102,7 @@
 #' \code{\link{checkMicroFormat}}.  More information on "Micro Evaluation"
 #' structures can be found in the help file for function
 #' \code{\link{checkMicroFormat}}.
-#' 
+#'
 #' Interim Code: The "interimCode" input must be an R function that accepts a
 #' single "Micro Evaluation" data input, and returns an R "list" structure that
 #' is either empty or contains one or more of the following elements: An
@@ -111,7 +112,7 @@
 #' relating to doses in the data to drop before the next interim is analyzed.
 #' More information on "Micro Evaluation" structures can be found in the help
 #' file for function \code{\link{interimAnalysis}}.
-#' 
+#'
 #' Macro Code: The "macroCode" input must be an R function that accepts an
 #' enhanced "Micro Evaluation" data input, and returns a valid "Macro
 #' Evaluation" data structure (as specified in the help file for the
@@ -122,24 +123,24 @@
 #' @keywords datagen
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' # Standard analysis code
 #' emaxCode <- function(data){
 #'   library(DoseResponse)
-#'   with( data, 
+#'   with( data,
 #'     {
-#'     uniDoses <- sort( unique(DOSE))                                                                    
+#'     uniDoses <- sort( unique(DOSE))
 #'     eFit <- emaxalt( RESP, DOSE )
-#'     outDf <- data.frame( DOSE = uniDoses, 
-#'       MEAN = eFit$dm[as.character(uniDoses)], 
+#'     outDf <- data.frame( DOSE = uniDoses,
+#'       MEAN = eFit$dm[as.character(uniDoses)],
 #'       SE = eFit$dsd[as.character(uniDoses)] )
 #'     outDf$LOWER <- outDf$MEAN - 2 * outDf$SE
 #'     outDf$UPPER <- outDf$MEAN + 2 * outDf$SE
 #'     outDf$N     <- table(DOSE)[ as.character(uniDoses) ]
-#'     outDf 
-#'   }) 
+#'     outDf
+#'   })
 #' }
-#'              
+#'
 #' # Macro evaluation code
 #' macrocode <- function(data) {
 #'   # making up a t-test
@@ -149,18 +150,18 @@
 #'   n100  <- data$N[ data$DOSE == 100 & data$INTERIM == 0]
 #'   sd0   <- data$SE[ data$DOSE == 0 & data$INTERIM == 0]
 #'   sd100 <- data$SE[ data$DOSE == 100 & data$INTERIM == 0]
-#'   
+#'
 #'   sddiff <- if( n0 == n100 ){
 #'     sqrt( (sd0^2 + sd100^2)  / (n0 + n100) )
 #'   } else {
 #'     sqrt( (1/n0 + 1/n100) * ( (n0-1)*sd0^2 + (n100-1)*sd100^2  ) / (n0+n100-2)  )
 #'   }
-#'   tstat  <- ( mu100 - mu0 ) / sddiff 
+#'   tstat  <- ( mu100 - mu0 ) / sddiff
 #'   success <- abs(tstat) > qt( .975, n0+n100-2)
-#'   
+#'
 #'   data.frame( SUCCESS = success, TSTAT = tstat )
 #' }
-#'   
+#'
 #' # Interim analysis code
 #' interimCode <- function( data ){
 #'   dropdose  <- with( data, DOSE [ sign(UPPER) != sign(LOWER) & DOSE != 0] )
@@ -169,13 +170,13 @@
 #'   outList$STOP <- length(dropdose) == nrow(data)-1
 #'   outList
 #' }
-#'    
+#'
 #' # Run analysis
-#' analyzeData( 1:5, analysisCode = emaxCode, macroCode = macrocode, 
+#' analyzeData( 1:5, analysisCode = emaxCode, macroCode = macrocode,
 #'   interimCode = interimCode )
-#' 
+#'
 #' }
-#' 
+#'
 "analyzeData" <- function(
   replicates = "*",                  #@ Replicates to perform analysis on
   analysisCode,                      #@ Function taking a data
