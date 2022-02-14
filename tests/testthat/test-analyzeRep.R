@@ -74,6 +74,20 @@ test_that("test_analyzeRep_rep", {
                           respOmitFlag = "@954fgRESPOMIT" ),
                msg = "wrong sort of respomit flag, wrong name")
 
-  #
+  # test the argument of missomit flag
+  expect_error(analyzeRep(replicate = 1,
+                          analysisCode = dummyAnalysisCode,
+                          workingPath = analyseRep.datapath,
+                          missingFlag = "MISSING,MISSING2" ),
+               msg = "wrong sort of missomit flag, too long")
+
+  checkException(analyzeRep(replicate = 1,
+                            analysisCode = dummyAnalysisCode,
+                            workingPath = analyseRep.datapath,
+                            missingFlag = "@954fgMISSING" ),
+                 msg = "wrong sort of missomit flag, wrong name")
+
+  # test the argument of interimCol
+
 })
 
