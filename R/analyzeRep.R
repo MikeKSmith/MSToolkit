@@ -1,20 +1,20 @@
 #' Analyse a single replicate of data
-#' 
+#'
 #' The \code{analyzeRep} function analyzes a single replicate of data, possibly
 #' at different interim levels.
-#' 
+#'
 #' The \code{\link{analyzeRep}} function calls the
 #' \code{\link{performAnalysis}} function in order to analyze and summarize a
 #' single simulated replicate dataset (held in the "ReplicateData" subdirectory
 #' of the specified working path).
-#' 
+#'
 #' The first step of the analysis is to use the removeMissing, removeParOmit
 #' and removeRespOmit flags (together with the missingFlag, parOmitFlag and
 #' respOmitFlag inputs) in order to subset the data if required.  For example,
 #' we may wish to remove all observations flagged as "missing" in an earlier
 #' simulation of subject dropout.  The subset is applied to the data before the
 #' analysis.
-#' 
+#'
 #' The analysis code must be either an R function, a reference to an external R
 #' script, or a reference to an external SAS script.  If the software is set as
 #' "SAS", it is assumed that the analysisCode is an external SAS script.  If
@@ -25,14 +25,14 @@
 #' software is "R", the analysis code input must be either an R function or an
 #' R script.  The R analysis code must also return a valid "Micro Evaluatoin"
 #' structure as specified in function \code{\link{checkMicroFormat}}
-#' 
+#'
 #' The first step in \code{\link{analyzeRep}} is to perform a full analysis on
 #' the data (which has possibly been subset be the remove* inputs).  Following
 #' the analysis, the \code{\link{checkMicroFormat}} function is used to ensure
 #' the return data is a valid "Micro Evaluation" data structure.  The return
 #' structure is appended with drop and stop flags (set to 0) and with interim
 #' variables (where interim is "FULL").
-#' 
+#'
 #' If the interimCode has been specified, and the "interimCol" variable is
 #' found in the data, interim analyses will be performed iteratively on
 #' sections of the data.  The interimCode input must be an R function that
@@ -46,10 +46,12 @@
 #' list includes doses to "DROP", the doses will be removed from future
 #' analyses.  If the "STOP" flag in the list is set to "TRUE", the analysis is
 #' stopped at this interim.
-#' 
+#'
 #' Finally, all micro evaluation outputs (with appended interim variables and
 #' drop/stop flags) are combined and returned.
-#' 
+#'
+#' @aliases analyseRep
+#'
 #' @param analysisCode (Required) File containing analysis code (for R or SAS)
 #' or an R function for analysis (R only)
 #' @param replicate (Required) Replicate number of data to be analyzed
@@ -95,32 +97,32 @@
 #' @seealso \code{\link{performAnalysis}} is called by \code{analyzeRep} to
 #' perform each analysis on the subset of data. \code{\link{interimAnalysis}}
 #' executes the \code{interimCode} and updates the data changes accordibgly.
-#' 
+#'
 #' \code{\link{analyzeData}} calls \code{analyzeRep} sequentially.
 #' @keywords datagen IO models
 #' @examples
-#' 
-#' \dontrun{  
+#'
+#' \dontrun{
 #'   # Analysis Code
 #'   emaxFun <- function(data){
 #'     library(DoseResponse)
-#'     with( data, 
-#'      { 
-#'       uniDoses <- sort( unique(D))                                                                    
+#'     with( data,
+#'      {
+#'       uniDoses <- sort( unique(D))
 #'       eFit <- emaxalt( RESP, D )
-#'       outDf <- data.frame( D = uniDoses, 
-#'       MEAN = eFit$dm[as.character(uniDoses)], 
+#'       outDf <- data.frame( D = uniDoses,
+#'       MEAN = eFit$dm[as.character(uniDoses)],
 #'       SE = eFit$dsd[as.character(uniDoses)] )
 #'       outDf$LOWER <- outDf$MEAN - 2 * outDf$SE
 #'       outDf$UPPER <- outDf$MEAN + 2 * outDf$SE
 #'       outDf$N     <- table(DOSE)[ as.character(uniDoses) ]
-#'       outDf 
-#'      }) 
-#'    }                                                                                                                   
-#'   
+#'       outDf
+#'      })
+#'    }
+#'
 #'   analyzeRep(replicate = 1, analysisCode = emaxFun)
 #' }
-#' 
+#'
 "analyzeRep" <- function(
 		analysisCode		,           #@	File containing the actual analysis code to run on the data
 		replicate		,               #@	Replicate number of data to analyze
@@ -140,17 +142,17 @@
 		fullAnalysis = TRUE,			#@ Perform a full analysis
 		workingPath = getwd(),
 		method = getEctdDataMethod()
-){ 
+){
 	###############################################################################
 	# Mango Solutions, Chippenham SN14 0SQ 2006
 	# analyzeRep.R Wed Jul 04 12:20:41 BST 2007 @514 /Internet Time/
 	#
-	# Author: Romain    
+	# Author: Romain
 	###############################################################################
 	# DESCRIPTION: wrapper for the analysis step
 	# KEYWORDS: component:analysis
 	###############################################################################
-	
+
 	# Inner function: Retain values
 	"innerRetainValues" <- function(vec) {
 		if (all(is.na(vec))) return(rep(0, length(vec)))
@@ -159,15 +161,15 @@
 		isMiss <- is.na(vec)
 		approx(which(!isMiss), vec [ !isMiss ], 1:length(vec), "constant", rule = 2)$y
 	}
-	
+
 	# Check replicate number input
-	if( !is.numeric(replicate) || length(replicate) != 1 || replicate <= 0 )  
+	if( !is.numeric(replicate) || length(replicate) != 1 || replicate <= 0 )
 		ectdStop("replicate must be a single positive integer")
-	
-	## check that the software is SAS or R 
+
+	## check that the software is SAS or R
 	software <- try( match.arg(software), silent = TRUE )
 	if (class(software) == "try-error") ectdStop("The software should be `R` or `SAS`")
-	
+
 	# checking the macro code
 	if (software == "R") {
 		if (class(analysisCode) == "function") analysisCode <- .checkFun( analysisCode, "data" )
@@ -178,17 +180,17 @@
 	else {
 		if (!file.exists(file.path(workingPath, analysisCode))) ectdStop(paste("Cannot find SAS analysis script file \"", analysisCode, "\"", sep=""))
 	}
-	
+
 	## checks on inputs
 	doseCol      <- parseCharInput( doseCol     , expected = 1, valid = TRUE, convertToNumeric = FALSE )
 
 	## import the data
-	idata <- readData( dataNumber = replicate, dataType = "Replicate", 
+	idata <- readData( dataNumber = replicate, dataType = "Replicate",
 			variables = doseCol, workingPath = workingPath, method = method)
 	columns <- names( idata )
 	doses <- sort( unique( idata[[ doseCol ]]  ) )
-	
-	## check the flags  
+
+	## check the flags
 	parOmitFlag	 <- parseCharInput( parOmitFlag	, expected = 1, convertToNumeric = FALSE )
 	if (removeParOmit) {
 		valid <- try( validNames( parOmitFlag ), silent = TRUE )
@@ -198,31 +200,31 @@
 
 	respOmitFlag <- parseCharInput( respOmitFlag, expected = 1, convertToNumeric = FALSE )
 	if (removeRespOmit) {
-		valid <- try( validNames( respOmitFlag ), silent = TRUE )                    
+		valid <- try( validNames( respOmitFlag ), silent = TRUE )
 		if ( class(valid) == "try-error" ) ectdStop("Invalid format for response omit flag variable name")
 		if ( !(respOmitFlag %in% columns) ) removeRespOmit <- FALSE
 	}
-	
+
 	missingFlag <- parseCharInput( missingFlag, expected = 1, convertToNumeric = FALSE )
-	if (removeMissing) {	
+	if (removeMissing) {
 		valid <- try( validNames( missingFlag ), silent = TRUE )
 		if ( class(valid) == "try-error" ) ectdStop("Invalid format for 'Missing' flag variable name")
 		if ( !(missingFlag %in% columns) ) removeMissing <- FALSE
 	}
-	
+
 	interimCol   <- parseCharInput( interimCol  , expected = 1, convertToNumeric = FALSE, valid = TRUE )
 	valid <- try( validNames( interimCol ), silent = TRUE )
 	if ( class(valid) == "try-error" ) ectdStop("Invalid format for interim allocation variable name")
 	if (!(interimCol %in% columns) || !is.numeric(idata[[interimCol]]) || any(idata[[interimCol]] < 0) ) interimCode <- NULL
-	
+
 	## check the software
 	software <- try( match.arg( software ), silent= TRUE)
 	if (class(software) == "try-error") ectdStop("Software should be `R` or `SAS`")
-	
+
 	## subset data according to the remove Flags
-	removeSub <- NULL                
+	removeSub <- NULL
 	if( removeParOmit ) removeSub <- c( removeSub , paste( "( ", parOmitFlag  , " != 1 ) ", sep = "") )
-	if( removeMissing ) removeSub <- c( removeSub , paste( "( ", missingFlag , " != 1 ) ", sep = "") ) 
+	if( removeMissing ) removeSub <- c( removeSub , paste( "( ", missingFlag , " != 1 ) ", sep = "") )
 	if( removeRespOmit) removeSub <- c( removeSub , paste( "( ", respOmitFlag , " != 1 ) ", sep = "") )
 	if (length(removeSub)) {
 		removeSub <- paste( removeSub , collapse = " & " )
@@ -232,22 +234,22 @@
 	# Perform full analysis of the data including all the doses found in the data (if required)
 	if (fullAnalysis | is.null(interimCode)) {
 		.log(" ... full analysis")
-		fullOutput <-  performAnalysis( analysisCode = analysisCode, seed = seed, 
-				data = idata, software = software, doses = doses, doseCol = doseCol, 
-				workingPath = workingPath  )                                                                    
+		fullOutput <-  performAnalysis( analysisCode = analysisCode, seed = seed,
+				data = idata, software = software, doses = doses, doseCol = doseCol,
+				workingPath = workingPath  )
 
 		## add more variables to the dataset
 		if (is.data.frame(fullOutput) && (nRows <- nrow(fullOutput))) {
-			alldata <- data.frame( 
-				INTERIM = rep(0, nRows), 
-				INTERIMC = rep("FULL", nRows), 
-				fullOutput, 
+			alldata <- data.frame(
+				INTERIM = rep(0, nRows),
+				INTERIMC = rep("FULL", nRows),
+				fullOutput,
 				stringsAsFactors = FALSE)
 			if (doseCol %in% names(fullOutput)) {
-				alldata$INCLUDED = rep(1, nRows) 
+				alldata$INCLUDED = rep(1, nRows)
 				alldata$DROPPED = rep(0, nRows)
 			}
-			alldata$STOPPED <- rep(0, nRows)			
+			alldata$STOPPED <- rep(0, nRows)
 		}
 		else alldata <- NULL
 	}
@@ -258,12 +260,12 @@
 
 		# check if there is code
 		uniqueInterim <- unique( idata [[interimCol]] )
-		if (missing(interimCode)) ectdStop("No interim Code found")    
+		if (missing(interimCode)) ectdStop("No interim Code found")
 
 		# check if the function exists
 		interimCode <- try( match.fun(interimCode), silent =TRUE )
 		if (class(interimCode) == "try-error") ectdStop("Cannot find the interimCode function")
-		
+
 		# number of interim
 		nInterim <- max( idata[[ interimCol ]])
 
@@ -271,18 +273,18 @@
 		includeDoses <- if (!is.null(initialDoses)) initialDoses else doses
 
 		for( int in 1:nInterim ){
-			
+
 			.log( " ... interim $int / $nInterim" )
 
 			# make the new subset
 			includeRows <- rbind(includeRows, cbind(int, includeDoses))
 
 			# perform the analysis on the interim data
-			newAnalysis <- try( 
-					performAnalysis( analysisCode, seed = seed, data = idata, 
-							software = software, includeRows = includeRows, 
+			newAnalysis <- try(
+					performAnalysis( analysisCode, seed = seed, data = idata,
+							software = software, includeRows = includeRows,
 							doses = doses, doseCol = doseCol,
-							interimCol = interimCol, workingPath = workingPath ), 
+							interimCol = interimCol, workingPath = workingPath ),
 					silent = TRUE )
 			if (class(newAnalysis) == "try-error") ectdStop("Error when executing `performAnalysis`\n\t$newAnalysis")
 
@@ -291,16 +293,16 @@
 
 				# Add interim columns to the data
 				newAnalysis <- data.frame(
-					INTERIM = rep(int, nRows),  
-					INTERIMC = if(int == nInterim) rep("FINAL", nRows) else rep(int, nRows), 
-					newAnalysis, 
+					INTERIM = rep(int, nRows),
+					INTERIMC = if(int == nInterim) rep("FINAL", nRows) else rep(int, nRows),
+					newAnalysis,
 					stringsAsFactors = FALSE)
 				if (doseCol %in% names(newAnalysis)) newAnalysis$INCLUDED <- as.numeric(newAnalysis[[doseCol]] %in% includeDoses)
 
 				# Call the interimAnalysis function to get data changes
 				iList <- try(interimAnalysis( newAnalysis, interimCode, uniqueDoses = doses ))
 				if (class(iList) == "try-error") ectdStop("Interim analysis step failed")
-				
+
 				# Work out actions based on the return "DROP" element
 				dropKeep <- any(c("DROP", "KEEP") %in% names(iList))
 				if ( dropKeep ) {
@@ -322,10 +324,10 @@
 						beenDropped <- union(beenDropped, dropped)
 						includeDoses <- setdiff(includeDoses, beenDropped)
 					}
-				
-				} 
+
+				}
 				else dropped <- NULL
-				
+
 				# Add columns to the analysis output
 				if (doseCol %in% names(newAnalysis)) newAnalysis$DROPPED <- as.numeric(newAnalysis[[doseCol]] %in% dropped)
 				newAnalysis$STOPPED = rep(1 * ( "STOP" %in% names(iList) && iList$STOP ), nrow(newAnalysis))
@@ -333,7 +335,7 @@
 				# Add new analysis to existing data
 				alldata <- rbind( alldata, newAnalysis)
 
-				# Do we need to stop the trial? 
+				# Do we need to stop the trial?
 				if ( "STOP" %in% names(iList) && iList$STOP ) break			# Stop the trial if specified
 				if (!length(includeDoses)) break							# Stop the trial if no doses to include in next interim
 			}
@@ -341,7 +343,7 @@
 	}
 
 	if (any(myTest <- names(alldata) == "INTERIM")) names(alldata)[myTest] <- interimCol
-	alldata 
-	
+	alldata
+
 }
 
