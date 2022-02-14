@@ -88,6 +88,17 @@ test_that("test_analyzeRep_rep", {
                  msg = "wrong sort of missomit flag, wrong name")
 
   # test the argument of interimCol
+  expect_error(analyzeRep(replicate = 1,
+                          analysisCode = dummyAnalysisCode,
+                          workingPath = analyseRep.datapath,
+                          interimCol = "INTERIM,INTERIM2" ),
+               msg = "wrong sort of interim flag, too long")
+
+  expect_error(analyzeRep(replicate = 1,
+                          analysisCode = dummyAnalysisCode,
+                          workingPath = analyseRep.datapath,
+                          interimCol = "@954fginterim" ),
+               msg = "wrong sort of imterim flag, wrong name")
 
 })
 
