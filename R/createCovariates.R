@@ -1,30 +1,30 @@
 #' Create covariates
-#'
+#' 
 #' Function to create covariates. Discrete, continuous and/or from an external
 #' file. This function acts as a wrapper for the functions :
 #' \code{\link{createContinuousCovariates}},
 #' \code{\link{createDiscreteCovariates}},
 #' \code{\link{createDiscreteCovariates}} and
 #' \code{\link{createTimeVaryingCovariates}}
-#'
+#' 
 #' According to the presence of each "names" argument, the function calls
 #' lower-level functions to generate covariates.  For example, if
 #' \code{conNames} is given, the function will attempt to generate covariates
 #' from a continuous distribution using the
 #' \code{\link{createContinuousCovariates}} function.
-#'
+#' 
 #' If no names is given, a data frame containing only the subject column will
 #' be created.
-#'
+#' 
 #' If \code{\link{createTimeVaryingCovariates}} is invoked, the additional TIME
 #' column will be included in the output data.
-#'
+#' 
 #' Arguments are systematically passed to lower-level function according to a
 #' name convention.  For example, the \code{conRange} argument is passed to
 #' \code{\link{createContinuousCovariates}} as the \code{range} argument, the
 #' \code{extFile} is passed to the \code{\link{createExternalCovariates}} as
 #' the \code{file} argument, ...
-#'
+#' 
 #' @param subjects (Required) Subjects for which to create covariates
 #' @param conNames,conMean,conCov,conRange,conDigits,conMaxDraws (Optional)
 #' Arguments for the \code{\link{createContinuousCovariates}} function.  The
@@ -66,26 +66,26 @@
 #' covariate and examples.
 #' @keywords datagen IO
 #' @examples
-#'
-#'
-#'   ## unit tests for the covariates component of the MSToolkit package
+#' 
+#' 
+#'   ## unit tests for the covariates component of the MSToolkit package 
 #'   \dontrun{
 #'     file.show( system.file( "Runit", "runit.data.covariates.R", package = "MSToolkit") )
-#'
-#'     wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit")
-#'     dAll <- createCovariates( 30,
+#'   
+#'     wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit") 
+#'     dAll <- createCovariates( 30, 
 #'       conNames = "X,Y", conMean = "0,0" , conCov = "1,0,1", conRange = "-1<X<1",  # continuous
 #'       disNames = "P1,P2", disValues = "1,2#3,5,6" , disProbs = ".5,.5#.3,.3,.4",  # discrete
-#'       extNames = "X1", extFile = "testCovariates.csv", workingPath = wPath )      # external
-#'
-#'     dAllwithtime <- createCovariates( 30,
+#'       extNames = "X1", extFile = "testCovariates.csv", workingPath = wPath )      # external  
+#'     
+#'     dAllwithtime <- createCovariates( 30, 
 #'       conNames = "X,Y", conMean = "0,0" , conCov = "1,0,1", conRange = "-1<X<1", # continuous
 #'       disNames = "P1,P2", disValues = "1,2#3,5,6" , disProbs = ".5,.5#.3,.3,.4", # discrete
 #'       timeNames = "T1,T2", timeMean = list(1:3, 1:3), timeCov = list(1, 1:3),    # time-varying
-#'       timePeriod = 1:3, extNames = "X1", extFile = "testCovariates.csv",         # external
-#'       workingPath = wPath )
+#'       timePeriod = 1:3, extNames = "X1", extFile = "testCovariates.csv",         # external 
+#'       workingPath = wPath )        
 #'  }
-#'
+#' 
 createCovariates <- function(
   subjects,     #@ Subjects for which to create covariates
 
