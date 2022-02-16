@@ -1,13 +1,13 @@
 #' Create covariates by sampling from an external file
-#'
+#' 
 #' Create covariates by sampling from an external file.
-#'
+#' 
 #' The sampling is always done with replacement.
-#'
+#' 
 #' The \code{refCol} setting is typically used with the parameter component,
 #' see \code{\link{createParameters}} or \code{\link{createExternalParameters}}
 #' to maintain consistency between imported covariates and imported parameters.
-#'
+#' 
 #' @param subjects (Required) Number of subjects for which to sample sets of
 #' external covariate values
 #' @param names (Required) Names of the covariates to use from the \code{file}
@@ -53,22 +53,22 @@
 #' @keywords datagen IO
 #' @examples
 #' \dontrun{
-#'
+#'   
 #'   # an example file from the unit tests of the MSToolkit package
-#'   wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit" )
-#'
-#'   # sample 20 subjects from the example file
-#'   dat <- createExternalCovariates( 20, names = "X1",
-#'     subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),
+#'   wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit" ) 
+#'   
+#'   # sample 20 subjects from the example file 
+#'   dat <- createExternalCovariates( 20, names = "X1", 
+#'     subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),  
 #'     file = "testCovariates.csv", workingPath = wPath )
 #'   print( dat )
-#'
-#'   # maintaining the origin of each row
-#'   dat <- createExternalCovariates( 20, names = "X1, X2",
-#'     subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),
+#'     
+#'   # maintaining the origin of each row  
+#'   dat <- createExternalCovariates( 20, names = "X1, X2", 
+#'     subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),  
 #'     file = "testCovariates.csv", workingPath = wPath, refCol = "ID" )
 #'   print( dat )
-#'
+#' 
 #' }
 createExternalCovariates <- function(
   subjects,       #@ Subjects for which to create covariates
