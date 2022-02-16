@@ -1,8 +1,8 @@
 #' Adds dropout to a simulated dataset
-#'
+#' 
 #' Applies a given dropout function to a simulated trial dataset, in order to
 #' create a "missing" variable representing subject dropout
-#'
+#' 
 #' This function will accept (and check) a "dropout" function, which is to
 #' applied to the data.  This function must return a boolean vector.  The
 #' dropout function supplied will be applied to the data provided (possibly
@@ -12,7 +12,7 @@
 #' visits 2, 3 etc.).  This "retained" boolean vector is added to the dataset
 #' (or used to enhance an existing "missing" flag) and the updated data is
 #' returned.
-#'
+#' 
 #' @param data (Required) Data frame to which to add a "missingness" flag
 #' @param dropFunc (Required) Drop out function to apply to the data.  The
 #' function must return a vector of booleans
@@ -31,9 +31,9 @@
 #' @seealso \code{\link{checkDropOutFun}} and \code{\link{createMCAR}}
 #' @keywords datagen
 #' @examples
-#'
+#' 
 #' \dontrun{
-#'
+#' 
 #' dFun <- function(data, prop) sample(0:1, nrow(data), replace=TRUE, prob=c(1-prop, prop))
 #' createDropout(data=myDf, dropFunc=dFun, prop=.05)
 #' #     SUBJ TIME MISSING
@@ -53,7 +53,7 @@
 #' #  14    3    4       1
 #' #  15    3    5       1
 #' }
-#'
+#' 
 createDropout <- function(
   data,                             #@ Data Structure to which to add missing flag
   dropFunc,                         #@ Drop out function
