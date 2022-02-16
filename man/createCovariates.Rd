@@ -110,22 +110,22 @@ duplicated names between \code{conNames}, \code{extNames}, \code{disNames},
 \examples{
 
 
-  ## unit tests for the covariates component of the MSToolkit package 
+  ## unit tests for the covariates component of the MSToolkit package
   \dontrun{
     file.show( system.file( "Runit", "runit.data.covariates.R", package = "MSToolkit") )
-  
-    wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit") 
-    dAll <- createCovariates( 30, 
+
+    wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit")
+    dAll <- createCovariates( 30,
       conNames = "X,Y", conMean = "0,0" , conCov = "1,0,1", conRange = "-1<X<1",  # continuous
       disNames = "P1,P2", disValues = "1,2#3,5,6" , disProbs = ".5,.5#.3,.3,.4",  # discrete
-      extNames = "X1", extFile = "testCovariates.csv", workingPath = wPath )      # external  
-    
-    dAllwithtime <- createCovariates( 30, 
+      extNames = "X1", extFile = "testCovariates.csv", workingPath = wPath )      # external
+
+    dAllwithtime <- createCovariates( 30,
       conNames = "X,Y", conMean = "0,0" , conCov = "1,0,1", conRange = "-1<X<1", # continuous
       disNames = "P1,P2", disValues = "1,2#3,5,6" , disProbs = ".5,.5#.3,.3,.4", # discrete
       timeNames = "T1,T2", timeMean = list(1:3, 1:3), timeCov = list(1, 1:3),    # time-varying
-      timePeriod = 1:3, extNames = "X1", extFile = "testCovariates.csv",         # external 
-      workingPath = wPath )        
+      timePeriod = 1:3, extNames = "X1", extFile = "testCovariates.csv",         # external
+      workingPath = wPath )
  }
 
 }

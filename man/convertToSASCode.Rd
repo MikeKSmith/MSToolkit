@@ -38,13 +38,13 @@ on ";" symbols and returned.
 
 convertToSASCode(c("X > 1", "X < 0", "Y > 0 & Y < 10"))
 #  [1] "IF X > 1 ;IF X < 0 ;IF Y > 0 AND Y < 10 ;"
-  
+
 sasMat <- cbind(c("X > 1", "X < 0", "Y > 0 & Y < 10"), c("Col1", "Col2", "Col3"), 1:3)
 sasMat
 #     [,1]             [,2]   [,3]
-#[1,] "X > 1"          "Col1" "1" 
-#[2,] "X < 0"          "Col2" "2" 
-#[3,] "Y > 0 & Y < 10" "Col3" "3" 
+#[1,] "X > 1"          "Col1" "1"
+#[2,] "X < 0"          "Col2" "2"
+#[3,] "Y > 0 & Y < 10" "Col3" "3"
 convertToSASCode(sasMat)   # Convert matrix of "data change" code
 # [1] "IF X > 1 THEN Col1 = 1 ;IF X < 0 THEN Col2 = 2 ;IF Y > 0 AND Y < 10 THEN Col3 = 3 ;"
 

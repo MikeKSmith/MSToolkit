@@ -87,19 +87,19 @@ to maintain consistency between imported covariates and imported parameters.
 }
 \examples{
 \dontrun{
-  
+
   # an example file from the unit tests of the MSToolkit package
-  wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit" ) 
-  
-  # sample 20 subjects from the example file 
-  dat <- createExternalCovariates( 20, names = "X1", 
-    subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),  
+  wPath <- system.file( "Runit", "data", "createCovariates", package = "MSToolkit" )
+
+  # sample 20 subjects from the example file
+  dat <- createExternalCovariates( 20, names = "X1",
+    subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),
     file = "testCovariates.csv", workingPath = wPath )
   print( dat )
-    
-  # maintaining the origin of each row  
-  dat <- createExternalCovariates( 20, names = "X1, X2", 
-    subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),  
+
+  # maintaining the origin of each row
+  dat <- createExternalCovariates( 20, names = "X1, X2",
+    subset = c(".7 < X1 < .8", "-1 <= X2 <= 1"),
     file = "testCovariates.csv", workingPath = wPath, refCol = "ID" )
   print( dat )
 
