@@ -1,8 +1,8 @@
-#' Parse input to construct a covariance matrix
-#'
+#' Parse a covariance matrix
+#' 
 #' Creates a symmetric positive definite matrix from a vector if possible, or
 #' checks if a given matrix is symmetric positive definite.
-#'
+#' 
 #' parseCovMatrix attempts to create a symmetric positive definite matrix of
 #' dimension nCov x nCov. If values is a matrix, parseCovMatrix will simply
 #' check that it is symmetric and positive definite up to a tolerance as
@@ -17,38 +17,38 @@
 #' the entries for the lower triangle taken from "values".  If none of these
 #' conditions hold or if the entries of "values" are not compatible with
 #' positive definite symmetric matrices, an error will be printed.
-#'
+#' 
 #' @param values (Required) Either a matrix or a mixed character-numeric vector
 #' @param nCov (Required) The number of rows and columns that should be
 #' available in the resulting matrix
 #' @param tol (Optional) Numerical tolerance for the positive-definiteness
 #' check.  By default, the tolerance is used as 1e-06
 #' @return A positive definite symmetric matrix
-#' @author Romain Francois
+#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
 #' @seealso \code{\link{checkSymmetricPDMatrix}}
 #' @keywords datagen
 #' @examples
-#'
+#' 
 #'   parseCovMatrix(2, nCov = 3)
 #'   parseCovMatrix(c(1,2,3), nCov = 3)
 #'   parseCovMatrix(c(1,2,4), nCov = 2)
-#'
-parseCovMatrix <- function(
+#' 
+parseCovMatrix <- function( 
    values,        #@ values used
    nCov,          #@ number of covariates
    tol = 1e-06
 ){
- 	##############################################################################
+ 	###############################################################################
 	# Mango Solutions, Chippenham SN14 0SQ 2006
 	# parseCovMatrix.R Fri Fri Jun 01 11:16:03 BST 2007 @469 /Internet Time/
 	#
-	# Author: Romain Francois
-	##############################################################################
+	# Author: Romain
+	###############################################################################
 	# DESCRIPTION: parses a covarariance matrix
   # KEYWORDS: check, component:support
-	##############################################################################
-
-
+	###############################################################################
+   
+  
    ### 1st step build the matrix
    if( is.matrix(values)){
      mat <- values
