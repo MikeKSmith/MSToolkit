@@ -1,9 +1,9 @@
 #' Read scenario data
-#' 
+#'
 #' Reads a single element of replicate, macro evaluation or micro evaluation
 #' data from the current scenario
-#' 
-#' 
+#'
+#'
 #' @param dataType (Optional) The type of data you wish to read - either
 #' "ReplicateData", "MacroEvaluation" or "MicroEvaluation".  Default is
 #' "ReplicateData"
@@ -30,22 +30,22 @@
 #' @seealso \code{\link{writeData}}, \code{\link{readData}}
 #' @keywords IO
 #' @examples
-#' 
+#'
 #' 	\dontrun{
 #'    readAllData(dataType = "Macro", consolidate = FALSE)
-#' 	 readAllData(dataType = "Micro")	 
+#' 	 readAllData(dataType = "Micro")
 #'  }
-#' 
-"readAllData" <- function(                            
+#'
+"readAllData" <- function(
   dataType = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"),    #@ Type of data, should be "Replicate", "Macro", or "Micro"
   workingPath = getwd(),      #   The working directory
   dirName = dataType,       #@ Directory to use in case one doesn't want to use the default directory
-  prefix = switch(dataType, ReplicateData = "replicate", MicroEvaluation = "micro", MacroEvaluation = "macro"), 
+  prefix = switch(dataType, ReplicateData = "replicate", MicroEvaluation = "micro", MacroEvaluation = "macro"),
   replicates = NULL,
-  consolidate = TRUE, 
+  consolidate = TRUE,
   replicateCol = getEctdColName("Replicate"),
   method = getEctdDataMethod()   #@ Data Storage Method to use
-){  
+){
   ###############################################################################
   # Mango Solutions, Chippenham SN14 0SQ 2006
   # Thurs Jun 21 16:51 BST 2007 @445 /Internet Time/
@@ -59,8 +59,8 @@
 
   # Check dataType input
   dataType <- match.arg(dataType)
-  if (dataType != "ReplicateData") method <- "CSV" 
-  
+  if (dataType != "ReplicateData") method <- "CSV"
+
   # Attempt to extract all replicate numbers
   if (!length(replicates)) replicates <- getReplicates(dirName, prefix, method, workingPath = workingPath)
 
