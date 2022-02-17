@@ -44,6 +44,6 @@ and no directories are modified
 
 }
 \author{
-Francisco Gochez
+Mike K Smith \email{mstoolkit@googlemail.com}
 }
-\keyword{IO}
+\keyword{data}
