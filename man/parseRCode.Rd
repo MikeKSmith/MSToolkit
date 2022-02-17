@@ -21,5 +21,5 @@ The \code{parseRCode} function wraps "parse" and checks to ensure a valid
 expression is created
 }
 \author{
-Romain Francois, Rich Pugh
+Mike K Smith \email{mstoolkit@googlemail.com}
 }
