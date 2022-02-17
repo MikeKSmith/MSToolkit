@@ -52,7 +52,7 @@
                           MicroEvaluation = "micro",
                           MacroEvaluation = "macro"
                         ),
-                        method = getEctdDataMethod()   #@ Data Storage Method to use)
+                        method = getEctdDataMethod())   #@ Data Storage Method to use)
                         {
                           ###############################################################################
                           # Mango Solutions, Chippenham SN14 0SQ 2006
