@@ -1,4 +1,4 @@
-test_that("test_checkMacroFormat", {
+test_that("test.checkMacroFormat", {
 
   expect_error(checkMacroFormat(1:10),
                info = "not a data frame")
