@@ -45,11 +45,11 @@ test_that("test.compileSummary.R", {
   compileSummary("Macro", workingPath = cpdir)
   expectedMicroData <- read.csv(file.path(compileSummary.datapath, "microSummary.csv"))
   newMicroData <- read.csv(file.path(compileSummary.datapath, "microSummary.csv"))
-  expect_equal(expectedMicroData, newMicroData,
+  expect_equal(newMicroData, expectedMicroData,
                info = "compile micro R")
   expectedMacroData <- read.csv(file.path(compileSummary.datapath, "macroSummary.csv"))
   newMacroData <- read.csv(file.path(compileSummary.datapath, "macroSummary.csv"))
-  expect_equal(expectedMicroData, newMicroData,
+  expect_equal(newMicroData, expectedMicroData,
                info = "compile macro R")
 
   unlink(cpdir, recursive = TRUE)

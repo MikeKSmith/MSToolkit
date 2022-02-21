@@ -134,7 +134,7 @@ test_that("test_analyzeRep_rep", {
                     header = TRUE,
                     row.names = NULL)
   # test the interim column
-  expect_equal(c(0,sort(unique(idata$INTERIM))), sort(unique(res$INTERIM)),
+  expect_equal(sort(unique(res$INTERIM)), c(0,sort(unique(idata$INTERIM))),
                info = "checking the interim column")
 
   # test the INTERIMC column
@@ -146,8 +146,7 @@ test_that("test_analyzeRep_rep", {
   subFin  <- subset( res , INTERIMC == "FINAL" )
   subFull <- subset( res , INTERIMC == "FINAL" )
   rownames(subFin) <- rownames(subFull) # to make identical happy
-  expect_equal(subFin,
-               subFull,
+  expect_equal(subFull, subFin,
                info = "checking final and full analysis, must be similar when no changes")
 
   # test the number of subjects grows as the interim grows

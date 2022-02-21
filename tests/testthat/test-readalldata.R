@@ -20,15 +20,19 @@ test_that("test.readAllData.CSV", {
   x <- readAllData(dataType = "Micro", workingPath = tempDir)
 
   rownames(microData)  <- rownames(x)
-  expect_equal(x[,-1], microData, info = "checking the readAllData function with MicroEvaluation data")
-  expect_true(all(x$Replicate == rep(1:4, each=3)), info = "Check subset replicate variable created correctly")
+  expect_equal(microData, x[,-1],
+               info = "checking the readAllData function with MicroEvaluation data")
+  expect_true(all(x$Replicate == rep(1:4, each=3)),
+              info = "Check subset replicate variable created correctly")
 
   # Now check it with a subset of data
   x <- readAllData(dataType = "Micro", workingPath = tempDir, replicates = 2:3)
 
   y <- microData[4:9, ]
   rownames(y) <- rownames(x)
-  expect_equal(x[,-1], y, info = "checking the readAllData function with a reading of partial MicroEvaluation data")
-  expect_true(all(x$Replicate == rep(2:3, each=3)), info = "Check subset replicate variable created correctly")
+  expect_equal(y, x[,-1],
+               info = "checking the readAllData function with a reading of partial MicroEvaluation data")
+  expect_true(all(x$Replicate == rep(2:3, each=3)),
+              info = "Check subset replicate variable created correctly")
   unlink(tempDir, recursive = TRUE)
 })

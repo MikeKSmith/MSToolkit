@@ -15,7 +15,7 @@ test_that("test.interimAnalysis", {
   expect_error(interimAnalysis(mtcars, function(data) list(wrongname = data$mpg + 2)),
                info = "wrong list name")
 
-  expect_equal(interimAnalysis(mtcars, function(data) list()), list(),
+  expect_equal(list(), interimAnalysis(mtcars, function(data) list()),
                info = "empty list")
 
   expect_error(interimAnalysis(mtcars, function(data) list(DROP = 1, STOP = FALSE, DOSE = 3)),
@@ -33,10 +33,10 @@ test_that("test.interimAnalysis", {
   expect_error(interimAnalysis(mtcars, function(data) list(DROP = c(0,10), STOP = 18)),
                info = "STOP must be a logical")
 
-  expect_equal(interimAnalysis(mtcars), list(),
+  expect_equal(list(), interimAnalysis(mtcars),
                info = "empty `interimCode`")
 
-  expect_equal(interimAnalysis(mtcars, NULL), list(),
+  expect_equal(list(), interimAnalysis(mtcars, NULL),
                info = "NULL `interimCode`")
 
   myData <- data.frame(DOSE=c(0, 15, 30), TEST = 1:3)
@@ -49,7 +49,7 @@ test_that("test.interimAnalysis", {
     outList
   }
 
-  expect_equal(interimAnalysis(myData, myFun), list(STOP = FALSE, DROP = 30))
+  expect_equal(list(STOP = FALSE, DROP = 30), interimAnalysis(myData, myFun))
 
   myData <- data.frame(DOSE=c(0, 15, 30), TEST = 1:3)
 
@@ -61,5 +61,5 @@ test_that("test.interimAnalysis", {
     outList
   }
 
-  expect_equal(interimAnalysis(myData, myFun), list(STOP = FALSE, KEEP = c(F, F, T)))
+  expect_equal(list(STOP = FALSE, KEEP = c(F, F, T)), interimAnalysis(myData, myFun))
 })
