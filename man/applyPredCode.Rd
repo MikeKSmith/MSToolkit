@@ -50,8 +50,6 @@ statements to the data ("df"), producing a textual report of the process if
 are then returned
 }
 \examples{
-
-
 parsePredCode(c(
 	"X = 1",
 	"IF (X.EQ.1.OR.Y.GT.0) STUD = 1",
