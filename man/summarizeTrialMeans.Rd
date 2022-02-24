@@ -2,6 +2,7 @@
 % Please edit documentation in R/summarizeTrialMeans.R
 \name{summarizeTrialMeans}
 \alias{summarizeTrialMeans}
+\alias{summariseTrialMeans}
 \title{Summarize Trial Mean Data}
 \usage{
 summarizeTrialMeans(
