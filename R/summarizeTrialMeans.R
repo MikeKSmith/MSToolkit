@@ -88,3 +88,4 @@
 	simData[do.call("order", simData[bVar]),  , drop = FALSE]
 }
 
+summariseTrialMeans <- summarizeTrialMeans
