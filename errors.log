@@ -1,0 +1,10 @@
+Error in runTestSuite(testSuite) : invalid test suite supplied.
+In addition: Warning messages:
+1: package ‘RUnit’ was built under R version 4.0.5 
+2: In isValidTestSuite(testSuites) :
+  'testSuite' object does not conform to S3 class definition.
+'dirs' element may not contain empty string.
+3: In isValidTestSuite(testSuites[[1]]) :
+  'testSuite' object is not of class 'RUnitTestSuite'.
+Rendering development documentation for 'MSToolkit::mstoolkitUnitTests'
+Loading MSToolkit

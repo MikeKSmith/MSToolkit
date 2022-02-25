@@ -41,13 +41,13 @@
   model
 }
 
-.stripExitAbort <- function(txt) {
+".stripExitAbort" <- function(txt) {
   if (length(xRows <- grep("EXIT", txt))) txt <- txt[ - xRows]
   if (length(xRows <- grep("ABORT", txt))) txt <- txt[ - xRows]
   txt
 }
 
-.convertNmFunctions <- function(model)
+".convertNmFunctions" <- function(model)
 {
   lowerThese <- c("log10", "log", "exp", "sqrt", "abs", "asin", "acos", "atan", "sin", "cos", "tan")
   for (i in lowerThese) {
@@ -63,7 +63,7 @@
 ## to handle cases where operator is numeric but non integer.
 ## Following Klaas Prins suggestion
 
-.convertNmOperators <- function(model) {
+".convertNmOperators" <- function(model) {
   model <- gsub(" = ", " <- ", model)
   model <- gsub("([A-Za-z0-9]+)\\.EQ\\.([A-Za-z0-9]*\\.?[0-9]+)", "(\\1 == \\2)", model)
   model <- gsub("([A-Za-z0-9]+)\\.NE\\.([A-Za-z0-9]*\\.?[0-9]+)", "(\\1 != \\2)", model)
@@ -77,7 +77,7 @@
   model
 }
 
-.convertNmArithmetic <- function(model) {
+".convertNmArithmetic" <- function(model) {
   model <- gsub("\\*\\*", " ^ ", model)
   model <- gsub("\\*", " * ", model)
   model <- gsub("/", " / ", model)
@@ -86,7 +86,7 @@
   model
 }
 
-.convertNmParameters <- function(model) {
+".convertNmParameters" <- function(model) {
   # Search Strings
   thetaFind <- "THETA\\(([0-9]+)\\)"; thetaReplace <- "TH\\1"
   etaFind <- "ETA\\(([0-9]+)\\)"; etaReplace <- "ETA\\1"
@@ -97,19 +97,19 @@
   model
 }
 
-.stripBlanks <- function(txt) {
+".stripBlanks" <- function(txt) {
   txt <- gsub("^ *", "", txt)
   txt <- gsub(" *$", "", txt)
   txt
 }
 
-.stripComments <- function(txt) {
+".stripComments" <- function(txt) {
   if (length(xRows <- grep("^ *[\";]", txt) )) txt <- txt[ - xRows ]	# Remove Fortran coding
   txt <- gsub(";.*$", "", txt)
   txt
 }
 
-.applyIfStatement <- function( txt, ifClause, notIf = FALSE) {
+".applyIfStatement" <- function( txt, ifClause, notIf = FALSE) {
   splitText <- strsplit(txt, "=")[[1]]
   if (length(splitText) != 2) ectdStop("Problem with parsing target from 'IF' clause")
   theAnswer <- .stripBlanks(splitText[2])
@@ -118,7 +118,7 @@
   paste(.stripBlanks(splitText[1]), "[", ifClause, "] =", theAnswer)
 }
 
-.getIfClause <- function(txt) {
+".getIfClause" <- function(txt) {
   if (length(txt) != 1) ectdStop("Multiple statements passed to 'IF statement' extraction function")
   firstOpen <- gregexpr("\\(", txt)[[1]]
   lastClose <- gregexpr("\\)", txt)[[1]]
@@ -129,7 +129,7 @@
 }
 
 
-.parseIfElseStatements <- function(txt) {
+".parseIfElseStatements" <- function(txt) {
 
   # Deal with stray THENs
   strayThen <- grep("^ *THEN *$", txt)
@@ -179,7 +179,7 @@
 }
 
 
-.parseIfElseBlock <- function(txt) {
+".parseIfElseBlock" <- function(txt) {
 
   # Check input
   if (txt[length(txt)] != "ENDIF") ectdStop("Incorrect element passed to IfElse block parser")
@@ -226,7 +226,7 @@
   outText
 }
 
-.changeVarNames <- function(txt, respCol = getEctdColName("Response")) {
+".changeVarNames" <- function(txt, respCol = getEctdColName("Response")) {
 
   # Change the "F" variable
   findF <- grep("^F +<-", txt)
@@ -245,7 +245,7 @@
   txt
 }
 
-.convertSingleIf <- function(txt) {
+".convertSingleIf" <- function(txt) {
   if (length(txt) > 1) ectdStop("More than 1 statement passed into a 'single IF' parsing routine")
   txt <- .stripBlanks(txt)
   if (!length(grep("^IF", txt))) ectdStop("Invalid single 'IF' statement")
