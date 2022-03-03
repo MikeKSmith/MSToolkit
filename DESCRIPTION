@@ -28,7 +28,7 @@ Suggests:
 Imports: 
     parallel,
     MASS
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 License: GPL-3
 URL: https://github.com/MikeKSmith/MSToolkit

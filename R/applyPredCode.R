@@ -10,7 +10,7 @@
 #' "report" is set to TRUE.  The "keepCols" columns from the updated dataset
 #' are then returned
 #'
-#' @aliases applyPredCode parsePredCode
+#' @aliases parsePredCode
 #' @param df (Required) Data frame to which parsed NONMEM statements are to be
 #' applied
 #' @param pred Character vector of NONMEM statements

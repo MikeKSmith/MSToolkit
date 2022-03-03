@@ -29,13 +29,13 @@ The unit tests are based on the RUnit framework.
 
   \dontrun{
     mstoolkitUnitTests( htmlhelp = TRUE )
-    
+
     # unit tests
     browseURL("reportUT.html")
-    
+
     # system tests
     browseURL("reportST.html")
-    
+
   }
 
 }

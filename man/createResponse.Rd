@@ -67,18 +67,18 @@ behaved differently (it is assumed parameters passed were on the log scale)
 \examples{
 
   # example data
-  myData <- expand.grid( X = 1:2, Y = 1:2, Z = 1:2 )
-  
+  myData <- expand.grid(X = 1:2, Y = 1:2, Z = 1:2)
+
   \% added to comply with SF issue 7
   \% Tue Jul 24 10:21:14 BST 2007 @431 /Internet Time/
   # function example
-  out1 <- createResponse(data = myData, equation   = function(data) with(data, X+Y+Z), 
-    covariance = 1, range = "RESP < 3", seed = 96)
-  
+  out1 <- createResponse(data = myData, equation = function(data) with(data, X+Y+Z),
+                         covariance = 1, range = "RESP < 3", seed = 96)
+
   # same example using a character representation
-  out2 <- createResponse(data = myData, equation   = "X+Y+Z", 
-    covariance = 1, range = "RESP < 3", seed = 96)
-  stopifnot( identical( out1, out2) )  
+  out2 <- createResponse(data = myData, equation = "X+Y+Z",
+                         covariance = 1, range = "RESP < 3", seed = 96)
+  stopifnot(identical(out1, out2))
 
 }
 \seealso{
