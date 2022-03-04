@@ -10,7 +10,6 @@
 #' "report" is set to TRUE.  The "keepCols" columns from the updated dataset
 #' are then returned
 #'
-#' @aliases parsePredCode
 #' @param df (Required) Data frame to which parsed NONMEM statements are to be
 #' applied
 #' @param pred Character vector of NONMEM statements
@@ -21,8 +20,6 @@
 #' dataset
 #' @param verbose Logical: Should verbose logging be used? ( given by
 #' \link{getEctdVerbose} by default)
-#' @param model File containing analysis code (for R or SAS) or an R function
-#' for analysis (R only)
 #' @return A dataset with new columns added
 #' @author Mike K Smith \email{mstoolkit@@googlemail.com}
 #' @keywords NONMEM

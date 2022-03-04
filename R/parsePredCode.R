@@ -1,11 +1,7 @@
-#' parsePredCode
+#' @rdname applyPredCode
 #'
-#' Converts NONMEM Modelling code to executable S code, returning either a list of commands or a vector of commands
-#'
-#' @param model ...
-#' @param respCol ...
-#'
-#' @author Rich
+#' @param model File containing analysis code (for R or SAS) or an R function
+#' for analysis (R only)
 #'
 "parsePredCode" <- function(
   model,
