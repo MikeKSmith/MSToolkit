@@ -61,7 +61,7 @@
 	invLink,       #@ inverse link function for predictor
 	distribution = "normal",  #@ Outcome variable distribution
 	covariance,    #@ Residual error (co)variance
-	errStruc = "Additive",			#@ function describing how to apply residual error
+	errStruc =  c("Additive", "Proportional", "Log-Normal"),			#@ function describing how to apply residual error
 	range,         #@ Range of Acceptable values for created response
 	digits = 3,    #@ Number of digits to which round the response
 	seed = .deriveFromMasterSeed(),
