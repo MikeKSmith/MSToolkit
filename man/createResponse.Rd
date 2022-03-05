@@ -11,7 +11,7 @@ createResponse(
   invLink,
   distribution = "normal",
   covariance,
-  errStruc = c("Additive", "Proportional", "Log-Normal"),
+  errStruc = "Additive",
   range,
   digits = 3,
   seed = .deriveFromMasterSeed(),
