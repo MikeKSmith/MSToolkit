@@ -49,16 +49,15 @@ seperate datasets found
 \examples{
 
   \dontrun{
-    # a directory MicroEvaluation need to be there and be full 
+    # a directory MicroEvaluation need to be there and be full
     # of files matching the pattern micro[0-9]{4}.csv
     compileSummary(dataType = "Micro")
-    
-    # a directory MacroEvaluation need to be there and be full 
+
+    # a directory MacroEvaluation need to be there and be full
     # of files matching the pattern macro[0-9]{4}.csv
     compileSummary(dataType = "Macro")
 
   }
-
 }
 \author{
 Mike K Smith \email{mstoolkit@googlemail.com}

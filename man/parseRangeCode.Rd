@@ -51,7 +51,7 @@ subs2 <- parseRangeCode(c("1 < Y < 10", "1 > B > -2"))
 exData[ eval(subs1, exData), ]
 
 expr <- parseRCode("rnorm(30)")
-eval( expr ) 
+eval( expr )
 
 }
 \seealso{

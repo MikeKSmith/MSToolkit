@@ -43,14 +43,17 @@
 #'   # added to comply with SF issue 7
 #'   # Tue Jul 24 10:21:14 BST 2007 @431 /Internet Time/
 #'   # function example
-#'   out1 <- createResponse(data = myData, equation = function(data) with(data, X+Y+Z),
+#'   out1 <- createResponse(data = myData,
+#'                          equation = function(data) with(data, X+Y+Z),
 #'                          covariance = 1, range = "RESP < 3", seed = 96)
 #'
 #'   # same example using a character representation
-#'   out2 <- createResponse(data = myData, equation = "X+Y+Z",
+#'   out2 <- createResponse(data = myData,
+#'                          equation = "X+Y+Z",
 #'                          covariance = 1, range = "RESP < 3", seed = 96)
 #'   stopifnot(identical(out1, out2))
 #'
+#' @export
 "createResponse" <- function(
 	data,          #@ data structure to which
 	equation,      #@ function for creating response     >> createResponseVariable
@@ -58,7 +61,7 @@
 	invLink,       #@ inverse link function for predictor
 	distribution = "normal",  #@ Outcome variable distribution
 	covariance,    #@ Residual error (co)variance
-	errStruc = c("Additive", "Proportional", "Log-Normal"),			#@ function describing how to apply residual error
+	errStruc = "Additive",			#@ function describing how to apply residual error
 	range,         #@ Range of Acceptable values for created response
 	digits = 3,    #@ Number of digits to which round the response
 	seed = .deriveFromMasterSeed(),

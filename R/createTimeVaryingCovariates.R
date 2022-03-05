@@ -1,9 +1,9 @@
 #' Create a set of time-varying covariates
-#' 
+#'
 #' Creates a set of time-varying covariates from a multivariate normal
 #' distribution and (optionally) a set of constraints.
-#' 
-#' 
+#'
+#'
 #' @param subjects (Required) Subjects for which to create covariates
 #' @param names (Required) Names for the continuous covariates.  They should be
 #' valid R names (See \code{\link{validNames}}) and no duplicate name should be
@@ -40,24 +40,22 @@
 #' @author Mike K Smith \email{mstoolkit@@googlemail.com}
 #' @seealso \code{\link{createDiscreteCovariates}} to create covariates for a
 #' discrete distribution.
-#' 
+#'
 #' \code{\link{createExternalCovariates}} to create covariates by
 #' \emph{sampling} data from an external file.
-#' 
+#'
 #' \code{\link{createCovariates}} that wraps \code{createContinuousCovariates}
 #' and the two other described above.
 #' @keywords datagen
 #' @examples
-#' 
-#' 
-#'   # same   
-#'   dat <- createTimeVaryingCovariates(10, "X, Y, Z", 
+#'  # same
+#'  dat <- createTimeVaryingCovariates(10, "X, Y, Z",
 #' 	mean <- list(X = 1:4, Y = rep(3, 4), Z = "2.5, 3, 3.2, 3.6"),
 #' 	covariance = list(1, 2:5, cbind(c(1,.5,.3,0), c(.5,1,0,0), c(.3,0,1,0), c(0,0,0,1))),
 #' 	range = list("10>=X>0", NULL, c("Z>0", "Z<=10")),
 #' 	idCol = "SUBJ", timeCol = "TIME", treatPeriod = c(0.25, 0.5, 1, 12))
-#' 
-#' 
+#'
+#' @export
 createTimeVaryingCovariates <- function(
 		subjects,
 		names,
@@ -65,9 +63,9 @@ createTimeVaryingCovariates <- function(
 		covariance = 0,
 		range = NULL,
 		digits,
-		maxDraws = 100, 
+		maxDraws = 100,
 		seed = .deriveFromMasterSeed(),
-		idCol = getEctdColName("Subject"), 
+		idCol = getEctdColName("Subject"),
 		timeCol = getEctdColName("Time"),
 		treatPeriod
 ){
@@ -95,9 +93,9 @@ createTimeVaryingCovariates <- function(
 	if (length(treatPeriod) != nTime) ectdStop("the length of `treatPeriod` must be equal to the number of time points")
 
 	# check names
-	names <- if(missing(names)) { 
+	names <- if(missing(names)) {
 		"X" %.% 1:nCov
-	} else { 
+	} else {
 		parseCharInput( names , checkdup = TRUE, convertToNumeric = FALSE)
 	}
 
@@ -105,9 +103,9 @@ createTimeVaryingCovariates <- function(
 
 	if(length(names) != length(mean)) {
 		ectdStop(
-				"Dimension mismatch between `names` and `mean`"  %.nt% 
+				"Dimension mismatch between `names` and `mean`"  %.nt%
 				"`mean`  of length: " %.% length(mean) %.nt%
-        		"`names` of length: "%.% length(names) ) 
+        		"`names` of length: "%.% length(names) )
 	}
 
 	# covariance list
@@ -119,15 +117,15 @@ createTimeVaryingCovariates <- function(
 		covariance <- rep(list(covariance), nCov )
 		if (nCov > 1) warning("there is only 1 covariance matrix, use it for all the time point")
 	}
-	
-	
+
+
 	# maxDraws
-	maxDraws <- as.integer(maxDraws)                      
+	maxDraws <- as.integer(maxDraws)
 	if( maxDraws < 1 ) ectdStop("The maximum number of draws should be a positive integer")
 
 	# digits
 	if( !missing(digits) && digits < 0) ectdStop("The `digits` argument must be positive")
-   
+
 	# range
 	if( is.null(range) ) {
 		range <- rep(list(NULL), nCov)
@@ -137,39 +135,39 @@ createTimeVaryingCovariates <- function(
 	} else {
 		ectdStop("The `range` argument must be list for every covariance")
 	}
-	
+
 	OUT <- NULL
 	for (i in 1:nCov) {
 		rangei <- range[[i]]
 		namei <- names[i]
 		namev <- paste("T", treatPeriod, sep = ".")
 		if (!is.null(rangei)) rangei <- sapply(1:nTime, FUN = function(X) gsub(namei, paste("T", treatPeriod[X], sep = "."), rangei, fixed = TRUE))
-		
+
 		tmp <- createContinuousCovariates(
 				subjects = subjects,
 				names = namev,
-				mean = mean[[i]], 
-				covariance = covariance[[i]], 
+				mean = mean[[i]],
+				covariance = covariance[[i]],
 				range = rangei,
 				digits = digits,
 				maxDraws = maxDraws,
 				seed = seed,
-				idCol = idCol, 
+				idCol = idCol,
 				includeIDCol = TRUE)
-		
+
 		tmp <- reshape(tmp, idvar = idCol, varying = list(2:ncol(tmp)),
 				timevar = timeCol, v.names = namei, times = treatPeriod, direction = "long")
 		rownames(tmp) <- NULL
-		
+
 		if (is.null(OUT)) {
 			OUT <- tmp
 		} else {
 			OUT <- merge(OUT, tmp)
 		}
 	}
-	
+
 	OUT <- OUT[ do.call("order", OUT[c(idCol, timeCol)]), , drop=FALSE]
 	return(OUT)
-  
+
 }
-  
+

@@ -1,41 +1,41 @@
 #' Generate simulated data replicates
-#' 
+#'
 #' Generate Simulated Data Replicates by controlling dosing, covariates,
 #' parametes, response, missingness and interims
-#' 
-#' 
+#'
+#'
 #' The generateData function calls the low level generate data components to
 #' create sets of simulated data.  The following components are called to
 #' create aspects of the simulated trial data:
-#' 
+#'
 #' \code{\link{createTreatments}}: Used to create a dataset of all possible
 #' treatment regimes to be allocated to subjects
-#' 
+#'
 #' \code{\link{allocateTreatments}}: Use to allocate treatments to subjects in
 #' the simulated study
-#' 
+#'
 #' \code{\link{createCovariates}}: Creates a set of fixed covariates for a
 #' simulated population
-#' 
+#'
 #' \code{\link{createParameters}}: Creates simulated fixed and between subject
 #' parameters for subjects in each replicate
-#' 
+#'
 #' \code{\link{createResponse}}: Creates a simulated response variable based on
 #' available derived data
-#' 
+#'
 #' \code{\link{createMCAR}}: Adds a simulated "missing" flag to the data
-#' 
+#'
 #' \code{\link{createDropout}}: Adds a simulated "missing" flag to the data
 #' based on a dropout function
-#' 
+#'
 #' \code{\link{createInterims}}: Assigns subjects in the study to interim
 #' analyses
-#' 
+#'
 #' The function iteratively builds and combines the data components for each
 #' replicte, and stores the data in the "ReplicateData" subdirectory of the
 #' working directory.  This data can then be analyzed using a call to the
 #' \code{\link{analyzeData}} function.
-#' 
+#'
 #' @param replicateN (Required) Number of replicates for which to create
 #' simulated data
 #' @param subjects (Required) Number of subjects in simulation
@@ -188,18 +188,18 @@
 #' \code{\link{analyzeData}}
 #' @keywords datagen
 #' @examples
-#' 
-#' 
+#'
 #' \dontrun{
-#' generateData( replicateN = 500, subjects = 400, treatDoses = c(0, 5, 25, 50, 100), 
-#'   conCovNames = c("wt", "age"), conCovMean = c(83, 55) , conCovVCov = c(14,10)^2 , 
-#'   conCovDigits = 1, conCovCrit = "18 <= age <= 65", 
-#'   genParNames = "E0,ED50,EMAX", genParMean = c(2,50,10), genParVCov = diag( c(.5,30,10) ), 
-#'   genParBtwNames = "E0,ED50,EMAX", genParBtwMean = c(0,0,0), genParBtwVCov = diag(3), 
-#'   respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  respVCov = 5, 
+#' generateData( replicateN = 500, subjects = 400, treatDoses = c(0, 5, 25, 50, 100),
+#'   conCovNames = c("wt", "age"), conCovMean = c(83, 55) , conCovVCov = c(14,10)^2 ,
+#'   conCovDigits = 1, conCovCrit = "18 <= age <= 65",
+#'   genParNames = "E0,ED50,EMAX", genParMean = c(2,50,10), genParVCov = diag( c(.5,30,10) ),
+#'   genParBtwNames = "E0,ED50,EMAX", genParBtwMean = c(0,0,0), genParBtwVCov = diag(3),
+#'   respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  respVCov = 5,
 #'   interimSubj = ".3,.7")
 #' }
-#' 
+#'
+#' @export
 generateData <- function(
 		 replicateN ,	                              #@  Number of replicates
 		 subjects = NULL,	                          #@ Number of subjects in simulation
@@ -234,7 +234,7 @@ generateData <- function(
 		 timeCovNames ,	                              #@ Time-varying covariate names
 		 timeCovMean ,	                              #@ Time-varying covariate means
 		 timeCovVCov ,	                              #@ Time-varying covariate covariance
-		 timeCovCrit = NULL,	                      #@ Time-varying covariate acceptable range   
+		 timeCovCrit = NULL,	                      #@ Time-varying covariate acceptable range
 		 genParCrit,	                              #@ Range of acceptable values for generated parameters
 		 genParBtwNames ,	                          #@ Between subject effects to generate
 		 genParBtwMean ,	                          #@ Means for generated between subject effects
@@ -288,12 +288,12 @@ generateData <- function(
 	# DESCRIPTION: High level function to generate simulated trial data
 	# KEYWORDS: high, generate
 	###############################################################################
-	
+
 	# Reset column names
 	resetEctdColNames()
-	
+
 	# TODO: Better way of extracting default arguments to this function
-	defNames <- c("treatSubj", "treatType", "respName", "treatOrder", "conCovCrit", "conCovDigits", "conCovMaxDraws", "extCovSameRow", "extCovDataId", "timeCovCrit", 
+	defNames <- c("treatSubj", "treatType", "respName", "treatOrder", "conCovCrit", "conCovDigits", "conCovMaxDraws", "extCovSameRow", "extCovDataId", "timeCovCrit",
 		"genParErrStruc", "respDist", "respErrStruc", "respDigits", "genParVCov", "mcarProp", "dropFunExtraArgs", "interimMethod", "seed", "idCol", "doseCol", "timeCol",
     	"trtCol", "parOmitFlag", "respOmitFlag", "missingFlag", "interimCol", "parBtwSuffix", "deleteCurrData", "covDiff", "treatDiff", "extParDataId")
   	callNames <- union(names(match.call())[-1], defNames)
@@ -321,16 +321,16 @@ generateData <- function(
   	## Set Argument calling lists: matching of arguments
   	treatList <- innerCallList(c(doses = "treatDoses", times = "treatPeriod", type = "treatType", sequence = "treatSeq", doseCol = "doseCol", timeCol = "timeCol", trtCol = "trtCol"))
   	allocateList <- innerCallList(c(subjects = "treatSubj", prop = "treatProp", ordered = "treatOrder", idCol = "idCol", trtCol = "trtCol"))
-  	covList <- innerCallList(c(subjects = "subjects", conNames = "conCovNames", conMean = "conCovMean", conCov = "conCovVCov", conRange = "conCovCrit", conDigits = "conCovDigits", 
-    	conMaxDraws = "conCovMaxDraws", disNames = "disCovNames", disValues = "disCovVals", disProbs = "disCovProb", disProbArray = "disCovProbArray", extNames = "extCovNames", 
+  	covList <- innerCallList(c(subjects = "subjects", conNames = "conCovNames", conMean = "conCovMean", conCov = "conCovVCov", conRange = "conCovCrit", conDigits = "conCovDigits",
+    	conMaxDraws = "conCovMaxDraws", disNames = "disCovNames", disValues = "disCovVals", disProbs = "disCovProb", disProbArray = "disCovProbArray", extNames = "extCovNames",
     	extFile = "extCovFile", extSubset = "extCovSubset", extRefCol = "extCovRefCol", extSameRow = "extCovSameRow", extDataId = "extCovDataId", idCol = "idCol", workingPath = "workingPath",
 		timeNames = "timeCovNames", timeMean = "timeCovMean", timeCov = "timeCovVCov", timeRange = "timeCovCrit", timeCol = "timeCol", timePeriod = "treatPeriod"))
-	parList <- innerCallList(c(subjects = "subjects", genNames = "genParNames", genFixedMean = "genParMean", 
-		genFixedCov = "genParVCov", genRange = "genParCrit", genBetweenNames = "genParBtwNames", genBetweenMean = "genParBtwMean", genBetweenCov = "genParBtwVCov", 
-		genErrStruc = "genParErrStruc", genMaxDraws = "genParMaxDraws", genParRangeTolerance = "genParRangeTolerance", extFile = "extParFile", extNames = "extParNames", extBetween = "extParBtwNames", extBetweenNums = "extParBtwNums", extSubset = "extParSubset", 
-    	extRange = "extParCrit", extErrStruc = "extParErrStruc", extRefCol = "extParRefColData", extRefColName = "extParRefColName", extDataId = "extParDataId", suffix = "parBtwSuffix", idCol = "idCol", 
+	parList <- innerCallList(c(subjects = "subjects", genNames = "genParNames", genFixedMean = "genParMean",
+		genFixedCov = "genParVCov", genRange = "genParCrit", genBetweenNames = "genParBtwNames", genBetweenMean = "genParBtwMean", genBetweenCov = "genParBtwVCov",
+		genErrStruc = "genParErrStruc", genMaxDraws = "genParMaxDraws", genParRangeTolerance = "genParRangeTolerance", extFile = "extParFile", extNames = "extParNames", extBetween = "extParBtwNames", extBetweenNums = "extParBtwNums", extSubset = "extParSubset",
+    	extRange = "extParCrit", extErrStruc = "extParErrStruc", extRefCol = "extParRefColData", extRefColName = "extParRefColName", extDataId = "extParDataId", suffix = "parBtwSuffix", idCol = "idCol",
     	flagName = "parOmitFlag", workingPath = "workingPath"))
-	respList <- innerCallList(c(equation = "respEqn", name = "respName", invLink = "respInvLink", distribution = "respDist", covariance = "respVCov", errStruc = "respErrStruc", 
+	respList <- innerCallList(c(equation = "respEqn", name = "respName", invLink = "respInvLink", distribution = "respDist", covariance = "respVCov", errStruc = "respErrStruc",
 		range = "respCrit", digits = "respDigits", flagName = "respOmitFlag"))
 	mcarList <- innerCallList(c(prop = "mcarProp", rule = "mcarRule", flagName = "missingFlag" ))
 
@@ -340,10 +340,10 @@ generateData <- function(
 	## Set directory structures
 	if (deleteCurrData) removeDirectories("ReplicateData", workingPath = workingPath)
 	createDirectories("ReplicateData", workingPath = workingPath)
-  
+
 	## Derive Treatment Data
 	treatData <- do.call(createTreatments, treatList)
-	allocateList$trts <- max(treatData[[trtCol]])                          
+	allocateList$trts <- max(treatData[[trtCol]])
 
 	## Allocate treatments if required
 	if (!treatDiff) {
@@ -352,15 +352,15 @@ generateData <- function(
 		allocData[[idCol]] <- 1:subjects
 	}
 	if (!covDiff) covData <- do.call(createCovariates, covList)
-             
+
   	# Add buffer if we are adding to existing replicates in the directory
-	buffer <- if (deleteCurrData) 0 
+	buffer <- if (deleteCurrData) 0
 	else {
 		allReps <- try(getReplicates(workingPath = workingPath), silent = TRUE)
 		if (class(allReps) == "try-error") buffer <- 0
 		else buffer <- max(allReps)
 	}
-  
+
 	## Loop around replicates
 	if (length(replicateN) == 1) replicateN <- 1:replicateN
 	for (i in replicateN) {
@@ -372,7 +372,7 @@ generateData <- function(
 	    respList$seed     <- seed + 4 * i
 	    mcarList$seed     <- seed + 5 * i
 	    dropList$seed     <- seed + 6 * i
-	    interimList$seed  <- seed + 7 * i	
+	    interimList$seed  <- seed + 7 * i
 
 	    ## Replicate Looping: Core Data Structure
    	 if (covDiff) covData <- do.call(createCovariates, covList)
@@ -381,18 +381,18 @@ generateData <- function(
 		 allocData <- allocData [ rep(1:nrow(allocData), length = subjects), , drop = FALSE]
 		 allocData[[idCol]] <- 1:subjects
 	 }
-	 
+
 	 if (timeCol %in% names(covData)) bycov <- c(idCol, timeCol) else bycov <- idCol
 	 coreData <- merge(merge(treatData, allocData, by=trtCol), covData, by=bycov)
 	 sortBy <- c(idCol, trtCol, timeCol, doseCol)
 	 sortBy <- sortBy [ sortBy %in% names(coreData) ]
 	 if (length(sortBy)) coreData <- coreData [ do.call("order", coreData[sortBy]),,drop=FALSE]
-	
+
    	 ## Replicate Looping: Parameters and Reponse
    	 if (!missing(extParRefColData) && length(extParRefColData) == 1 && is.character(extParRefColData) && !length(grep(",", extParRefColData))) {
    	   if (!length(grep(".refCol", extParRefColData))) extParRefColData <- paste(extParRefColData, ".refCol", sep="")
    	   if (extParRefColData %in% names(coreData)) parList$extRefCol <- coreData[[extParRefColData]]
-   	   else parList <- parList[names(parList) != "extRefCol"]      
+   	   else parList <- parList[names(parList) != "extRefCol"]
    	 }
     coreData <- merge(coreData, do.call(createParameters, parList), by=idCol)
     respList$data <- coreData
@@ -416,7 +416,7 @@ generateData <- function(
 
     .log( sprintf("gendata replicate %5d / %5d", i, length(replicateN)) )
   }
- 
+
   # Set new default column names
   setEctdColName("Subject", idCol)
   setEctdColName("Dose", doseCol)
@@ -427,8 +427,8 @@ generateData <- function(
   setEctdColName("Missing", missingFlag)
   setEctdColName("ParOmit", parOmitFlag)
   setEctdColName("RespOmit", respOmitFlag)
-  
-  invisible()  
+
+  invisible()
 }
 
 

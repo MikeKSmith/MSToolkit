@@ -3,6 +3,7 @@
 #' @param model File containing analysis code (for R or SAS) or an R function
 #' for analysis (R only)
 #'
+#' @export
 "parsePredCode" <- function(
   model,
   respCol = getEctdColName("Response")

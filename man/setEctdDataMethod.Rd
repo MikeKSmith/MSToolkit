@@ -48,5 +48,6 @@ evaluation data is always held as CSV files
 	setEctdDataMethod(nowMethod)
 
 }
+
 }
 \keyword{IO}

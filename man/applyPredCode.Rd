@@ -58,7 +58,6 @@ parsePredCode(c(
  	"NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
 ))
 
-
 }
 \author{
 Mike K Smith \email{mstoolkit@googlemail.com}

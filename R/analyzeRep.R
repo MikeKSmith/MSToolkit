@@ -123,6 +123,7 @@
 #'   analyzeRep(replicate = 1, analysisCode = emaxFun)
 #' }
 #'
+#' @export
 "analyzeRep" <- function(
 		analysisCode		,           #@	File containing the actual analysis code to run on the data
 		replicate		,               #@	Replicate number of data to analyze

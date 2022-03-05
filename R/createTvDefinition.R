@@ -1,5 +1,5 @@
 # Create the tvDefinition class
-setClass("tvDefinition", 
+setClass("tvDefinition",
 	representation(Name = "character", Value = "numeric", trtCall = "list"),
 	validity = function(object) {
 		test1 <- length(object@Name) == 1
@@ -17,12 +17,12 @@ setClass("tvDefinition",
 
 
 #' Create "Typical Value" Definition
-#' 
+#'
 #' Create "Typical Value" Definition for use with "SIMON" typical value
 #' simulation
-#' 
+#'
 #' Constructs "tvDefinition" object
-#' 
+#'
 #' @param drugName ...
 #' @param drugValue ...
 #' @param doses ...
@@ -34,16 +34,15 @@ setClass("tvDefinition",
 #' @author Mike K Smith \email{mstoolkit@@googlemail.com}
 #' @keywords Typical Value
 #' @examples
-#' 
-#' 
+#'
 #' createTvDefinition("A", 1, 1:3)
-#' 
-#' 
+#'
+#' @export
 "createTvDefinition" <- function(
-	drugName,								#@ Name of drug  
-	drugValue,								#@ Value to be associated with this drug  
-	doses,									#@ Vector of dose values  
-	times = NULL,							#@ Optional vector of times  
+	drugName,								#@ Name of drug
+	drugValue,								#@ Value to be associated with this drug
+	doses,									#@ Vector of dose values
+	times = NULL,							#@ Optional vector of times
 	type = c("Parallel", "Crossover"),  	#@ Dosing Method: "Parallel" (default) or "Crossover"
 	sequence,								#@ Optional sequence matrix for crossover trials
 	testCall = TRUE

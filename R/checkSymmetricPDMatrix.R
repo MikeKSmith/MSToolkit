@@ -22,6 +22,8 @@
 #'   C <- matrix( c( -2, 1, 0, 1, -2, 1, 0, 1, -2 ), nrow=3, byrow=TRUE )
 #'   checkSymmetricPDMatrix(C)
 #'   }
+#'
+#' @export
 checkSymmetricPDMatrix <- function( mat, tol = 1e-6 ){
  	##############################################################################
 	# Mango Solutions, Chippenham SN14 0SQ 2006
@@ -43,10 +45,10 @@ checkSymmetricPDMatrix <- function( mat, tol = 1e-6 ){
     ectdStop( "Input matrix not symmetric" )
 
   ev <- eigen(mat, symmetric = TRUE, only.values = TRUE)$values
-    
+
   # This test for positive-definiteness was found in the function mvrnorm
-  if (!all(ev >= -tol * abs(ev[1]))) 
+  if (!all(ev >= -tol * abs(ev[1])))
       ectdStop("matrix not positive definite")
-  
+
 }
 

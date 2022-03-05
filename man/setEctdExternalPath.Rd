@@ -38,5 +38,6 @@ library root
 	getEctdExternalPath("SASPATH_WIN")		# Get the "SAS Execution on Windows" path
 
 }
+
 }
 \keyword{IO}

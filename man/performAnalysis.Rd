@@ -72,28 +72,29 @@ structure as specified in function \code{\link{checkMicroFormat}}
 }
 \examples{
 \dontrun{
-  
+
   # Emax example
   anaCode <- function(data){
     with( data, {
       uniDoses <- sort( unique(DOSE))
-      outDf <- data.frame( DOSE = uniDoses, 
-        MEAN = tapply(RESP, DOSE, mean) , 
+      outDf <- data.frame( DOSE = uniDoses,
+        MEAN = tapply(RESP, DOSE, mean) ,
         SE   = tapply(RESP, DOSE, sd )  )
       outDf$LOWER <- outDf$MEAN - 2 * outDf$SE
       outDf$UPPER <- outDf$MEAN + 2 * outDf$SE
       outDf$N     <- table(DOSE)[ as.character(uniDoses) ]
-      outDf 
-    }) 
+      outDf
+    })
   }
-  
+
   # example data
-  exData <- system.file( "Runit", "data", "analyseRep", "ReplicateData", "replicate0001.csv", 
+  exData <- system.file( "Runit", "data", "analyseRep", "ReplicateData", "replicate0001.csv",
   package = "MSToolkit")
   out <- performAnalysis(anaCode, data = exData, doses = c(0, 5, 25, 50, 100) )
   checkMicroFormat( out )       # Check the format of the return structure
 
 }
+
 }
 \seealso{
 \code{\link{checkMicroFormat}}

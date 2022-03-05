@@ -66,6 +66,8 @@
 #'   createExternalParameters( subjects = 100, names = "E0,ED50",
 #'     file = "testParam.csv", errStruc = "None", betNames = "B1,B2", workingPath = wPath )
 #' }
+#'
+#' @export
 "createExternalParameters" <- function(
 	subjects,           						#@ Subjects for which to create parameters
 	file,               						#@ File name for data to import

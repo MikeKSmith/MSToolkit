@@ -1,18 +1,18 @@
 #' Calculate Simulated Trial Means
-#' 
+#'
 #' Calculate mean simulated responses by replicate
-#' 
+#'
 #' The inputs are checked, and the alpha value is parsed using
 #' \link{checkSimAlpha} Subsets are applied to the data if "subset" is
 #' specified and differences from baseline are calculated using
 #' \link{calculateDiffsFromBase} if required
-#' 
+#'
 #' If respType is "Continuous": * Mean responses are calculated by Replicate
 #' (\code{replicateCol}), Subject (\code{idCol}), Dose (\code{doseCol}), Time
 #' (\code{timeCol}), and any by variables (\code{bVar}) * Means of these means
 #' are then calculated by Replicate (\code{replicateCol}) and any by variables
 #' (\code{bVar}) * The data is rounded (\code{digits}) and returned
-#' 
+#'
 #' When dealing with categorical responses, it is possible that the unique set
 #' of responses could be (say): 1, 2, 4, 5 In this case, it is unclear as to
 #' whether the value "3" should be included in a summary.  If "fillRespRange"
@@ -20,7 +20,7 @@
 #' zero) Frequencies are calculated by "Response level" (\code{respCol}) and
 #' any by variables Frequences are converted to proportions (within by variable
 #' level) if required (\code{catType})
-#' 
+#'
 #' @param data Simulated trial data frame
 #' @param respCol Response column names (given by \link{getEctdColName} by
 #' default)
@@ -42,25 +42,27 @@
 #' @param digits Number of digits to round summary data
 #' @return A data frame of trial "means"
 #' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#'
+#' @export
 "calculateSimTrialMeans" <- function(
-		data, 
-		respCol = getEctdColName("Response"), 
+		data,
+		respCol = getEctdColName("Response"),
 		bVar = doseCol,
-		subset = NULL, 
-		diffBase = FALSE, 
-		idCol = getEctdColName("Subject"), 
-		timeCol = getEctdColName("Time"), 
-		doseCol = getEctdColName("Dose"), 
-		replicateCol = getEctdColName("Replicate"), 
-		respType = c("Continuous", "Categorical"), 
-		catType = c("Proportion", "Count"), 
+		subset = NULL,
+		diffBase = FALSE,
+		idCol = getEctdColName("Subject"),
+		timeCol = getEctdColName("Time"),
+		doseCol = getEctdColName("Dose"),
+		replicateCol = getEctdColName("Replicate"),
+		respType = c("Continuous", "Categorical"),
+		catType = c("Proportion", "Count"),
 		fillRespRange = TRUE,
 		digits = 3)
 {
 	###############################################################################
 	# Mango Solutions, Chippenham SN14 0SQ 2006
 	# calculateSimTrialMeans.R 10NOV09
-	# 
+	#
 	# Author: Rich
 	###############################################################################
 	# DESCRIPTION: Create set of simulated trial means
@@ -69,12 +71,12 @@
 	# Check response and categorical types
 	respType <- match.arg(respType)
 	catType <- match.arg(catType)
-	
+
 	# Basic Input Checks
 	.checkLogical(diffBase, fillRespRange)											# Check single logicals
 	.checkCharacter(respCol, idCol, doseCol, replicateCol, respType, catType)		# Check single characters
 	.checkNumeric(digits)															# Check single numerics
-	
+
 	# Check inputs & variables
 	if (!is.data.frame(data)) ectdStop("Data frame must be provided as the first input")
 	neededCols <- c(replicateCol, idCol, doseCol, respCol)
@@ -84,7 +86,7 @@
 	# Differences from baseline
 	if (diffBase) data <- calculateDiffsFromBase(data, respCol = respCol, idCol = idCol, timeCol = timeCol, replicateCol = replicateCol)
 	if (!missing(subset) && length(subset)) try(data <- .applyDataSubset(data, subset))
-	
+
 	# Split based on response type
 	if (respType == "Continuous") {
 		# First pass - include trial, subject, dose, time and by variables
@@ -112,7 +114,7 @@
 		repData <- uniData [ rep(1:nrow(uniData), length(uniResp)), , drop = FALSE]
 		mergeData <- cbind(repData, .RESP = rep(uniResp, each = nrow(uniData)))
 		names(mergeData) [ names(mergeData) == ".RESP"] <- respCol
-		
+
 		fullData <- merge(mergeData, partialN, all = T)
 		if (any(naTest <- is.na(fullData$COUNT))) {
 			fullData$COUNT <- replace(fullData$COUNT, naTest, 0)

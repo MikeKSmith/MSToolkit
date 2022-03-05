@@ -142,6 +142,8 @@ getEctdVerbose <- function()
 #'   setEctdLogFile   (oldlf  )
 #'
 #' }
+#'
+#' @export
 setEctdVerbose <- function(verbose) {
   if (missing(verbose))
     ectdStop("Must provide verbose flag")
@@ -206,6 +208,8 @@ getEctdDataMethod <-
 #' 	setEctdDataMethod(nowMethod)
 #'
 #' }
+#'
+#' @export
 setEctdDataMethod <- function(method) {
   if (missing(method))
     ectdStop("Must provide a data storage method: 'CSV', 'RData' or 'Internal'")
@@ -262,6 +266,8 @@ getEctdExternalPath <- function(pathName) {
 #' 	getEctdExternalPath("SASPATH_WIN")		# Get the "SAS Execution on Windows" path
 #'
 #' }
+#'
+#' @export
 setEctdExternalPath <- function(pathName, Value) {
   if (missing(pathName) ||
       !is.character(pathName) ||
@@ -342,6 +348,8 @@ setEctdExternalPath <- function(pathName, Value) {
 #' 	getEctdPossibleColNames("Subject")
 #' 	matchEctdColNames ("Subject", c("A", "SUBJ", "B"))
 #' }
+#'
+#' @export
 getEctdColName <- function(colName) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -363,6 +371,8 @@ getEctdColName <- function(colName) {
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param Value (Required) Value to which to set the default column name
+#'
+#' @export
 setEctdColName <- function(colName, Value) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -390,6 +400,8 @@ setEctdColName <- function(colName, Value) {
 #'
 #' @param whichNames Column types for which to reset the default name (default
 #' all)
+#'
+#' @export
 resetEctdColNames <- function(whichNames = names(getNames)) {
   getNames <- get("colNames", envir = .ectdEnv)
   if (!is.character(whichNames))
@@ -408,6 +420,8 @@ resetEctdColNames <- function(whichNames = names(getNames)) {
 #' @param colName (Required) The "column type" of the variable name of interest
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
+#'
+#' @export
 getEctdPossibleColNames <- function(colName) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -431,6 +445,8 @@ getEctdPossibleColNames <- function(colName) {
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param Value (Required) Value to which to set the default column name
+#'
+#' @export
 setEctdPossibleColNames <- function(colName, Value) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -459,6 +475,8 @@ setEctdPossibleColNames <- function(colName, Value) {
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param dataNames (Required) Column names against which to match the possible
 #' set of column names
+#'
+#' @export
 matchEctdColNames <- function(colName, dataNames) {
   colList <- getEctdPossibleColNames(colName)
   if (!any(myTest <- colList %in% dataNames))

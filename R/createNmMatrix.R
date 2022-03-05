@@ -19,6 +19,7 @@
 #' 	createNmMatrix(1:6)
 #' 	createNmMatrix(1:10, list(LETTERS[1:4], letters[1:4]))
 #'
+#' @export
 "createNmMatrix" <- function(
   x, 						#@ Input vector
   dimnames = NULL,		#@ Optional dimension names

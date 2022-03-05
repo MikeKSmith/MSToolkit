@@ -41,9 +41,7 @@ Constructs "tvDefinition" object
 }
 \examples{
 
-
 createTvDefinition("A", 1, 1:3)
-
 
 }
 \author{

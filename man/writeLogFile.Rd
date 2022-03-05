@@ -40,7 +40,7 @@ status.
 }
 \examples{
 
- \dontrun{ 
+ \dontrun{
     jstatuses <- sample(c("PEND", "RUN", "DONE", "EXIT"), 10, replace = TRUE)
     writeLogFile(jstatuses, Sys.time())
     file.show( "jobstatus.log" )

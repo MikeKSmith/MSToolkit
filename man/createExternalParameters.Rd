@@ -108,6 +108,7 @@ was implemented as exp(fixed + between subject)
   createExternalParameters( subjects = 100, names = "E0,ED50",
     file = "testParam.csv", errStruc = "None", betNames = "B1,B2", workingPath = wPath )
 }
+
 }
 \seealso{
 \code{\link{createParameters}} and

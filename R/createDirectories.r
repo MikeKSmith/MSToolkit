@@ -29,6 +29,7 @@
 #'     createDirectories(dirNames = c("ReplicateData", "MicroEvaluation"))
 #'   }
 #'
+#' @export
 createDirectories <- function(
   dirNames = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"), 		#@ A vector containing the full names of the directories to be created.
   workingPath = getwd(), 													#@ Directory in which to create directories
@@ -42,7 +43,7 @@ createDirectories <- function(
   #
   # Author: Francisco Gochez
   ###############################################################################
-  # DESCRIPTION: Tries to create named subdirectories for storing replicate, micro 
+  # DESCRIPTION: Tries to create named subdirectories for storing replicate, micro
   # evaluation and macro evaluation data.  Returns a logical vector representing
   # the success or failure of directory creation
   # KEYWORDS: IO
@@ -69,10 +70,10 @@ createDirectories <- function(
 
 	  # Create physical directories
 	  if (method %in% c("CSV", "RData")) {
-		  
+
 		  # Create full directory paths
 		  fullPath <- file.path(workingPath, dirNames)
-		  
+
 		  # Create directories using the "dir.create" function
 		  result <- dir.create(fullPath, showWarnings = warn)
 
@@ -81,5 +82,5 @@ createDirectories <- function(
 		  return(result)
 	  }
 	  else return(TRUE)  # Don't need to create directories for "Internal" storage
-  }	
+  }
 }

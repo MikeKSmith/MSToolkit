@@ -41,17 +41,16 @@ already missing.
 }
 \examples{
 
-  
-myData <- data.frame( 
-  SUBJ   = rep(1:3, each = 3), 
-  TIME = rep(0:2, 3)  ) 
-createMCAR( myData, prop = 0.1, rule = "TIME > 0")  
+
+myData <- data.frame(
+  SUBJ   = rep(1:3, each = 3),
+  TIME = rep(0:2, 3)  )
+createMCAR( myData, prop = 0.1, rule = "TIME > 0")
 
 \dontrun{
  ## more examples in the unit tests
- file.show( system.file( "Runit", "runit.data.missing.R" , package = "MSToolkit") ) 
+ file.show( system.file( "Runit", "runit.data.missing.R" , package = "MSToolkit") )
 }
-
 
 }
 \seealso{

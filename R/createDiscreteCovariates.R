@@ -66,6 +66,7 @@
 #'
 #'   createDiscreteCovariates( 100 , probArray = pa )
 #'
+#' @export
 createDiscreteCovariates <- function(
   subjects,     #@ Subjects for which to create covariates
   names,        #@ Names for the continuous covariates

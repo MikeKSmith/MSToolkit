@@ -41,6 +41,7 @@
 #'     package = "MSToolkit"))
 #'   }
 #'
+#' @export
 parseCharInput <- function(input,
                            convertToNumeric = TRUE,
                            sort = FALSE,
@@ -89,14 +90,14 @@ parseCharInput <- function(input,
       out <- as.numeric(out)
     out
   }
-    
+
   valid && validNames( out )
-  
+
   if( !missing(expected) && length(out) != expected )
     ectdStop( msg )
   if( checkdup && any(duplicated(out)))
     ectdStop( "Duplicated values in " %.% deparse(substitute(input)))
-  
+
   ## convert to numeric and sort if required
   if(checkProb  ){
     #if(!is.numeric(out) || sum(out) != 1 )
@@ -104,7 +105,7 @@ parseCharInput <- function(input,
       ectdStop("Parsed values don't sum up to one")
   }
   if(sort) {
-    sort(out) 
+    sort(out)
   } else {
     out
   }

@@ -42,23 +42,22 @@ to perform the check. The size of the subset is then the minimum of the
 
   dFun <- function(data, prop) sample(0:1, nrow(data), TRUE, c(1-prop, prop))
    testData <- data.frame(
-     SUBJ=rep(1:10, each=5), 
-     TIME=rep(0:4, 10), 
+     SUBJ=rep(1:10, each=5),
+     TIME=rep(0:4, 10),
      VALUE=rnorm(50))
   checkDropOutFun( dFun, testData, prop = .2 )
-  
+
   \dontrun{
     # wrong function
     checkDropOutFun( max, testData )
-    
+
     # function that does not exist
     checkDropOutFun( "XXXX", testData )
-    
+
     # function that does not exist
     checkDropOutFun( XXXX, testData )
-    
-  }
 
+  }
 
 }
 \seealso{

@@ -54,6 +54,7 @@
 #' #  15    3    5       1
 #' }
 #'
+#' @export
 createDropout <- function(
   data,                             #@ Data Structure to which to add missing flag
   dropFunc,                         #@ Drop out function

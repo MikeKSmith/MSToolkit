@@ -104,6 +104,7 @@ to maintain consistency between imported covariates and imported parameters.
   print( dat )
 
 }
+
 }
 \seealso{
 \code{\link{createContinuousCovariates}},

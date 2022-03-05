@@ -347,14 +347,13 @@ working directory.  This data can then be analyzed using a call to the
 }
 \examples{
 
-
 \dontrun{
-generateData( replicateN = 500, subjects = 400, treatDoses = c(0, 5, 25, 50, 100), 
-  conCovNames = c("wt", "age"), conCovMean = c(83, 55) , conCovVCov = c(14,10)^2 , 
-  conCovDigits = 1, conCovCrit = "18 <= age <= 65", 
-  genParNames = "E0,ED50,EMAX", genParMean = c(2,50,10), genParVCov = diag( c(.5,30,10) ), 
-  genParBtwNames = "E0,ED50,EMAX", genParBtwMean = c(0,0,0), genParBtwVCov = diag(3), 
-  respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  respVCov = 5, 
+generateData( replicateN = 500, subjects = 400, treatDoses = c(0, 5, 25, 50, 100),
+  conCovNames = c("wt", "age"), conCovMean = c(83, 55) , conCovVCov = c(14,10)^2 ,
+  conCovDigits = 1, conCovCrit = "18 <= age <= 65",
+  genParNames = "E0,ED50,EMAX", genParMean = c(2,50,10), genParVCov = diag( c(.5,30,10) ),
+  genParBtwNames = "E0,ED50,EMAX", genParBtwMean = c(0,0,0), genParBtwVCov = diag(3),
+  respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  respVCov = 5,
   interimSubj = ".3,.7")
 }
 

@@ -1,8 +1,8 @@
 #' Parse a covariance matrix
-#' 
+#'
 #' Creates a symmetric positive definite matrix from a vector if possible, or
 #' checks if a given matrix is symmetric positive definite.
-#' 
+#'
 #' parseCovMatrix attempts to create a symmetric positive definite matrix of
 #' dimension nCov x nCov. If values is a matrix, parseCovMatrix will simply
 #' check that it is symmetric and positive definite up to a tolerance as
@@ -17,7 +17,7 @@
 #' the entries for the lower triangle taken from "values".  If none of these
 #' conditions hold or if the entries of "values" are not compatible with
 #' positive definite symmetric matrices, an error will be printed.
-#' 
+#'
 #' @param values (Required) Either a matrix or a mixed character-numeric vector
 #' @param nCov (Required) The number of rows and columns that should be
 #' available in the resulting matrix
@@ -28,12 +28,13 @@
 #' @seealso \code{\link{checkSymmetricPDMatrix}}
 #' @keywords datagen
 #' @examples
-#' 
+#'
 #'   parseCovMatrix(2, nCov = 3)
 #'   parseCovMatrix(c(1,2,3), nCov = 3)
 #'   parseCovMatrix(c(1,2,4), nCov = 2)
-#' 
-parseCovMatrix <- function( 
+#'
+#' @export
+parseCovMatrix <- function(
    values,        #@ values used
    nCov,          #@ number of covariates
    tol = 1e-06
@@ -47,8 +48,8 @@ parseCovMatrix <- function(
 	# DESCRIPTION: parses a covarariance matrix
   # KEYWORDS: check, component:support
 	###############################################################################
-   
-  
+
+
    ### 1st step build the matrix
    if( is.matrix(values)){
      mat <- values
@@ -56,27 +57,27 @@ parseCovMatrix <- function(
      values <- parseCharInput( values, sort = FALSE )
      if(nCov == 1){
        length(values) == 1 || ectdStop("Dimension problem")
-       mat <- matrix( values[1], nrow = 1, ncol = 1) 
+       mat <- matrix( values[1], nrow = 1, ncol = 1)
      } else {
        if(length(values) == 1) values <- rep(values, nCov)
-       nValues <- length(values) 
+       nValues <- length(values)
        if( nValues == nCov){
-         mat <- diag( values) 
+         mat <- diag( values)
        } else if( nValues == (nCov)*(nCov+1)/2 ){
          mat <- matrix( 0, ncol = nCov, nrow = nCov)
          mat[ upper.tri(mat, diag = TRUE) ] <- values
          mat <- t(mat)
          mat[ upper.tri(mat, diag = TRUE) ] <- values
        } else{
-         ectdStop("Dimension Problem") 
+         ectdStop("Dimension Problem")
        }
      }
-   } 
-   
-   # 2nd step, ensure the matrix is positive definite 
+   }
+
+   # 2nd step, ensure the matrix is positive definite
    checkSymmetricPDMatrix( mat, tol )
-   
-   mat    
-       
+
+   mat
+
 }
-               
+

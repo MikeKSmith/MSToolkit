@@ -39,6 +39,8 @@
 #' # [1] "IF X > 1 THEN Col1 = 1 ;IF X < 0 THEN Col2 = 2 ;IF Y > 0 AND Y < 10 THEN Col3 = 3 ;"
 #'
 #' }
+#'
+#' @export
 convertToSASCode <- function(
   code    #@ matrix of 3 columns describing the changes to make to the data
 ){

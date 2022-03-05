@@ -86,6 +86,7 @@
 #'       workingPath = wPath )
 #'  }
 #'
+#' @export
 createCovariates <- function(
   subjects,     #@ Subjects for which to create covariates
 

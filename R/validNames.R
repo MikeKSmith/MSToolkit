@@ -20,6 +20,7 @@
 #'     validNames(".334fsedqw")
 #'   }
 #'
+#' @export
 validNames <- function(...) {
   ##############################################################################
   # Mango Solutions, Chippenham SN14 0SQ 2006

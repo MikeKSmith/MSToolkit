@@ -61,7 +61,6 @@ created by aligning each column of the matrix with the times specified.
 }
 \examples{
 
-
 createTreatments(doses = c(0, 15, 30))
 #  TRT DOSE
 # 1   1    0
@@ -95,7 +94,7 @@ createTreatments(sequence = cbind(c(0, 15, 30),
                                   c(15, 30, 0),
                                   c(30, 0, 15)),
                                   times = 0:3)
-#   TRT TIME DOSE
+#    TRT TIME DOSE
 # 1    1    0    0
 # 2    1    1    0
 # 3    1    2   15
@@ -108,6 +107,7 @@ createTreatments(sequence = cbind(c(0, 15, 30),
 # 10   3    1   30
 # 11   3    2    0
 # 12   3    3   15
+
 }
 \seealso{
 \code{\link{allocateTreatments}}

@@ -42,6 +42,8 @@
 #' parseHashString(c("1.5, 2, 3.2","5, 4.2","10,11"))
 #' parseHashString(list("1.5, 2, 3.2","5, 4.2","10,11"))
 #'
+#'
+#' @export
 parseHashString <- function(input,
                             ...,
                             missingMsg) {
@@ -64,7 +66,7 @@ parseHashString <- function(input,
     input <- as.list(unlist(strsplit(input, "\\#+")))
   }
   out <-  lapply( input, parseCharInput, ... )
-      
-  out                             
+
+  out
 }
 

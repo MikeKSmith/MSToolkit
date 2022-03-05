@@ -1,20 +1,20 @@
 #' Calculate Observed Data Summary
-#' 
+#'
 #' Calculate a summary of an "observed" dataset (typically used to overlay
 #' observed data in a simulated plot or table)
-#' 
+#'
 #' The inputs are checked, and the alpha value is parsed using
 #' \link{checkSimAlpha} Subsets are applied to the data if "subset" is
 #' specified and differences from baseline are calculated using
 #' \link{calculateDiffsFromBase} if required
-#' 
+#'
 #' If respType is "Continuous": * Mean responses are calculated by Subject
 #' (\code{idCol}), Dose (\code{doseCol}), Time (\code{timeCol}), and any by
 #' variables ((\code{bVar}) * The following summaries are then created (based
 #' on any by variables (\code{bVar})) - Mean - Median - Minimum - Maximum -
 #' Number of non-missing values - Lower alpha\% percent interval - Upper
 #' alpha\% percent interval
-#' 
+#'
 #' When dealing with categorical responses, it is possible that the unique set
 #' of responses could be (say): 1, 2, 4, 5 In this case, it is unclear as to
 #' whether the value "3" should be included in a summary.  If "fillRespRange"
@@ -22,7 +22,7 @@
 #' zero) Frequencies are calculated by "Response level" (\code{respCol}) and
 #' any by variables Frequences are converted to proportions (within by variable
 #' level) if required (\code{catType})
-#' 
+#'
 #' @param data Observed data frame
 #' @param respCol Response column names (given by \link{getEctdColName} by
 #' default)
@@ -45,6 +45,8 @@
 #' @return A data frame of response summaries
 #' @author Mike K Smith \email{mstoolkit@@googlemail.com}
 #' @keywords Observed
+#'
+#' @export
 "calculateObsSummary" <- function(
 		data,
 		respCol = getEctdColName("Response"),
@@ -52,9 +54,9 @@
 		subset = NULL,
 		alpha = 95,
 		digits = 3,
-		diffBase = FALSE, 
-		doseCol = getEctdColName("Dose"), 
-		timeCol = getEctdColName("Time"), 
+		diffBase = FALSE,
+		doseCol = getEctdColName("Dose"),
+		timeCol = getEctdColName("Time"),
 		idCol = getEctdColName("Subject"),
 		respType = c("Continuous", "Categorical"),
 		catType = c("Count", "Proportion"),
@@ -64,7 +66,7 @@
 	###############################################################################
 	# Mango Solutions, Chippenham SN15 1BN 2009
 	# createObsSummary.R 19NOV09
-	# 
+	#
 	# Author: Rich
 	###############################################################################
 	# DESCRIPTION: Create summary of observed variables from a NONMEM object
@@ -74,33 +76,33 @@
 	.checkLogical(diffBase, fillRespRange)							# Check single logicals
 	.checkCharacter(respCol, idCol, respType, catType)				# Check single characters
 	.checkNumeric(digits)											# Check single numerics
-	
+
 	# Parse the "alpha" input
 	alpha <- checkSimAlpha(alpha)
 	alpha <- qnorm((1 + alpha)/2)
-	
+
 	# Get the data
-	data <- switch(class(data), 
+	data <- switch(class(data),
 			"NMRun" = data,   ## TODO: Call correct data method here
 			"data.frame" = data,
 			ectdStop("Observed data must be either a data frame or NONMEM run object"))
-	
+
 	# Check inputs
 	if (!(timeCol %in% names(data))) timeCol <- NULL
 	if (!(doseCol %in% names(data))) doseCol <- NULL
 	if (!length(bVar)) ectdStop("Need at least 1 by variable to calculate summaries")
 	needCols <- unique(c(respCol, bVar, idCol))
 	checkColNames(names(data), needCols)
-	
+
 	# Subset if required
 	if (!is.null(subset)) data <- .applyDataSubset(data, subset)
 	if (diffBase & length(timeCol)) data <- calculateDiffsFromBase(data, respCol = respCol, idCol = idCol, timeCol = timeCol, replicateCol = NULL)
-	
+
 	# Calculate "means" based on response variable type
 	if (respType == "Continuous") {
 		# Calculate means by subject, time and by variables
 		meanData <- .dataAggregate(data[respCol], data[unique(c(idCol, doseCol, timeCol, bVar))], mean, na.rm = TRUE)
-		
+
 		#
 		# Set up functions to use in the aggregate calls
 		#
@@ -110,7 +112,7 @@
 		medianFun <- function(x, dG) round(median(x, na.rm = T), dG)
 		minFun <- function(x, dG) round(min(x, na.rm = T), dG)
 		maxFun <- function(x, dG) round(max(x, na.rm = T), dG)
-		
+
 		#
 		# Create summaries
 		#
@@ -121,7 +123,7 @@
 		myN <- .dataAggregate(list(N = meanData[[respCol]]), meanData[bVar], function(x) sum(!is.na(x)))
 		myMin <- .dataAggregate(list(Min = meanData[[respCol]]), meanData[bVar], minFun, dG = digits)
 		myMax <- .dataAggregate(list(Max = meanData[[respCol]]), meanData[bVar], maxFun, dG = digits)
-		
+
 		# Merge summaries
 		outData <- merge(myMeds, merge(myMeans, merge(myLower, merge(myUpper, merge(myMin, merge(myMax, myN))))))
 	}
@@ -142,7 +144,7 @@
 			outData <- merge(outData, totalData)
 			outData$PROPORTION <- round(100 * outData$COUNT / outData$TOTAL, digits = digits)
 			outData <- outData[setdiff(names(outData), c("COUNT", "TOTAL"))]
-		}		
+		}
 	}
 	return(outData)
 }

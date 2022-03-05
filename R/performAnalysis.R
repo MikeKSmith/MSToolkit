@@ -1,13 +1,13 @@
 #' Runs the analysis code against one dataset
-#' 
+#'
 #' That function is iteratively called from \code{\link{analyzeRep}} to analyze
 #' a replicate dataset at each step defined by the interims.
-#' 
+#'
 #' The function tries to perform the analysis contained in the
 #' \code{analysisCode} against the \code{data}.  The analysis code specified is
 #' either an external file containing code (SAS and R), or an R function (R
 #' only).
-#' 
+#'
 #' If software is set to "SAS" the analysis code is assumed to be a reference
 #' to an external SAS script.  The SAS code must accept a single dataset called
 #' work.infile, and create an output dataset called work.outfile.  The
@@ -16,7 +16,7 @@
 #' software is "R", the analysis code input must be either an R function or an
 #' R script.  The R analysis code must also return a valid "Micro Evaluatoin"
 #' structure as specified in function \code{\link{checkMicroFormat}}
-#' 
+#'
 #' @param analysisCode (Required) Analysis code: An R function, a reference to
 #' an external R script, or a reference to an external SAS script
 #' @param doses (Required) Vector of doses for which estimates are expected
@@ -41,28 +41,30 @@
 #' @keywords models
 #' @examples
 #' \dontrun{
-#'   
+#'
 #'   # Emax example
 #'   anaCode <- function(data){
 #'     with( data, {
 #'       uniDoses <- sort( unique(DOSE))
-#'       outDf <- data.frame( DOSE = uniDoses, 
-#'         MEAN = tapply(RESP, DOSE, mean) , 
+#'       outDf <- data.frame( DOSE = uniDoses,
+#'         MEAN = tapply(RESP, DOSE, mean) ,
 #'         SE   = tapply(RESP, DOSE, sd )  )
 #'       outDf$LOWER <- outDf$MEAN - 2 * outDf$SE
 #'       outDf$UPPER <- outDf$MEAN + 2 * outDf$SE
 #'       outDf$N     <- table(DOSE)[ as.character(uniDoses) ]
-#'       outDf 
-#'     }) 
+#'       outDf
+#'     })
 #'   }
-#'   
+#'
 #'   # example data
-#'   exData <- system.file( "Runit", "data", "analyseRep", "ReplicateData", "replicate0001.csv", 
+#'   exData <- system.file( "Runit", "data", "analyseRep", "ReplicateData", "replicate0001.csv",
 #'   package = "MSToolkit")
 #'   out <- performAnalysis(anaCode, data = exData, doses = c(0, 5, 25, 50, 100) )
 #'   checkMicroFormat( out )       # Check the format of the return structure
-#' 
+#'
 #' }
+#'
+#' @export
 "performAnalysis" <- function(
   analysisCode,  							#@ File containing the actual analysis code to run on the data
   doses,         							#@ Doses for which estimates are expected
@@ -81,17 +83,17 @@
   # Mango Solutions, Chippenham SN14 0SQ 2006
   # performAnalysis.R Wed Jun 27 11:08:20 BST 2007 @464 /Internet Time/
   #
-  # Author: Romain    
+  # Author: Romain
   ###############################################################################
   # DESCRIPTION: analyze a single replicate of data
   # KEYWORDS: component:analysis
   ###############################################################################
 
-  ## check that the software 
+  ## check that the software
   software <- try( match.arg(software), silent = TRUE )
   if (class(software) == "try-error") ectdStop("The software should be `R` or `SAS`")
 
-  switch( software, 
+  switch( software,
     "SAS" = {
 
 		# Export the data to a file for SAS to use
@@ -99,7 +101,7 @@
 		outfile <- file.path(tempSasDir, "sasDataOutput.csv")
 		write.csv(data, file = infile)			# Export data so SAS can read it
 		if (!file.exists(infile)) ectdStop("Cannot write replicate to an external CSV file")
-				
+
 		# Set up parameters for the SAS call
 		sasChanges <- convertSASIncludeRows(includeRows, doseCol = doseCol, interimCol = interimCol) 	# SAS 'keep rows' string
 		sasParameters <- paste(infile, outfile, file.path(workingPath, analysisCode), sasChanges, seed, sep="#")
@@ -120,7 +122,7 @@
 			}
 		}
 		else sasData <- NULL
-		
+
 		return(sasData)
     },
     "R" = {
@@ -138,23 +140,23 @@
 		else {
 			if (length(analysisCode) == 1 && file.exists(file.path(workingPath, analysisCode))) { # Script
 				analysisOutput <- try(source(file.path(workingPath, analysisCode), local = TRUE)$value, silent = TRUE)
-				if (class(analysisOutput) == "try-error") ectdStop(paste("Could not perform analysis using script", file.path(workingPath, analysisCode)))			
+				if (class(analysisOutput) == "try-error") ectdStop(paste("Could not perform analysis using script", file.path(workingPath, analysisCode)))
 			}
 			else { 	# Character parse
 				analysisOutput <- try(eval(parse(analysisCode)), silent = TRUE)
 			}
 		}
 		out <- if( class(analysisOutput) == "try-error" ) {
-			ectdWarning("Error when executing analysis code: " %.nt% 
+			ectdWarning("Error when executing analysis code: " %.nt%
 				( analysisOutput %-~% "^[^:]*:") %.nt%    # extract the message from the `try`
 				"... creating an empty summary file" )
 
 			NULL
       	}
 		else {
-        	checkMicroFormat( analysisOutput , doseCol = doseCol ) 
+        	checkMicroFormat( analysisOutput , doseCol = doseCol )
     	}
-      
+
       	return( out )
     })
 
@@ -168,7 +170,7 @@
 	###############################################################################
 	# DESCRIPTION: Subsets data based on 2 column matrix
 	###############################################################################
-	
+
 	# Check the input structure
 	if (!is.matrix(includeRows) || ncol(includeRows) != 2) ectdStop("'includeRows' input should be a matrix with 2 columns")
 
@@ -178,7 +180,7 @@
 	# Perform the subset creation
 	outSub <- apply(includeRows, 1, innerPasteSubset, interimCol = interimCol, doseCol = doseCol)
 	outSub <- paste(outSub, collapse = " | ")
-	
+
 	# Try to apply the subset
 	myTest <- try(with(data, eval(parse(text = outSub))))
 	if (class(myTest) == "try-error" || !is.logical(myTest)) ectdStop("Could not execute subset statement on data")

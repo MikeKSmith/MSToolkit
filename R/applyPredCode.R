@@ -30,7 +30,7 @@
 #'  	"NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
 #' ))
 #'
-#'
+#' @export
 "applyPredCode" <- function(
 		df, 										#@ Dataset within which to apply $PRED statements
 		pred, 										#@ Parsed $PRED statements

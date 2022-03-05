@@ -30,7 +30,7 @@
 #'   doseCol = "DOSE",
 #'   mustHaveDose = TRUE)
 #'
-#'
+#' @export
 "checkMicroFormat" <- function (
   data,
   doseCol = getEctdColName("Dose"),

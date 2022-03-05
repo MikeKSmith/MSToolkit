@@ -88,7 +88,6 @@ correct number or proportion of subjects is allocated to each treatment. If
                      subjects = 6,
                      prop = c(0.2, 0.8),
                      ordered = TRUE)
-
 }
 \author{
 Rich Pugh

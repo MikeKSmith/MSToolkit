@@ -41,6 +41,7 @@
 #'   out2 <- createResponseVariable(data = myData, equation = "X+Y+Z")
 #'   stopifnot(identical(out1,out2))
 #'
+#' @export
 "createResponseVariable" <- function(
 	data,           #@ data frame to whoch to add the response variable
 	equation,       #@ function for creting the response variable or text character

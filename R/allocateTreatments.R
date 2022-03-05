@@ -69,7 +69,7 @@
 #'                      subjects = 6,
 #'                      prop = c(0.2, 0.8),
 #'                      ordered = TRUE)
-#'
+#' @export
 "allocateTreatments" <- function(
  	trts,
  	subjects,

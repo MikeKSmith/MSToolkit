@@ -68,15 +68,12 @@ Creates a set of time-varying covariates from a multivariate normal
 distribution and (optionally) a set of constraints.
 }
 \examples{
-
-
-  # same   
-  dat <- createTimeVaryingCovariates(10, "X, Y, Z", 
+ # same
+ dat <- createTimeVaryingCovariates(10, "X, Y, Z",
 	mean <- list(X = 1:4, Y = rep(3, 4), Z = "2.5, 3, 3.2, 3.6"),
 	covariance = list(1, 2:5, cbind(c(1,.5,.3,0), c(.5,1,0,0), c(.3,0,1,0), c(0,0,0,1))),
 	range = list("10>=X>0", NULL, c("Z>0", "Z<=10")),
 	idCol = "SUBJ", timeCol = "TIME", treatPeriod = c(0.25, 0.5, 1, 12))
-
 
 }
 \seealso{

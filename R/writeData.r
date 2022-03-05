@@ -41,6 +41,7 @@
 #'     writeData(dat = x, dataNumber = 5, dataType = "Macro")
 #'   }
 #'
+#' @export
 "writeData" <- function(dat,
                         dataNumber,
                         dataType = c("ReplicateData", "MacroEvaluation", "MicroEvaluation"),

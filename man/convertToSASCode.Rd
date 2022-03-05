@@ -49,6 +49,7 @@ convertToSASCode(sasMat)   # Convert matrix of "data change" code
 # [1] "IF X > 1 THEN Col1 = 1 ;IF X < 0 THEN Col2 = 2 ;IF Y > 0 AND Y < 10 THEN Col3 = 3 ;"
 
 }
+
 }
 \author{
 Mike K Smith \email{mstoolkit@googlemail.com}

@@ -103,5 +103,6 @@ The set of possible "column types" are:
 	getEctdPossibleColNames("Subject")
 	matchEctdColNames ("Subject", c("A", "SUBJ", "B"))
 }
+
 }
 \keyword{IO}

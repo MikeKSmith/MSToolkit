@@ -11,7 +11,7 @@ createResponse(
   invLink,
   distribution = "normal",
   covariance,
-  errStruc = c("Additive", "Proportional", "Log-Normal"),
+  errStruc = "Additive",
   range,
   digits = 3,
   seed = .deriveFromMasterSeed(),
@@ -72,11 +72,13 @@ behaved differently (it is assumed parameters passed were on the log scale)
   # added to comply with SF issue 7
   # Tue Jul 24 10:21:14 BST 2007 @431 /Internet Time/
   # function example
-  out1 <- createResponse(data = myData, equation = function(data) with(data, X+Y+Z),
+  out1 <- createResponse(data = myData,
+                         equation = function(data) with(data, X+Y+Z),
                          covariance = 1, range = "RESP < 3", seed = 96)
 
   # same example using a character representation
-  out2 <- createResponse(data = myData, equation = "X+Y+Z",
+  out2 <- createResponse(data = myData,
+                         equation = "X+Y+Z",
                          covariance = 1, range = "RESP < 3", seed = 96)
   stopifnot(identical(out1, out2))
 

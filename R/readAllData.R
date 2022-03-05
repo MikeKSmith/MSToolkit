@@ -36,6 +36,7 @@
 #' 	 readAllData(dataType = "Micro")
 #'  }
 #'
+#' @export
 "readAllData" <- function(
   dataType = c("ReplicateData", "MicroEvaluation", "MacroEvaluation"),    #@ Type of data, should be "Replicate", "Macro", or "Micro"
   workingPath = getwd(),      #   The working directory

@@ -70,6 +70,8 @@
 #'   print( dat )
 #'
 #' }
+#'
+#' @export
 createExternalCovariates <- function(
   subjects,       #@ Subjects for which to create covariates
   names,          #@ Names for the continuous covariates

@@ -106,6 +106,7 @@
 #'                               names = c("X", "Y", "Z"),
 #'                               digits = "2,3,2"  )
 #'
+#' @export
 createContinuousCovariates <- function(subjects,
                                        names,
                                        mean,

@@ -110,6 +110,7 @@
 #' #4    4  0   50  100       0
 #' #5    5  0   50  100       0
 #'
+#' @export
 "createNormalParameters" <- function(
 	subjects,
 	names,

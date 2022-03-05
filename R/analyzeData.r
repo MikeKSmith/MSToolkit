@@ -177,6 +177,7 @@
 #'
 #' }
 #'
+#' @export
 "analyzeData" <- function(
   replicates = "*",                  #@ Replicates to perform analysis on
   analysisCode,                      #@ Function taking a data
