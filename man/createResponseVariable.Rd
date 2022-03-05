@@ -36,18 +36,18 @@ When the user is confident that the \code{equation} is correct, the
 \examples{
 
   # define a data set
-  myData <- data.frame( X = c(1,2,1), Y = c(1,1,1), Z = c(1,1,1) )
-  
-  \% added to comply with SF issue 7
-  \% Tue Jul 24 10:20:20 BST 2007 @430 /Internet Time/
+  myData <- data.frame(X = c(1,2,1), Y = c(1,1,1), Z = c(1,1,1))
+
+  # added to comply with SF issue 7
+  # Tue Jul 24 10:20:20 BST 2007 @430 /Internet Time/
   # function version
   out1 <- createResponseVariable(data = myData, equation = function(data){
-    with( data, X + Y + Z)
+    with(data, X + Y + Z)
   })
-  
+
   # same using the character version
   out2 <- createResponseVariable(data = myData, equation = "X+Y+Z")
-  stopifnot( identical(out1,out2))
+  stopifnot(identical(out1,out2))
 
 }
 \seealso{
