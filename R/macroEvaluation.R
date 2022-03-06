@@ -23,14 +23,13 @@
 #' @examples
 #'
 #'   # example of micro data with interim
-#'   microData <- read.csv(
-#'     system.file( "Runit", "data", "macroEvaluation", "micro0001.csv" , package = "MSToolkit") )
+#'
 #'   mCode <- function(data) {
 #'     diffMeans <- data$MEAN[ data$DOSE == 100 & data$INTERIM == 0] -
 #'     data$MEAN[ data$DOSE == 0 & data$INTERIM == 0  ]
 #'     data.frame( SUCCESS = diffMeans > 10, NFINAL = sum(data$N) )
 #'   }
-#'   out <- macroEvaluation( microData, mCode)
+#'   out <- macroEvaluation( MSToolkit:::microData, mCode)
 #'   stopifnot( nrow(out) == 1 )
 #'
 #' @export
