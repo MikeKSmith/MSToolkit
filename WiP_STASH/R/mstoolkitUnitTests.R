@@ -34,7 +34,7 @@
 #'
 #'   }
 #'
-#' @export
+#'
 "mstoolkitUnitTests" <- function(htmlreport = FALSE, showdetails =  TRUE){
 
   oldverbose <- getEctdVerbose()
