@@ -233,10 +233,10 @@
 	## Split jobs and call grid
 	if (grid) {
 
-		nclusters <- parallel:::detectCores() - 1
+		nclusters <- parallel::detectCores() - 1
 		if (is.numeric(getOption("max.clusters"))) nclusters <- min(nclusters, getOption("max.clusters"))
-		cl <- parallel:::makeCluster(nclusters)
-		stopCluster <- parallel:::stopCluster
+		cl <- parallel::makeCluster(nclusters)
+		stopCluster <- parallel::stopCluster
 
 		repSplit <- .splitGridVector(replicates, ceiling(length(replicates) / nclusters ))
 
