@@ -27,7 +27,9 @@ Suggests:
     rmarkdown
 Imports: 
     parallel,
-    MASS
+    MASS,
+    methods,
+    RNMImport
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 License: GPL-3
