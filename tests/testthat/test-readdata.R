@@ -17,7 +17,7 @@ test_that("test.readData.CSV", {
                                   workingPath = MSToolkit:::testdata_datastorage_path)))
   expect_error(readData(dataType = "microeval", dataNumber = 1))
 
-  x <- MSToolkit::ReplicateSample
+  x <- MSToolkit:::ReplicateSample
   x1 <- x[20:80, ]
   rownames(x1) <- 1:61
   y <- readData(dataType = "Replicate", dataNumber = 10,
