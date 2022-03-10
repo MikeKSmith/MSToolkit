@@ -1,6 +1,3 @@
-if( !exists("unitTestPath")) unitTestPath <- system.file(package = "MSToolkit", "tests")
-macro.datapath <- file.path(unitTestPath , "testthat", "data", "macroEvaluation")
-
 test_that("test.analysis.macro", {
 
   expect_error(macroEvaluation(doseCol = "DOSE, DOSES"),
@@ -12,7 +9,7 @@ test_that("test.analysis.macro", {
   expect_error(macroEvaluation(interimCol = "=08fewik3"),
                info = "interim not valid")
 
-  microData <- read.csv(file.path(macro.datapath, "micro0001.csv" ), header = TRUE )
+  microData <- MSToolkit:::microData
   expect_error(macroEvaluation(doseCol = "D", data = microData),
                info = "dose not in the data")
   expect_error(macroEvaluation(interimCol = "I", data = microData),
