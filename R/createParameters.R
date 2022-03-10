@@ -2,6 +2,9 @@
 #'
 #' Creates simulated fixed and between subject parameters for subjects in each replicate
 #'
+#' @param genNames Names of fixed effects to generate
+#' @param genFixedMean Means for generating fixed parameters
+#' @param genFixedCov Covariance Matrix for generating fixed parameter. 0 by default.
 #'
 #' @export
 createParameters <- function(
