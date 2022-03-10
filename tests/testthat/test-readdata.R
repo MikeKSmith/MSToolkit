@@ -1,5 +1,3 @@
-if( !exists("unitTestPath")) unitTestPath <- system.file(package = "MSToolkit", "tests")
-testDir <- file.path(unitTestPath, "testthat", "testdata.datastorage")
 
 # Author: Francisco
 # Date: Jul 3 2007
@@ -7,19 +5,25 @@ testDir <- file.path(unitTestPath, "testthat", "testdata.datastorage")
 test_that("test.readData.CSV", {
 
   setEctdDataMethod("CSV")
-  x <- read.csv(paste(testDir,"/microSummary.csv", sep=""))
-  y <- readData(dataType = "Micro", dataNumber = 1, workingPath = testDir)
+  x <- MSToolkit:::microSummary
+  y <- readData(dataType = "Micro", dataNumber = 1,
+                workingPath = MSToolkit:::testdata_datastorage_path)
 
   expect_true(identical(x[1:10,-c(1,2,13)], y[ ,-11]))
-  expect_error(readData(dataType = "Micro", dataNumber = 2, workingPath = testDir))
-  expect_true(!identical(x[2:11,],readData(dataType = "Micro", dataNumber = 1, workingPath = testDir)))
+  expect_error(readData(dataType = "Micro", dataNumber = 2,
+                        workingPath = MSToolkit:::testdata_datastorage_path))
+  expect_true(!identical(x[2:11,],
+                         readData(dataType = "Micro", dataNumber = 1,
+                                  workingPath = MSToolkit:::testdata_datastorage_path)))
   expect_error(readData(dataType = "microeval", dataNumber = 1))
 
-  x <- read.csv(paste(testDir,"/ReplicateSample.csv", sep=""))
+  x <- MSToolkit::ReplicateSample
   x1 <- x[20:80, ]
   rownames(x1) <- 1:61
-  y <- readData(dataType = "Replicate", dataNumber = 10, workingPath = testDir)
-  expect_error(readData(dataType = "Replicate", dataNumber = 11, workingPath = testDir))
+  y <- readData(dataType = "Replicate", dataNumber = 10,
+                workingPath = MSToolkit:::testdata_datastorage_path)
+  expect_error(readData(dataType = "Replicate", dataNumber = 11,
+                        workingPath = MSToolkit:::testdata_datastorage_path))
 })
 
 
