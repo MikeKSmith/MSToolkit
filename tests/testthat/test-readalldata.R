@@ -1,6 +1,3 @@
-if( !exists("unitTestPath")) unitTestPath <- system.file(package = "MSToolkit", "tests")
-testDir <- file.path(unitTestPath, "testthat", "testdata.datastorage")
-
 # Author: Francisco
 # Date: Jul 3 2007
 
