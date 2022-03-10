@@ -28,7 +28,7 @@ test_that("test.performAnalysis", {
   myDf$RESP <- log(with(myDf, abs(exp(sqrt(DOSE) + 1 + rnorm(nrow(myDf))))))
 
   # Perform analysis
-  whichPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data", "Scripts")
+  whichPath <- MSToolkit:::scripts_path
   out1 <- performAnalysis("rAnalysisScript.R", data = myDf, workingPath = whichPath)
 
   # Tests
