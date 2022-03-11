@@ -14,6 +14,12 @@ ReplicateSample <- read.csv(here("tests/testthat/testdata.datastorage/ReplicateS
 # Create this dataset to provide test data for testing readData function (test.readData.CSV)
 microSummary <- read.csv(here("tests/testthat/testdata.datastorage/microSummary.csv"))
 
+# Create the internal dataset 'testCovariates' to test the generateData function.
+testCovariates <- read.csv(here("tests/testthat/systemTest/data/testCovariates.csv"))
+
+# Create the internal dataset 'testParam' to test the generateData function.
+testParam <- read.csv(here("tests/testthat/systemTest/data/testParam.csv"))
+
 # Create the testdata.datastorage folder path
 testdata_datastorage_path <- here("tests/testthat/testdata.datastorage")
 
@@ -26,6 +32,8 @@ systemTest_path <- here("tests/testthat/systemTest")
 usethis::use_data(microData,
                   ReplicateSample,
                   microSummary,
+                  testCovariates,
+                  testParam,
                   testdata_datastorage_path,
                   scripts_path,
                   systemTest_path,
