@@ -1,8 +1,8 @@
 setEctdDataMethod("CSV")
 
 systemTestPath <- MSToolkit:::systemTest_path
-covariatesDataFile <- file.path(systemTestPath, "data", "testCovariates.csv")
-parametersDataFile <- file.path(systemTestPath, "data", "testParam.csv")
+covariatesDataFile <- MSToolkit:::testCovariates
+parametersDataFile <- MSToolkit:::testParam
 resetEctdColNames()
 
 test_that("test.generateData.call1", {
