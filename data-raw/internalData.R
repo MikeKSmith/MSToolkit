@@ -20,9 +20,13 @@ testdata_datastorage_path <- here("tests/testthat/testdata.datastorage")
 # Create the 'Scripts' folder path
 scripts_path <- here("tests/testthat/systemTest/data/Scripts")
 
+# Create the 'systemTest' folder path
+systemTest_path <- here("tests/testthat/systemTest")
+
 usethis::use_data(microData,
                   ReplicateSample,
                   microSummary,
                   testdata_datastorage_path,
                   scripts_path,
+                  systemTest_path,
                   overwrite = TRUE, internal = TRUE)
