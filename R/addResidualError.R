@@ -79,24 +79,25 @@ addResidualError <- function(
   ## TODO
   ## Error handling if errStruc is not one of accepted types should be ectdStop
 
-  errFun <- if(is.function(errStruc)) errStruc
-  else {
-    getErrStruc <- try(match.arg(errStruc))
-    if (class(getErrStruc) == "try-error") {
-      errStruc <- casefold(substring(errStruc, 1, 1), upper = TRUE)
-      getErrStruc <- match.arg(errStruc,
-                               c("Additive",
-                                 "Proportional",
-                                 "Log-Normal",
-                                 "Combined"))
-    }
-    switch( getErrStruc,
-            "Additive"       = function(x,y) x + y,
-            "Log-Normal"     = function(x,y) x * exp(y),
-            "Proportional"   = function(x,y) x * (1 + y),
-            "Combined"      = function(x,y) x + y[1] + y[2]*x
-    )
-  }
+  errFun <- if(is.function(errStruc)) {
+    errStruc
+    } else {
+      getErrStruc <- try(match.arg(errStruc))
+      if (class(getErrStruc) == "try-error") {
+        errStruc <- casefold(substring(errStruc, 1, 1), upper = TRUE)
+        getErrStruc <- match.arg(errStruc,
+                                 c("Additive",
+                                   "Proportional",
+                                   "Log-Normal",
+                                   "Combined"))
+        }
+      switch( getErrStruc,
+              "Additive"       = function(x,y) x + y,
+              "Log-Normal"     = function(x,y) x * exp(y),
+              "Proportional"   = function(x,y) x * (1 + y),
+              "Combined"      = function(x,y) x + y[1] + y[2]*x
+      )
+      }
 
   error <- MASS::mvrnorm(n = length(response),
                          mu = rep(0,nrow(covariance)),
@@ -105,13 +106,15 @@ addResidualError <- function(
   if( length(formals(errFun)) < 2  ) ectdStop(
     "The error function should take at least two arguments")
 
-  if( nrow(covariance) > 1){
-    if(getErrStruc %in% c("Additive","Proportional", "Log-Normal")) ectdStop(
-"Additive, Proportional or Log-Normal errors must use univariate covariance")
-  }
-  if( nrow(covariance) != 2 & getErrStruc == "Combined") ectdStop(
-      "Combined error structure must use bivariate covariance structure")
 
+  if(exists("getErrStruc")) {
+    if( nrow(covariance) > 1){
+      if(getErrStruc %in% c("Additive","Proportional", "Log-Normal")) ectdStop(
+        "Additive, Proportional or Log-Normal errors must use univariate covariance")
+    }
+    if( nrow(covariance) != 2 & getErrStruc == "Combined") ectdStop(
+        "Combined error structure must use bivariate covariance structure")
+  }
   out <- errFun( response, error )
 
   if( !is.numeric(out)) ectdStop(
