@@ -94,7 +94,7 @@ test_that("test.generateData.call1", {
               info = "Check distribution of covariate 2")
   expect_true(t.test(conData1$ConCov3)$p.value > 0.05,
               info = "Check distribution of covariate 3")
-  expect_true(cor.test(conData1$ConCov2, conData1$ConCov3)$p.value > 0.05,
+  expect_true(cor.test(conData1$ConCov2, conData1$ConCov3)$p.value < 0.05,
               info = "Check for (lack of) correlation between covariates")
 
   # Check discrete covariates: disCovVals=list(0:1,1:2,1:3), disCovProb = ".5,.5#.5,.5#.3,.3,.4",
