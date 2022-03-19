@@ -1,6 +1,6 @@
 test_that("test.createNmParSamples", {
 
-  whichPath <- system.file(package = "MSToolkit", "tests", "testthat", "data", "NONMEM")
+  whichPath <- MSToolkit:::nonmem_path
   #expect_true(require(RNMImport))
   if (require(RNMImport)) {
     suppressWarnings({
