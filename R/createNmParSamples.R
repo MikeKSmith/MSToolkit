@@ -39,7 +39,7 @@
 )
 {
 	# Stop if library not there
-	if (!requireNamespace(RNMImport)) ectdStop("RNMImport library not found")
+	if (!requireNamespace("RNMImport")) ectdStop("RNMImport library not found")
 
 	# Set the seed
 	set.seed(seed)
