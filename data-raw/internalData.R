@@ -32,6 +32,9 @@ systemTest_path <- here("tests/testthat/systemTest")
 # Create the 'NONMEM' folder path
 nonmem_path <- system.file(package = "MSToolkit", "tests", "testthat", "data", "NONMEM")
 
+# Create the 'testthat' folder path
+testthat_path <- system.file(package = "MSToolkit", "tests", "testthat")
+
 usethis::use_data(microData,
                   ReplicateSample,
                   microSummary,
@@ -41,4 +44,5 @@ usethis::use_data(microData,
                   scripts_path,
                   systemTest_path,
                   nonmem_path,
+                  testthat_path,
                   overwrite = TRUE, internal = TRUE)
