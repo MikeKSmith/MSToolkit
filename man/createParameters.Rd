@@ -35,6 +35,13 @@ createParameters(
   flagName = getEctdColName("ParOmit")
 )
 }
+\arguments{
+\item{genNames}{Names of fixed effects to generate}
+
+\item{genFixedMean}{Means for generating fixed parameters}
+
+\item{genFixedCov}{Covariance Matrix for generating fixed parameter. 0 by default.}
+}
 \description{
 Creates simulated fixed and between subject parameters for subjects in each replicate
 }
