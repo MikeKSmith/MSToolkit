@@ -40,12 +40,12 @@
 
 	# Inner paste subset function
 	"innerPasteSASSubset" <- function(vec, interimCol, doseCol) {
-		paste("(", interimCol, "=", vec[1], "and", doseCol, "=", vec[2], ")")
+		paste0("(", interimCol, " = ", vec[1], " and ", doseCol, " = ", vec[2], ")")
 	}
 
 	# Perform parsing
 	outSub <- apply(includeRows, 1, innerPasteSASSubset, interimCol = interimCol, doseCol = doseCol)
 	outSub <- paste(outSub, collapse = " or ")
-	paste("IF", outSub, ";")
+	paste0("IF ", outSub, ";")
 
 }
