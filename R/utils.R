@@ -206,17 +206,18 @@
 	NULL
 }
 
-# .checkGridAvailable <- function(){
-#   suppressWarnings(require(parallel, quietly = TRUE))
-# }
-#
-# .splitGridVector <- function(vec, nReps = 100) {
-#   startVec <- rep(1:ceiling(length(vec)/nReps), each=nReps)[1:length(vec)]
-#   if (any(startVec > 1) & sum(startVec == max(startVec)) < .1 * nReps) {
-#     startVec[startVec == max(startVec)] <- max(startVec)-1
-#   }
-#   split(vec, startVec)
-# }
+.checkGridAvailable <- function(){
+  suppressWarnings(require(parallel, quietly = TRUE))
+  }
+
+
+.splitGridVector <- function(vec, nReps = 100) {
+  startVec <- rep(1:ceiling(length(vec)/nReps), each=nReps)[1:length(vec)]
+  if (any(startVec > 1) & sum(startVec == max(startVec)) < .1 * nReps) {
+    startVec[startVec == max(startVec)] <- max(startVec)-1
+  }
+  split(vec, startVec)
+}
 #
 #
 # .ectdSasCall <- function(params,
