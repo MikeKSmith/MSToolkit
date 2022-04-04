@@ -1,8 +1,8 @@
 setEctdDataMethod("CSV")
 
-if( !exists("unitTestPath")) unitTestPath <- system.file(package = "MSToolkit", "tests")
-analyseRep.datapath <- file.path( unitTestPath , "testthat", "data", "analyseRep" )
-cat("analyseRep.datapath:", analyseRep.datapath, "\n" )
+unitTestPath <- MSToolkit:::testthat_path
+analyseRep.datapath <- file.path(unitTestPath, "data", "analyseRep")
+cat("analyseRep.datapath:", analyseRep.datapath, "\n")
 
 test_that("test_analyzeRep_rep", {
   # test the argument of replicate
@@ -81,7 +81,7 @@ test_that("test_analyzeRep_rep", {
                           missingFlag = "MISSING,MISSING2" ),
                info = "wrong sort of missomit flag, too long")
 
-  checkException(analyzeRep(replicate = 1,
+  expect_error(analyzeRep(replicate = 1,
                             analysisCode = dummyAnalysisCode,
                             workingPath = analyseRep.datapath,
                             missingFlag = "@954fgMISSING" ),
@@ -125,7 +125,7 @@ test_that("test_analyzeRep_rep", {
   res <- analyzeRep(replicate = 1,
                     analysisCode = anaCode,
                     interimCode = interimCode,
-                    workingPath = analyseRep.datapath )
+                    workingPath = analyseRep.datapath)
   expect_true(all(c("INTERIM","INTERIMC","DOSE","MEAN","SE","LOWER","UPPER","N","DROPPED","STOPPED") %in% names(res)),
              info = "check that the correct names are in the result" )
 
