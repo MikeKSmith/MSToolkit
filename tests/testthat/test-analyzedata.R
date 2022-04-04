@@ -1,11 +1,15 @@
 setEctdDataMethod("CSV")
 resetEctdColNames()
 
+systemTestPath <- MSToolkit:::testthat_path
+interimPath <- file.path(systemTestPath, "systemTest", "data", "Interim")
+scriptsPath <- file.path(systemTestPath, "systemTest", "data", "Scripts")
+
 test_that("test.analyseData.BasicAnalysis", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow analysis of all, or a subset of, generated simulated data from a single function call
   setEctdDataMethod("CSV")
@@ -63,9 +67,9 @@ test_that("test.analyseData.BasicAnalysis", {
 
 test_that("test.analyseData.RScript", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow analysis based on an R function, external R script or
   # external SAS script
@@ -115,9 +119,9 @@ test_that("test.analyseData.RScript", {
 
 test_that("test.analyseData.SASScript", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Check for SAS existance
   isWin <- .Platform$OS.type == "windows"
@@ -163,9 +167,9 @@ test_that("test.analyseData.SASScript", {
 
 test_that("test.analyseData.Interims", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow automated interim analysis step and data update based on of microevluation outputs
   whichPath <- interimPath
@@ -223,9 +227,9 @@ test_that("test.analyseData.Interims", {
 
 test_that("test.analyseData.MacroEval", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow automated macro evaluation of microevaluation outputs
   whichPath <- interimPath
@@ -283,9 +287,9 @@ test_that("test.analyseData.MacroEval", {
 
 test_that("test.analyseData.gridCalling", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   if (MSToolkit:::.checkGridAvailable()) {
     whichPath <- interimPath
@@ -329,9 +333,9 @@ test_that("test.analyseData.gridCalling", {
 
 test_that("test.analyseData.MicroMacroFiles", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow compilation microevalation and macroevaluation, along with writing to external CSV files
   whichPath <- interimPath
@@ -389,9 +393,9 @@ test_that("test.analyseData.MicroMacroFiles", {
 
 test_that("test.analyseData.OmitRows", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow automated removal of rows where the missing,
   # parameter or response flags are set
@@ -439,9 +443,9 @@ test_that("test.analyseData.OmitRows", {
 
 test_that("test.analyseData.RandomSeed", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow control over random number seed for reproducibility
   whichPath <- interimPath
@@ -478,9 +482,9 @@ test_that("test.analyseData.RandomSeed", {
 
 test_that("test.analyseData.ColumnNames", {
 
-  systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
-  interimPath <- file.path(systemTestPath, "Interim")
-  scriptsPath <- file.path(systemTestPath, "Scripts")
+  # systemTestPath <- system.file(package = "MSToolkit", "tests", "testthat", "systemTest", "data")
+  # interimPath <- file.path(systemTestPath, "Interim")
+  # scriptsPath <- file.path(systemTestPath, "Scripts")
 
   # Allow identification of key columns within the data, such as
   # the "Dose", "Missing" and "Interim" columns
