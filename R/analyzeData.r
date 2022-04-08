@@ -233,7 +233,17 @@
 	## Split jobs and call grid
 	if (grid) {
 
-		nclusters <- parallel::detectCores() - 1
+	  chk_cores <- Sys.getenv("_R_CHECK_LIMIT_CORES_","")
+	  # because CRAN limits the number of cores available to packages to 2
+	  if(nzchar(chk_cores) && chk_cores == "TRUE") {
+	    # use 2 cores in CRAN
+	    nclusters <- 2L
+	  } else {
+	    # use all cores in test
+	    nclusters <- parallel::detectCores() -1
+	  }
+
+		#nclusters <- parallel::detectCores() - 1
 		if (is.numeric(getOption("max.clusters"))) nclusters <- min(nclusters, getOption("max.clusters"))
 		cl <- parallel::makeCluster(nclusters)
 		stopCluster <- parallel::stopCluster
