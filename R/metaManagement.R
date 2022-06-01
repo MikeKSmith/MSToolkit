@@ -87,6 +87,32 @@ assign(
   envir = .ectdEnv
 )
 
+############################################################
+
+# This sets the paths of external system
+## Read the paths of external system
+external_path <- ini::read.ini(here::here("inst/ECTD.ini"))
+
+## Convert the original format to dataframe
+external_path <- tibble::rownames_to_column(data.frame(unlist(external_path)))
+
+## Correct the name of paths and the format of the paths
+n <- nrow(external_path)
+for (i in 1:n){
+  if(i <= n) {
+    external_path[i,1] <- gsub("\\..*","",external_path[i,1])
+    se_remove <- gsub(",$","",external_path[i,2])
+    external_path[i,2] <- gsub("([[:print:]])\\1+","\\1",se_remove)
+  }
+}
+
+ectdIni <- tidyr::pivot_wider(external_path,
+                              names_from = names(external_path[1]),
+                              values_from = names(external_path[2]))
+
+## Assign the external paths
+assign("externalPaths", ectdIni, envir = .ectdEnv)
+############################################################
 #######################################################################################################
 
 ## The rest of this script sets the access functions for the meta layer
@@ -218,6 +244,7 @@ setEctdDataMethod <- function(method) {
   invisible(method)
 }
 
+#' @export
 # Get & Set external execution path
 getEctdExternalPath <- function(pathName) {
   getPaths <- get("externalPaths", envir = .ectdEnv)
@@ -228,10 +255,10 @@ getEctdExternalPath <- function(pathName) {
     if (!is.character(pathName) ||
         length(pathName) != 1)
       ectdStop("Single character value should be provided as the 'pathName' input")
-    if (pathName %in% names(getPaths))
-      return(getPaths[pathName])
-    else
-      ectdStop(paste("Could not find external path '", pathName, "'", sep = ""))
+    if (any(pathName %in% names(getPaths))){
+      return(noquote(strsplit(getPaths[pathName][[1]], "\\s*=\\s*")[[1]]))}
+    else{
+      ectdStop(paste("Could not find external path '", pathName, "'", sep = ""))}
   }
 }
 
@@ -279,7 +306,15 @@ setEctdExternalPath <- function(pathName, Value) {
     ectdStop("Single character value should be provided as the 'Value' input")
   getPaths <- get("externalPaths", envir = .ectdEnv)
   getPaths <- getPaths [setdiff(names(getPaths), pathName)]
+  remaining_name <- names(getPaths[setdiff(names(getPaths), pathName)]) # Extract the remaining name of the paths
   getPaths <- c(getPaths, Value)
+  # Correct the format of the remaining path(s)
+  n = length(remaining_name)
+  for(i in 1:n){
+    if(i <=n){
+      getPaths[remaining_name][[i]] <- noquote(strsplit(getPaths[remaining_name][[i]], "\\s*=\\s*")[[1]])
+    }
+  }
   names(getPaths)[length(getPaths)] <- pathName
   assign("externalPaths", getPaths, envir = .ectdEnv)
   invisible(getPaths)
@@ -484,4 +519,3 @@ matchEctdColNames <- function(colName, dataNames) {
   else
     colList[myTest][1]
 }
-
