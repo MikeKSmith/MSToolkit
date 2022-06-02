@@ -221,7 +221,7 @@
 	macroCode <- .checkFun(macroCode, "data")
 	replicates <- .checkReplicates( replicates, workingPath = workingPath, method = method)
 
-	pb <- txtProgressBar(min = 0, max = max(replicates,1), style = 3)
+	pb <- utils::txtProgressBar(min = 0, max = max(replicates,1), style = 3)
 
 	if (grid && !.checkGridAvailable()) grid <- FALSE
 	if (length(replicates) == 1) grid <- waitAndCombine <- FALSE
@@ -271,7 +271,7 @@
 
 		parallel::clusterApply(cl = cl, repSplit, function(l,a){
 			for (i in l) {
-			  setTxtProgressBar(pb, i)
+			  utils::setTxtProgressBar(pb, i)
 
 				microData <- analyzeRep(replicate = i, analysisCode = a$analysisCode,
 						interimCode = a$interimCode, software = a$software, removeMissing = a$removeMissing,
@@ -302,7 +302,7 @@
 		# Loop through and analyze replicates
 
 		for (i in replicates) {
-		  setTxtProgressBar(pb, i)
+		  utils::setTxtProgressBar(pb, i)
 			## TODO: Update analyzeRep and performAnalysis with data storage method ..
 			microData <- analyzeRep(replicate = i, analysisCode = analysisCode,
 				interimCode = interimCode, software = software, removeMissing = removeMissing,
