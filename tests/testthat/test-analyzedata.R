@@ -160,7 +160,9 @@ test_that("test.analyseData.SASScript", {
     if (any(file.exists(file.path(whichPath, targetFiles)))) {
       for (i in targetFiles) try(unlink(file.path(whichPath, i), recursive = TRUE), silent = TRUE)
     }
-  } else expect_true(TRUE, " (CAN NOT TEST > 'SAS' NOT FOUND)")
+  } else {
+      expect_false(FALSE)
+      message("Error: (CAN NOT TEST > 'SAS' NOT FOUND)")}
 })
 
 
