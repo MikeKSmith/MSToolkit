@@ -269,7 +269,7 @@
                         macroCode = macroCode,
                         method = method)
 
-        clusterApply(cl = cl, repSplit, function(l,a){
+		parallel::clusterApply(cl = cl, repSplit, function(l,a){
 			for (i in l) {
 			  setTxtProgressBar(pb, i)
 
