@@ -79,7 +79,7 @@
 
 	# Parse the "alpha" input
 	alpha <- checkSimAlpha(alpha)
-	alpha <- qnorm((1 + alpha)/2)
+	alpha <- stats::qnorm((1 + alpha)/2)
 
 	# Get the data
 	data <- switch(class(data),
