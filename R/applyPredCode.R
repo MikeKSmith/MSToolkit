@@ -68,7 +68,7 @@
 			outDf <- tryCommand
 		}
 		if (verbose) {
-			cat("\n"); print(head(outDf)); cat("\n")
+			cat("\n"); print(utils::head(outDf)); cat("\n")
 		}
 	}
 
