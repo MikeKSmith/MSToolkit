@@ -34,7 +34,8 @@ Imports:
     tibble,
     tidyr,
     here,
-    utils
+    utils,
+    stats
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 License: GPL-3
