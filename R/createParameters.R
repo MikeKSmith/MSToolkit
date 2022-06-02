@@ -2,9 +2,38 @@
 #'
 #' Creates simulated fixed and between subject parameters for subjects in each replicate
 #'
+#' @param subjects Subjects for which to create parameters
 #' @param genNames Names of fixed effects to generate
 #' @param genFixedMean Means for generating fixed parameters
-#' @param genFixedCov Covariance Matrix for generating fixed parameter. 0 by default.
+#' @param genFixedCov Covariance Matrix for generating fixed parameter. \emph{0} by default.
+#' @param genRange Range of Acceptable values for derived parameters
+#' @param genBetweenNames Between subjects effects to generate
+#' @param genBetweenMean Means for generated between subject effects
+#' @param genBetweenCov Between subject effects covariance.
+#' @param genErrStruc   The function to map effects: \emph{Additive}, \emph{Proportional}, \emph{Log-Normal} or \emph{None}. The default is \emph{"None"}.
+#' @param genMaxDraws The maximum number of draws. The default value is \emph{10}.
+#' @param genParRangeTolerance The proportion of subjects with "in range" parameters with. The default value is \emph{0.5}.
+#'
+#' @param extFile The external file name for data to import.
+#' @param extNames Names of parameters to import (refers to variables in the input data)
+#' @param extBetween Between subject effects variables in the data
+#' @param extBetweenNums The integer mapping between random and fixed effects.
+#' @param extSubset The subset to be applied to data before sampling.
+#' @param extRange The range of Acceptable values for derived parameters.
+#' @param extErrStruc Function to map between subject effects: \emph{Additive}, \emph{Proportional}, \emph{Log-Normal} or \emph{None}.
+#' The default is \emph{"None"}.
+#' @param extRefCol The column of reference data.
+#' @param extRefColName The column name in data for referenced sampling.
+#' @param extRefColSuffix Suffix to add to reference variable in the data.
+#' @param extIndEffects Individual effects flag
+#' @param extDataId The external subject variable name. By default,
+#' this is taken to be the same as the "idCol" input.
+#' @param workingPath Working path from which to import covariate file. By default, the working path will be used
+#'
+#' @param suffix  Suffix for retained between subject effects. The default is \emph{".Between"}.
+#' @param idCol Subject variable name. The default is \emph{getEctdColName("Subject")}.
+#' @param seed Random seed. The default is \emph{.deriveFromMasterSeed()}.
+#' @param flagName Name for omit flag. The default is \emph{getEctdColName("ParOmit")}.
 #'
 #' @export
 createParameters <- function(
