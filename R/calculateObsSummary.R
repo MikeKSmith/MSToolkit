@@ -106,8 +106,8 @@
 		#
 		# Set up functions to use in the aggregate calls
 		#
-		loFun <- function(x, alp, dG) round(mean(x, na.rm = T) - (alp * sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
-		upFun <- function(x, alp, dG) round(mean(x, na.rm = T) + (alp * sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
+		loFun <- function(x, alp, dG) round(mean(x, na.rm = T) - (alp * stats::sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
+		upFun <- function(x, alp, dG) round(mean(x, na.rm = T) + (alp * stats::sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
 		meanFun <- function(x, dG) round(mean(x, na.rm = T), dG)
 		medianFun <- function(x, dG) round(median(x, na.rm = T), dG)
 		minFun <- function(x, dG) round(min(x, na.rm = T), dG)
