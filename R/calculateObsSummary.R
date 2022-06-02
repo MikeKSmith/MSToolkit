@@ -109,7 +109,7 @@
 		loFun <- function(x, alp, dG) round(mean(x, na.rm = T) - (alp * stats::sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
 		upFun <- function(x, alp, dG) round(mean(x, na.rm = T) + (alp * stats::sd(x, na.rm = T))/sqrt(sum(!is.na(x))), dG)
 		meanFun <- function(x, dG) round(mean(x, na.rm = T), dG)
-		medianFun <- function(x, dG) round(median(x, na.rm = T), dG)
+		medianFun <- function(x, dG) round(stats::median(x, na.rm = T), dG)
 		minFun <- function(x, dG) round(min(x, na.rm = T), dG)
 		maxFun <- function(x, dG) round(max(x, na.rm = T), dG)
 
