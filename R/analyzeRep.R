@@ -160,7 +160,7 @@
 		rleNa <- rle(is.na(vec))
 		if (rleNa$values[1]) vec[1:(rleNa$lengths[1])] <- 0
 		isMiss <- is.na(vec)
-		approx(which(!isMiss), vec [ !isMiss ], 1:length(vec), "constant", rule = 2)$y
+		stats::approx(which(!isMiss), vec [ !isMiss ], 1:length(vec), "constant", rule = 2)$y
 	}
 
 	# Check replicate number input
