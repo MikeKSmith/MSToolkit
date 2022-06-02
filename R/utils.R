@@ -207,7 +207,7 @@
 }
 
 .checkGridAvailable <- function(){
-  suppressWarnings(requireNamespace(parallel, quietly = TRUE))
+  suppressWarnings(requireNamespace("parallel", quietly = TRUE))
   }
 
 
