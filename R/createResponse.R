@@ -94,7 +94,7 @@
 	# Handle the invLink
 	if ( missing(invLink)) {
 		# Use the defaults
-    	invLink <- switch( distribution,  "n" = NULL,  "l" = exp,  "b" = plogis, "p" = exp)
+    	invLink <- switch( distribution,  "n" = NULL,  "l" = exp,  "b" = stats::plogis, "p" = exp)
 	}
 	else {
   		# Is the function available ?
