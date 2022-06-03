@@ -155,7 +155,7 @@ createTimeVaryingCovariates <- function(
 				idCol = idCol,
 				includeIDCol = TRUE)
 
-		tmp <- reshape(tmp, idvar = idCol, varying = list(2:ncol(tmp)),
+		tmp <- stats::reshape(tmp, idvar = idCol, varying = list(2:ncol(tmp)),
 				timevar = timeCol, v.names = namei, times = treatPeriod, direction = "long")
 		rownames(tmp) <- NULL
 
