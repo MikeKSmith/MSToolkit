@@ -60,8 +60,8 @@
 
 	# Stop if unrecognised summary method
 	if(method == "Quantile") {			# Quantile method
-		loFun <- function(x, alp, digits) round(quantile(x, prob = (1 - alp)/2, na.rm = T), digits) # "Lower" function
-		upFun <- function(x, alp, digits) round(quantile(x, prob = (1 + alp)/2, na.rm = T), digits) # "Upper" function
+		loFun <- function(x, alp, digits) round(stats::quantile(x, prob = (1 - alp)/2, na.rm = T), digits) # "Lower" function
+		upFun <- function(x, alp, digits) round(stats::quantile(x, prob = (1 + alp)/2, na.rm = T), digits) # "Upper" function
 	}
 	else {								# Gaussian method
 		loFun <- function(x, alp, digits) {
