@@ -54,7 +54,7 @@ setClass("tvDefinition",
 	if (type == "Crossover" & missing(sequence)) ectdStop("Sequence matrix must be provided for crossover design")
 	tcList <- list(doses = doses, times = times, type = type)
 	if (!missing(sequence)) tcList$sequence <- sequence
-	tvObject <- new("tvDefinition", Name = drugName, Value = drugValue, trtCall = tcList)
+	tvObject <- methods::new("tvDefinition", Name = drugName, Value = drugValue, trtCall = tcList)
 	if (testCall) {
 		tryCall <- try(do.call("createTreatments", tvObject@trtCall), silent = TRUE)
 		if (class(tryCall) == "try-error") ectdStop("Generated definition fails on test call to 'createTreatments'")
