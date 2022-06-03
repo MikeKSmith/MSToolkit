@@ -65,7 +65,7 @@
 	if (class(interimCode) == "try-error") ectdStop("The interimCode function generated errors")
 
 	# remove some na's
-	data <- na.omit(data)
+	data <- stats::na.omit(data)
 
 	# Try to excute the code on the (micro evaluation) data
 	uniDoseTest <- "uniDoses" %in% names(formals(interimCode)) & length(uniqueDoses)
