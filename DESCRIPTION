@@ -11,6 +11,8 @@ Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                   person("Francisco", "Gochez", 
                     role = c("aut")),
                   person("Jian", "Li", 
+                    role = c("ctb")),
+                  person("Jinhao", "Luo",
                     role = c("ctb"))
                   )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
