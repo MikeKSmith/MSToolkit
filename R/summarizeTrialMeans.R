@@ -67,12 +67,12 @@
 		loFun <- function(x, alp, digits) {
 			naTest <- !is.na(x)
 			if(sum(naTest) == 1) round(x[naTest], digits)
-			else round(mean(x, na.rm = T) + qnorm((1 - alp)/2) * sd(x, na.rm = T), digits)
+			else round(mean(x, na.rm = T) + stats::qnorm((1 - alp)/2) * sd(x, na.rm = T), digits)
 		}
 		upFun <- function(x, alp, digits) {
 			naTest <- !is.na(x)
 			if(sum(naTest) == 1) round(x[naTest], digits)
-			else round(mean(x, na.rm = T) + qnorm((1 + alp)/2) * sd(x, na.rm = T), digits)
+			else round(mean(x, na.rm = T) + stats::qnorm((1 + alp)/2) * sd(x, na.rm = T), digits)
 		}
 	}
 
