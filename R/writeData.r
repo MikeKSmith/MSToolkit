@@ -87,7 +87,7 @@
 
                               # Write the file
                               tryWrite <-
-                                try(write.table(
+                                try(utils::write.table(
                                   dat,
                                   fullPath,
                                   append = append,
