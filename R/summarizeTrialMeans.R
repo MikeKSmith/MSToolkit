@@ -53,7 +53,7 @@
 
 	# Build basic summary functions to use
 	meanFun <- function(x, digits) round(mean(x, na.rm = T), digits)			# Mean function
-	medianFun <- function(x, digits) round(median(x, na.rm = T), digits)		# Median function
+	medianFun <- function(x, digits) round(stats::median(x, na.rm = T), digits)		# Median function
 	minFun <- function(x, digits) round(min(x, na.rm = T), digits)				# Minimum function
 	maxFun <- function(x, digits) round(max(x, na.rm = T), digits)				# Maximum function
 	nFun <- function(x) sum(!is.na(x))								# Number of non-missings
