@@ -141,7 +141,7 @@
       			ectdWarning(paste(pNeg, "% of lambda values are less than 0 or missing - setting these values to 0 for the poission distribution draw", sep=""))
       			lambda[negTest] <- 0
 			}
-			name %<-% rpois( nrow(data), lambda = lambda )
+			name %<-% stats::rpois( nrow(data), lambda = lambda )
 		}
 	}
 
