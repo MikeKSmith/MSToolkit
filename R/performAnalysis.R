@@ -113,7 +113,7 @@
 
 		# Has the call been successful?
 		if (file.exists(outfile)) {
-			sasData <- try(read.csv(outfile))
+			sasData <- try(utils::read.csv(outfile))
 			if (class(sasData) == "try-error") ectdStop("Could not import SAS analysis output")
 			sasData <- checkMicroFormat( sasData, doseCol = doseCol )
          	if (cleanUp) {
