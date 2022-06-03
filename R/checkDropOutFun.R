@@ -73,7 +73,7 @@
 	if (!any(nf == "data")) ectdStop("The drop out function must have a `data` argument")
 
 	# Run function on section of data
-	hd <- if( useSubset ) head( data, n = sizeSubset  ) else data
+	hd <- if( useSubset ) utils::head( data, n = sizeSubset  ) else data
 	out <- try( fun( hd, ... ) , silent = TRUE)
 	if (class(out) == "try-error") ectdStop("Error when calling the dropout function on a subset of data")
 
