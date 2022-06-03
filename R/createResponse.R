@@ -130,7 +130,7 @@
 		# check if the probabilities are \in [0,1]
 		probs <- get(name)
     	if( any(probs < 0 || probs > 1)) ectdStop( "the probabililties are not between 0 and 1")
-    	name %<-% rbinom( nrow(data), prob = probs, size = 1 )
+    	name %<-% stats::rbinom( nrow(data), prob = probs, size = 1 )
 	}
 	else {
 		if( distribution == 'p' ) {    # poisson
