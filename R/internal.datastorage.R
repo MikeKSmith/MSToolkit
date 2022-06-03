@@ -77,7 +77,7 @@
   if( !all(diff(nFields) == 0) ) ectdStop("The file does not have the same number of fields all along")
 
 	## try to import the data
-	out <- try( read.table(file, header = TRUE, skip = skip, sep = sep), silent = TRUE )
+	out <- try( utils::read.table(file, header = TRUE, skip = skip, sep = sep), silent = TRUE )
 	if(class(out) == "try-error") ectdStop("error when importing the data in the file `$file`\n\t$out" )
 
   # Check for required variables in the import data
