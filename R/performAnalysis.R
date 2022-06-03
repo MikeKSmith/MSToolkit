@@ -99,7 +99,7 @@
 		# Export the data to a file for SAS to use
 		infile <- file.path(tempSasDir, "sasDataInput.csv")
 		outfile <- file.path(tempSasDir, "sasDataOutput.csv")
-		write.csv(data, file = infile)			# Export data so SAS can read it
+		utils::write.csv(data, file = infile)			# Export data so SAS can read it
 		if (!file.exists(infile)) ectdStop("Cannot write replicate to an external CSV file")
 
 		# Set up parameters for the SAS call
