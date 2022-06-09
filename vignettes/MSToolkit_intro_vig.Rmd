@@ -27,9 +27,9 @@ This purpose of this vignettes page is to help users understand how to generate 
 
 The `generateData` function generates simulated data replicates by controlling dosing, covariates, parameters, response, missingness and interim. It takes a number of arguments which are passed down to the various lower level functions to create sets of simulated data.
 
-The following inputs are used to generate 100 replicates of 200 subjects split equally across the two treatment arms by basic linear model.
+The following inputs are used to generate *100* replicates of *200* subjects split equally across the two treatment arms by basic linear model.
 
-```{r basic-linear-model}
+```{r basic-linear-model, eval = FALSE}
 # Before we use the `generateDate` function, we need to library the `MSToolkit` package.
 
 library(MSToolkit)
@@ -37,66 +37,397 @@ library(MSToolkit)
 # Inputs the variables into the arguments
 
 generateData(replicateN = 100, 
-             subjects=200, 
+             subjects = 200, 
              treatSubj = rep(100,2), 
              treatDoses = c(0,100),  
              genParNames = "ALPHA, BETA", 
              genParMean = c(0,1), 
-             genParVCov=0,  
+             genParVCov = 0,  
              respEqn = "ALPHA+BETA*DOSE", 
              respVCov = 1,  
-             seed=12345)
+             seed = 12345)
 ```
 
-The treatment doses are 0 and 100. Parameters ALPHA and BETA are generated where ALPHA=0 and BETA=1. The values of ALPHA and BETA will not change between simulation replicates since genParVCov = 0. The linear predictor (respEqn) calculates the response for each treatment (dose) according to the equation ALPHA+BETA*DOSE, in this case the expected effect at each dose is the same as the dose level since ALPHA=0 and BETA=1. respVCov specifies the response variability / residual error which will be added to the expected values generated through respEqn. Here the residual variability = 1 so values from a N(0,1) distribution will be generated for each response and added to values from respEqn. The seed is set to ensure reproducibility. By default MSToolkit assumes an additive error structure, although this can be changed through settings in the generateData(...) call.
+The treatment doses are *0* and *100*. Parameters *ALPHA* and *BETA* are generated where *ALPHA = 0* and *BETA = 1*. The values of ALPHA and BETA will not change between simulation replicates since `genParVCov = 0`. The linear predictor (`respEqn`) calculates the response for each treatment (dose) according to the equation $ALPHA + BET A* DOSE$, in this case the expected effect at each dose is the same as the dose level since ALPHA=0 and BETA=1. respVCov specifies the response variability / residual error which will be added to the expected values generated through respEqn. Here the residual variability equals to 1 so values from a *N(0,1)* distribution will be generated for each response and added to values from `respEqn`. The `seed` is set to ensure reproducibility. By default MSToolkit assumes an additive error structure, although this can be changed through settings in the `generateData(...)` call.
 
 Meanwhile, different distributions could be specified by `respDist = `:
 
-```{r linear-model-binary-distribution}
+```{r linear-model-binary-distribution, eval = FALSE}
 generateData(replicateN = 2, 
-             subjects=200, 
+             subjects = 200, 
              treatSubj = rep(100,2), 
              treatDoses = c(0,100),  
              genParNames = "ALPHA, BETA", 
              genParMean = c(0,1), 
-             genParVCov=c(1,1), 
+             genParVCov = c(1,1), 
              respEqn = "ALPHA+BETA*DOSE",  
-             respDist="Binary")    # Binomial distribution
+             respDist = "Binary")    # Binomial distribution
 ```
 
 
-In this example we simulate data from a binomial distribution by setting `respDist="Binary"`. The linear predictor is given by $log(\frac{p}{1-p}) = ALPHA + BETA*DOSE$, so that the probability of a response = 1 increases with DOSE. The canonical inverse link functions are used to convert between the linear predictor and the input to the response distribution, for example the link for Binary data is $\frac{exp( x )}{1 + exp( x )}$. Other link functions can be specified by setting the argument `respInvLink` which takes any R function. For example it is possible to generate binary data from explicit probabilities by setting `respDist = "Binary"` and `respInvLink = "NULL"` to use the identity link.
+In this example we simulate data from a binomial distribution by setting `respDist="Binary"`. The linear predictor is given by $log(\frac{p}{1-p}) = ALPHA + BETA*DOSE$, so that the probability of a response equals to 1 increases with DOSE. The canonical inverse link functions are used to convert between the linear predictor and the input to the response distribution, for example the link for Binary data is $\frac{exp( x )}{1 + exp( x )}$. Other link functions can be specified by setting the argument `respInvLink` which takes any R function. For example it is possible to generate binary data from explicit probabilities by setting `respDist = "Binary"` and `respInvLink = "NULL"` to use the identity link.
 
 
 Besides, the different outcome values could be generated by specifying the linear predictor for the `respEqn` argument. This should be a valid R expression or function. The expression can be written directly in `generateData` or an R function defined outside of `generateData` can be called. This function must return a vector of equal length to the number of rows in the generated data - one value per subject or one value per observation (TIME) within each subject. 
 
-```{r basic-emax-model}
+```{r basic-emax-model, eval = FALSE}
 generateData(replicateN = 100, 
-             subjects=100, 
+             subjects = 100, 
              treatSubj = rep(20,5),
              treatDoses = c(0, 5, 10, 50, 100),  
              genParNames = "E0,ED50,EMAX", 
              genParMean = c(0,50,100), 
-             genParVCov=diag(c(0,0,0)),  
+             genParVCov = diag(c(0,0,0)),  
              respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  
              respVCov = 100)
 ```
 
-A basic Emax model is applied to generate 100 replicates of 100 subjects split equally across the 5 treatment arms. The treatment arms are 0,5,10,50,100. Three parameters are to be generated, and are named E0, ED50 and EMAX. These take the values 0, 50 and 100 respectively. The variance-covariance matrix is set to 0 so again, these parameters will be the same across all replicates. The linear predictor is the standard 3-parameter Emax model. The variance of the response is set to 100 so responses will be drawn from a Normal distribution with mean given by the Emax model and variance 100, for example `respVCov = 100`.
+A basic Emax model is applied to generate *100* replicates of *100* subjects split equally across the *5* treatment arms. The treatment arms are *0*, *5*, *10*, *50*, *100*. Three parameters are to be generated, and are named *E0*, *ED50* and *EMAX*. These take the values *0*, *50* and *100* respectively. The variance-covariance matrix is set to *0* so again, these parameters will be the same across all replicates. The linear predictor is the standard 3-parameter Emax model. The variance of the response is set to 100 so responses will be drawn from a Normal distribution with mean given by the Emax model and variance *100*, for example `respVCov = 100`.
 
-Instead of setting the variance covariance matrix to zero, we could set a diagonal matrix with variances to vary the model parameter values between replicates, for example `genParVCov=diag(c(10,10,10))`.
+Instead of setting the variance-covariance matrix to 0, we could set a diagonal matrix with variances to vary the model parameter values between replicates, for example `genParVCov=diag(c(10,10,10))`.
 
-```{r variable-parameters-emax-model}
+```{r variable-parameters-emax-model, eval = FALSE}
 generateData(replicateN = 100, 
-             subjects=100, 
+             subjects = 100, 
              treatSubj = rep(20,5),
              treatDoses = c(0, 5, 10, 50, 100),  
              genParNames = "E0,ED50,EMAX", 
              genParMean = c(0,50,100), 
-             genParVCov=diag(c(10,10,10)),  
+             genParVCov = diag(c(10,10,10)),  
              respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  
              respVCov = 100)
 ```
 
-In this case the variance-covariance matrix is set to a diagonal matrix with variance 10 for each parameter. This means that E0 ~ N(0,10); ED50 ~ N(50,10) and EMAX ~ N(100,10) and the values for E0, ED50 and EMAX for each replicate will be drawn from these Normal distributions.
+In this case the variance-covariance matrix is set to a diagonal matrix with variance *10* for each parameter. This means that *E0 ~ N(0,10)*, *ED50 ~ N(50,10)* and *EMAX ~ N(100,10)* and the values for E0, ED50 and EMAX for each replicate will be drawn from these Normal distributions.
 
+In addition, we could include correlations between the parameters E0, ED50 and EMAX.
+
+```{r correlation-emax-model, eval = FALSE}
+generateData(replicateN = 100, 
+             subjects = 100, 
+             treatSubj = rep(20,5),
+             treatDoses = c(0, 5, 10, 50, 100),  
+             genParNames = "E0,ED50,EMAX", 
+             genParMean = c(0,50,100), 
+             genParVCov = c(10,1,10,1,8,10),  
+             respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  
+             respVCov = 100)
+```
+
+Each parameter has variance equals to *10* but the correlation between ED50 and EMAX is *0.8*, which is typical for this type of model. Note that the variance-covariance matrix can be specified a number of ways, as an array or a matrix, or here as values of the lower triangle of that full variance-covariance matrix. `MSToolkit` automatically converts these numbers to a full covariance matrix and checks that it is positive-semi-definite using the function `parseCovMatrix`.
+
+Furthermore, we could specify the proportion of subjects in each interim cut (note that the proportions are cumulative) by including the argument `interimSubj`.
+
+```{r interim-emax-model, eval = FALSE}
+generateData(replicateN = 2, 
+             subjects = 100, 
+             treatSubj = rep(20,5),
+             treatDoses = c(0, 5, 10, 50, 100),  
+             genParNames = "E0,ED50,EMAX", 
+             genParMean = c(0,50,100), 
+             genParVCov = c(10,1,10,1,8,10),
+             respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",  
+             respVCov = 100,  
+             interimSubj = c(0.33,0.66))
+```
+
+In here, we have our first interim after $\frac{1}{3}$ of data, the second at $\frac{2}{3}$. Subjects are randomly assigned to interim proportions 1, 2, 3 with probabilty $\frac{1}{3}$ for each. This means that there may not be exactly $\frac{1}{3}$ of subjects assigned to each interim, as we would experience in real life.
+
+We could also define the function outside of `generateData` for specifying mean effects for each treatment. For example, we want to precisely what the mean response will be for an experimental drug and its control treatment. A function called `resp.fn` is written to calculate the mean response for each subject which takes the data with treatment identifier (*TRT=1 or 2*), DOSE information (here DOSE=0 or 1, but these are merely labels and can be ignored in this example). The dataset also includes two parameters - MEAN1 and MEAN2 which have values 0 and 10 respectively. `resp.fn` must take this dataset and return a value of RESP for each subject. So the function initialises a value for RESP (*=0*) and then for each treatment, assigns *MEAN = 1* where *TRT = 1* and *MEAN = 10* where *TRT = 2*.The resulting values then have residual error added (`respVCov=1`). 
+
+```{r defined-function-data, eval = FALSE}
+resp.fn<-function(data){
+	RESP<-rep(0,nrow(data))
+	RESP[data$TRT == 1] <- data$MEAN1[data$TRT == 1]
+	RESP[data$TRT == 2] <- data$MEAN2[data$TRT == 2]
+	RESP
+	}
+	
+generateData(replicateN = 2, 
+             subjects = 200, 
+             treatSubj = rep(100,2), 
+             treatDoses = c(0,1),  
+             genParNames = "MEAN1, MEAN2", 
+             genParMean = c(0,10), 
+             genParVCov = 0,  
+             respEqn = resp.fn, 
+             respVCov = 1)
+```
+
+Besides, we could generate data for a crossover trial. In here, we use the same function as above to generate the mean response for each subject, but we swap from specifying RESP as a function of TRT into RESP as a function of DOSE. This is because when we specify a crossover trial, TRT becomes the treatment sequence that subjects are allocated to, so DOSE becomes the treatment identifier for each period. This could be a dose of drug, or simply a label (since the means here are defined exactly for each treatment).
+
+```{r crossover-trial-function, eval = FALSE}
+resp.fn<-function(data){
+	RESP<-rep(0,nrow(data))
+	RESP[data$DOSE == 0]<-data$MEAN1[data$DOSE == 0]
+	RESP[data$DOSE == 1]<-data$MEAN2[data$DOSE == 1]
+	RESP
+	}
+```
+
+We use the argument `treatType="Crossover"` to show that we are generating data for a crossover trial and we use `treatSeq` to define the treatment sequences. `treatSeq` should be an array, but can specify any number of treatment periods and sequences using the labels for treatments given by `treatDoses`, which are *0* and *1* here. The array has sequences as columns and periods as rows. Here we have specified a 2x2 crossover with two sequences, which is *DOSE = 0* followed by *DOSE = 1* and vice versa. A three-period, two-treatment design could be specified as `treatSeq=array(c(0,1,1,1,0,0),dim=c(3,2))`.
+
+```{r crossover-trial-data, eval = FALSE}
+generateData(replicateN = 2, 
+             subjects = 20, 
+             treatSubj = rep(10,2), 
+             treatDoses = c(0,1),
+             treatType = "Crossover", 
+             treatSeq = array(c(0,1,1,0),dim=c(2,2)),  
+             genParNames = "MEAN1, MEAN2", 
+             genParMean = c(0,10), 
+             genParVCov = 0,  
+             genParBtwNames = "MEAN1,MEAN2",
+             genParBtwVCov = c(1,0.8,1),
+             genParErrStruc = "Additive",  
+             respEqn = resp.fn, 
+             respVCov = 1)
+```
+
+We must also take a little extra care in thinking about the data generation processes in crossover trials. In a crossover we can assume that the treatment effect is constant across treatment periods, but we usually assume that an individual’s responses between periods is correlated - that is subjects with high observations in period 1 will have high observations in period 2. We do this by specifying **between subject variability** in the parameter means through `genParBtwNames = "MEAN1,MEAN2"`, `genParBtwVCov = c(1,0.8,1)` and `genParErrStruc = "Additive"`. These options add between subject variability to *MEAN1* and *MEAN2* with a correlation of *0.8* between them. Thus subjects with high MEAN1 will also have high MEAN2. Finally the residual error is added through `respVCov` as usual. Then, in the analysis, we will look for treatment effects within subjects and we can also look at period effects and sequence effects (none simulated here).
+
+At last, `MSToolkit` creates a sub-directory called *ReplicateData* under the current R working directory for the output from the `generateData` function. The individual replicate datasets are stored in CSV format in this directory and are named *replicate000x.csv*. There are up to 9999 replicate datasets can be created. 
+
+# Illustration of `analyzeData` function by an example
+
+In here, the `analyzeData` function would be illustrated by a completed example, included the data generation process, data analysis process and the decision criteria.
+
+## Data generation
+
+### Design
+
+The design for this study is as follows:
+
+* *100* subjects
+* Parallel group
+* *5* doses: *Placebo, 5, 10, 50, 100mg* (units are arbitrary in this example)
+* Patients are allocated randomly to each dose (i.e. we do not guarantee equal allocation to each treatment arm).
+* Interim analyses after *30%* and *70%* of subjects have provided response
+
+
+### Response generation function
+
+* Emax model: $RESP = E0 + \frac{(EMAX * DOSE)}{(ED50 + DOSE)}$
+    + *E0 ~ N(2, 0.5)*
+    + *ED50 ~ N(50, 30)*
+    + *EMAX ~ N(10,10)*
+* $Residual error \sim N(0,2)$
+    + Additive (i.e. *Y = RESP + residual error*)
+    
+### Simulation specification
+
+* *5* trial replicates
+* Simulate with model parameter uncertainty (i.e. each replicate has unique values for model parameters, drawn from an underlying multivariate distribution).
+* In this case, model parameters are independent (i.e. off-diagonal elements of the multivariate variance-covariance matrix are zero).
+
+We apply the information as above to `generateData`function to simulate the data:
+
+```{r simulate-for-analysis, eval=FALSE}
+generateData(
+  replicateN = 5,
+  subjects = 100,
+  treatDoses = c(0, 5, 10, 50, 100),
+  genParNames = "E0, ED50, EMAX",
+  genParMean = c(2, 50, 10),
+  genParVCov = c(0.5, 30, 10),
+  respEqn = "E0 + ((DOSE * EMAX)/(DOSE + ED50))",
+  respVCov = 2,
+  interimSubj = "0.3, 0.7")
+```
+
+## Evaluation of operating characteristics
+
+Before executing the data analysis, we need to introduce a concept -operating characteristics. Operating characteristics here refer to the performance of the given design + analysis + decision criteria. We are usually interested in the probability of making correct decisions (correct GO and correct NO GO) and the probabilities of making false positive or false negative decisions separately. Many factors can influence these probabilities:
+
+* Dose-selection and numbers of subjects influence the precision of our estimated parameters.
+* The choice of model and model selection process.
+* How we handle estimation when the observed data do not match our a priori model selection.
+* Or our decision criteria and whether this is based purely on the estimated mean or whether it involves interval estimates.
+
+
+### Micro-evaluation of a priori effect vs simulated / “observed”
+
+With MSToolkit we introduce the idea of micro-evaluation (a treatment specific comparison of a priori known effects or “truth” vs simulated trial, “observed” or estimated effects). Micro-evaluation will help characterise bias and precision of estimated parameters or treatment effects. We use this to help refine the analytical methods - we should aim to reduce bias and increase precision of our estimates for a given data generation + analysis method. Note that it is good practice to investigate micro-evaluation properties for “null” data generation cases i.e. where there is a prior no effect. We usually also look at sensitivity to a priori assumptions. We can do this by varying the data generation model compared to the assumptions made by the analysis method. This can include generating data from non-monotonic increasing functions when analysis assumes monotonically increasing dose-response functions.
+
+### Macro-evaluation to assess decision criteria
+
+MSToolkit also uses what we call “macro-evaluation” to assess the operating characteristics of our decision criteria. Macro-evaluation aims to make an overall decision about the “success” or “failure” of a trial. Usually the macro-evaluation decision criteria compares the decision made for the simulated trial data with the decision that would have been made given perfect information or the a prior known “truth”.
+
+
+## Performing data analysis by using R function
+
+### Defining the `analysisCode` function
+
+```{r basic-analysis-code, eval = FALSE}
+emaxCode <- function(data) {
+  
+  uniDoses <- sort(unique(data$DOSE))
+  obsMean <- tapply(data$RESP, 
+                    list(data$DOSE), mean)
+  obsSD <- tapply(data$RESP,
+                  list(data$DOSE), sd)
+  eFit <- emax.fit(data$RESP, data$DOSE)
+  outDf <- data.frame(DOSE = uniDoses,
+                      MEAN = eFit$fitpred,
+                      SE = eFit$sdpred,
+                      SDDIF = eFit$sddif)
+  
+  outDf$LOWER <- outDf$MEAN - 1.96 * outDf$SE
+  outDf$UPPER <- outDf$MEAN + 1.96 * outDf$SE
+  outDf$N <- table(data$DOSE)
+  outDf$OBSMEAN <- obsMean
+  outDf$OBSSD <- obsSD
+  outDf
+}
+```
+
+The example code above is using the function emax.fit to perform the basic analysis. This function allows access to many summaries of the model that is fit to the data. The replicate datasets are passed to the function through the argument data.
+
+Analysis output (the micro-evaluation datasets named as *micro000x.csv*) are stored in the **MicroEvaluation** sub-directory within the working directory. One dataset is stored for each replicate. The `analyzeData` function collates the individual *micro000x.csv* files into a single **MicroSummary.csv** data file after the last replicate is analyzed. This **MicroSummary.csv** file is stored at the top level of the working directory.
+
+### Interim analysis
+
+**NOTE** that you need to specify interim analysis proportions in the generated data **BEFORE** you analyze the replicate dataset. If subjects are not assigned to interim cuts in the generated data, the interim analysis steps will not be carried out (the `analyzeData` function assumes that all subjects are in the full dataset).
+
+```{r interim-analysis, eval=FALSE}
+interimCode <- function(data) {
+# DROP any doses where the lower bound of the difference from placebo is negative
+  dropdose  <- with(data, DOSE [LOWER < 0 & DOSE != 0])
+  outList <- list()
+  if (length(dropdose) > 0) 
+    outList$DROP <- dropdose
+  outList$STOP <- length(dropdose) == nrow(data) - 1
+  outList
+}
+```
+
+The interimcode function above will be run **AFTER** the `analysisCode` at each specified interim analysis and the function specifies rules for dropping doses or terminating the study. **REQUIRED** outputs are **DROP** and **STOP**.
+
+The code above checks whether the lower confidence limit for the difference from placebo for each dose is below zero i.e. no difference from placebo. The *DROP* variable is a vector of those doses which are to be dropped from the study. *STOP* is a flag which indicates whether the study should stop. In this case, if all doses are included in *DROP* (not including placebo) then the study is stopped.
+
+The micro-evaluation dataset **micro000x.csv** found in the **MicroEvaluation** sub-directory (see below) compiles together results from the analysis of each interim. It contains a column *INTERIM* which indicates which interim analysis the results pertain to. *INTERIM==0* denotes the analysis of the FULL dataset (i.e. if no doses are dropped and assuming the study goes on to completion). This allows us to compare an adaptive design against a non-adaptive design in one step. If, after interim evaluation we drop a dose, then *DROPPED=1* for this dose and subjects on this dose are not included in evaluation at the subsequent interims. Information on that dose already gained will be carried forward into subsequent interim analysis and updated with the new model evaluation, but the dose will remain closed for allocation. The *micro000x.csv* dataset also includes the STOPPED variable which indicates that at a specific interim analysis the study was stopped. Note that we perform the analysis of the FULL (100%) dataset BEFORE conducting the interim analyses so that if the decision is made to stop the study we can compare results against the comparable data without interim analysis.
+
+### Marco-evaluation code
+
+```{r macro-evaluation, eval=FALSE}
+macroCode <- function(data) {
+  # Is effect at highest dose significant?
+  success <- 
+    data$LOWER[data$INTERIM == max(data$INTERIM) & data$DOSE == max(data$DOSE)] > 7
+  data.frame(SUCCESS = success)
+}
+```
+
+The above macro-evaluation code looks at the lower confidence limits of the difference over placebo and if all of these values are less than zero declares the trial a failure. If at least ONE of these confidence limits are above zero then the trial is deemed a success. The **MacroEvaluation** directory contains the results of macro-evaluation (macroCode output) for each replicate in the *macro000x.csv* dataset. The `analyzeData` function compiles these into a **MacroSummary.csv** file which is stored at the top level of the working directory.
+
+The macroCode function can return any macro-evaluation summary that is useful for assessing the trial-level operating characteristics, like success or failure, bias and precision of parameter estimates, etc.
+
+### Running analysis using `analyzeData`
+
+```{r analyze-data, eval=FALSE}
+
+analyzeData(analysisCode = emaxCode,
+            macroCode = macroCode,
+            interimCode = interimCode)
+
+# analysisCode and macroCode are REQUIRED inputs.
+```
+
+`analyzeData` wraps the analysis and micro-evaluation, macro-evaluation and interim analysis functions together and controls the input or output of replicate data (**replicate000x.csv** from the **ReplicateData** subdirectory), passing this to the analysis function (as argument **data**) and returning the micro-evaluation output **micro000x.csv** for each replicate to the **MicroEvaluation** subdirectory. It also applies the macro-evaluation function to the micro000x dataset, generating a **macro000x.csv** dataset which is stored in the **MacroEvaluation** subdirectory. Should interim analysis be requested, the `analyzeData` function will apply the `analysisCode` function first to the full dataset, then to each interim cut of the data. For each interim cut (not including the FULL dataset analysis) the `interimCode` function will be applied to decide whether to DROP doses or STOP the study.
+
+## Performing data analysis by using SAS code
+
+We could also apply the SAS code to `analyzeData` function. If using SAS code to perform analysis, the code **MUST** be placed at the **TOP** level of the working directory. The code should be written to accept a working input dataset called *INFILE* and should return a final dataset of results called *OUTFILE*. Both of these datasets should be contained in the *WORK* directory (i.e. **NOT** permanent SAS datasets). Code should be written to be robust to errors. It is the user’s responsibility to track errors within the SAS code.
+
+To call external SAS code for analysis the following syntax should be used:
+
+```{r sas-analyze-data, eval=FALSE}
+analyzeData(analysisCode = "emax.sas", 
+            software = "SAS", 
+            macroCode = macrocode)
+```
+
+`macroCode` functions can be written in R. The SAS output will be passed back into R and macro-evaluation carried out on each replicate as though the analysis had been carried out in R.
+
+For the above example we ran the following SAS analysis code. This code analyses the generated data using a basic *PROC NLIN* call. In this example we are only interested in assessing the model fit parameters against the “true” values used in data generation. We use the *SAS ODS* system to create a dataset of the model parameters.
+
+```{r sas-ods, eval=FALSE}
+ods output parameterestimates=parms corrb=corr;
+proc nlin;
+ model resp=e0 + (emax * dose) / (ed50 + dose);  # Specify the form of the Emax equation;
+ parameters e0 = 0 ed50 = 25 emax = 120;  # Specify starting values for the parameters;
+ bounds ed50 > 0;   # Set up boundary conditions.  Here ED50 must be positive;
+run;
+ods output close;
+proc transpose data=parms out=tparms prefix=mean;
+ var estimate;
+ id parameter; 
+run;
+proc transpose data=parms out=stderr prefix=se;
+ var estimate;
+ id parameter; 
+run;
+proc sql noprint;
+ create table doses as
+   select unique(dose) as dose
+   from infile;
+ create table parms2 as
+   select * from tparms t, stderr s;
+ create table doseparms as
+   select * from doses d, tparms t, stderr s;
+ create table obsvars as
+   select mean(resp) as dsm, var(resp) as dsv,count(resp) as n
+   from infile
+   group by dose;
+quit;
+data outfile (drop=_name_);
+ retain mean se lower upper 0;
+ set doseparms;
+ mean=0;
+ se=0;
+ lower=0;
+ upper=0;
+ n=0;
+ run;
+```
+
+# Troubleshooting the analysis code
+
+To troubleshoot analysis or interim code or macro-evaluation code you can read in the individual dataset with this code:
+
+```{r read-replicate, eval=FALSE}
+data <- readData( dataNumber = 1, dataType = "Replicate")
+```
+
+then run the `analysisCode` function (i.e. the `EmaxCode` function generated above) over this
+
+```{r analysis-code, eval=FALSE}
+EmaxCode(data)
+```
+
+Output from the `EmaxCode` function should be the *micro-evaluation* dataset. However if this doesn’t return the right dataset it’s easier to troubleshoot than running all 100 of the replicates.
+
+You can check the `macroCode` function by reading in the *micro-evaluation* dataset:
+
+```{r read-micro-evaluation-dataset, eval=FALSE}
+data <- read.csv("./microevaluation/micro0001.csv")
+
+# The micro-evaluation dataset is stored in the MicroEvaluation sub-directory 
+# within the working directory
+```
+
+and then run the `macroCode` function (i.e. the `macroCode` function generated above) over this:
+
+```{r macrocode, eval=FALSE}
+macroCode(data)
+```
+
+Once you’re happy with this, you can go on to look at how the `interimCode` works by running:
+
+```{r check-interim-code, eval=FALSE}
+analyzeRep(analysisCode = emaxCode,
+           interimCode = interimcode,
+           replicate = 1)
+```
+
+This will do the full analysis or micro-evaluation step at interims as well as on the full dataset. **NOTE** that you need to specify interim analysis proportions in the generated data BEFORE you analyze the replicate dataset. If subjects are not assigned to interim cuts in the generated data, the interim analysis steps will not be carried out (the `analyzeData` function assumes that all subjects are in the FULL dataset).
