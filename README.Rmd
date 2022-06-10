@@ -72,7 +72,8 @@ generateData(
   respVCov = 5, 
   interimSubj = ".3,.7")
 
-# This example generates 500 .CSV files with 400 subjects each to store the replicate datasets in the "ReplicateData" directory. 
+# This example generates 500 .CSV files with 400 subjects each to store the 
+# replicate datasets in the "ReplicateData" directory. 
 ```
 
 Once data has been generated, the next step is to analyze the replicate data using the `analyzeData()`. This function wraps together functions for performing user-specified analysis on the replicate datasets and also performing micro- and macro- level summaries of the analysis results. The summary files are named "MicroSummary.csv" and "MacroSummary.csv" respectively, and stored in the current R working directory. 
