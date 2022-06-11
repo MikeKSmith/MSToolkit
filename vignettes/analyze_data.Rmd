@@ -1,0 +1,49 @@
+---
+title: "analyzeDta"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{analyzeDta}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# How it works
+
+`analyzedata(...)` performs analysis of the individual replicate datasets. The *Get started* page gives an overview of the analysis process, but in short the analyzeData(...) function analyses each replicate dataset in turn and applies the user defined `analysisCode` function supplied to analyse the data. The `analysisCode` function need only be written in the context of analysing a single dataset. `MSToolkit` takes care of reading in each replicate dataset and writing back out the analysis results.
+
+The user must provide a valid R function which is to be used for analysing the generated dataset or an external file (.R or .SAS) which contains code for analysis of the data. The user must also provide functions for performing the micro- and macro-evaluation summary of trial performance.
+
+The `analyzedata(...)` function automatically handles the data input and output, pointing the analytic function (`analysisCode`) to each replicate dataset in turn. The user doesn’t need to explicitly name the *“replicate000x.csv”* file for analysis. `analyzedata(...)` takes the user-defined `analysisCode` function and loops through each replicate dataset in turn passing this to the `analysisCode` function which takes it as the argument `data`. The user then works with an data frame object called `data` in the `analysisCode` function. Examples are given in the [Get started]() page. 
+
+The `analysisCode` returns analysis output which is used later in evaluating the operating characteristics for a “Go / No Go” decision. The returned dataset is referred to as the *“micro-evaluation”* data. This distinguishes it from the results of the “Go / No Go” evaluation which is referred to as the *“macro-evaluation”* output. Micro-evaluation results are used in cases where we may wish to drop doses at interim analysis - the decision to drop doses can then be based on the output interval estimates. For example we may wish to drop doses where the lower limit is less than zero (in a difference from baseline or comparison to placebo). Micro-evaluation is performed at each specified interim analysis. If several interim analyses are planned, then the Micro-evaluation is performed on the whole dataset (without dropping any doses), and after every interim. This allows comparisons in trial performance between the adapting and not adapting.
+
+The `macroCode` summarises the trial performance as a whole - it should provide a single assessment of the success or failure of a trial at the conclusion of the trial. For example, we may wish to summarise the proportion of simulated trials showing the maximal effect greater than a clinically meaningful effect. Similarly we may wish to show that the final estimates of model parameters are precise and unbiased. Macro-evaluation should summmarise trial performance at this level.
+
+The `analyzedata(...)` function is different from the `generateData` function in that there are fewer low level functions that the user will typically want to access. The majority of the lower level functions for `analyzedata(...)` govern the data input and output of the trial replicate data, and general “housekeeping” and submitting of the analysis jobs to the GRID.
+
+# Arguments
+
+## Required Arguments
+
+|Argument Name|Description|
+|:------------|-----------|
+|analysisCode|R function or SAS file of analytic code. MUST return mean, std.error, lower and upper interval estimates for each dose. Other parameters may be returned, but the core set as described must be in the dataset for use by interimCode.|
+|macroCode|Macro-evaluation code. Algorithm for defining trial level success.|
+
+## Optional Arguments
+|Argument Name|Description|
+|:------------|-----------|
+|replicates|Which replicates to use in the analyzedata(...) step. **DEFAUL**T is ALL|
+|interimCode|Defines an algorithm for dropping doses at interim analyses.|
+|software|Software for analysis - could be R or SAS.|
+|grid|If running the `MSToolkit` from a *UNIX* node or via *ePharm*, then the user can choose to split the analysis across GRID nodes in order to speed up the analysis. If running `MSToolkit` locally on a laptop, this option cannot be accessed at this time.|
+|removeMissing <br /> removeRespOmit|Should missing data or subjects who have dropped out be included in analysis?|
+
+If running `analyzedata(...)` on a multi-processor machine then the analysis job will split the job into roughly equal sized numbers of replicates to run across processors.
