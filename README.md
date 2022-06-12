@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/jluo0015/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jluo0015/MSToolkit?branch=Dev)
+coverage](https://codecov.io/gh/jluo0015/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jluo0015/MSToolkit?branch=master)
 <!-- badges: end -->
 
 ## Overview
