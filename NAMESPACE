@@ -2,6 +2,7 @@
 
 export(addResidualError)
 export(allocateTreatments)
+export(analyseData)
 export(analyzeData)
 export(analyzeRep)
 export(applyPredCode)

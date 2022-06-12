@@ -337,4 +337,6 @@
 	invisible()
 }
 
+
+#' @export
 analyseData <- analyzeData
