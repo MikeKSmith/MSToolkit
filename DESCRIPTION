@@ -32,7 +32,6 @@ Imports:
     parallel,
     MASS,
     methods,
-    RNMImport,
     ini,
     tibble,
     tidyr,
