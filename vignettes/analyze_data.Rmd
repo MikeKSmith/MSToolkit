@@ -1,8 +1,8 @@
 ---
-title: "analyzeDta"
+title: "analyzeData"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{analyzeDta}
+  %\VignetteIndexEntry{analyzeData}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
