@@ -41,7 +41,7 @@ Imports:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://github.com/MikeKSmith/MSToolkit
 BugReports: https://github.com/MikeKSmith/MSToolkit/issues
 VignetteBuilder: knitr
