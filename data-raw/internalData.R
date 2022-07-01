@@ -2,14 +2,17 @@
 
 # These codes are used to create the internal data for the function samples or testing
 
+library(utils)
+library(here)
+
 # create a R script to access the data for the example of macroEvaluation function
-microData <- utils::read.csv(here::here("tests/testthat/data/macroEvaluation/micro0001.csv"), header = TRUE)
+microData <- read.csv(here("tests/testthat/data/macroEvaluation/micro0001.csv"), header = TRUE)
 
 # Create this dataset to provide the data sample for testing the writeData/readData function.
-ReplicateSample <- utils::read.csv(here::here("tests/testthat/testdata.datastorage/ReplicateSample.csv"))
+ReplicateSample <- read.csv(here("tests/testthat/testdata.datastorage/ReplicateSample.csv"))
 
 # Create this dataset to provide test data for testing readData function (test.readData.CSV)
-microSummary <- utils::read.csv(here::here("tests/testthat/testdata.datastorage/microSummary.csv"))
+microSummary <- read.csv(here("tests/testthat/testdata.datastorage/microSummary.csv"))
 
 # Create the internal dataset 'testCovariates' to test the generateData function.
 #testCovariates <- utils::read.csv(here("tests/testthat/systemTest/data/testCovariates.csv"))
@@ -18,13 +21,13 @@ microSummary <- utils::read.csv(here::here("tests/testthat/testdata.datastorage/
 #testParam <- utils::read.csv(here("tests/testthat/systemTest/data/testParam.csv"))
 
 # Create the testdata.datastorage folder path
-testdata_datastorage_path <- here::here("tests/testthat/testdata.datastorage")
+testdata_datastorage_path <- here("tests/testthat/testdata.datastorage")
 
 # Create the 'Scripts' folder path
-scripts_path <- here::here("tests/testthat/systemTest/data/Scripts")
+scripts_path <- here("tests/testthat/systemTest/data/Scripts")
 
 # Create the 'systemTest' folder path
-systemTest_path <- here::here("tests/testthat/systemTest")
+systemTest_path <- here("tests/testthat/systemTest")
 
 # Create the 'NONMEM' folder path
 nonmem_path <- system.file(package = "MSToolkit", "tests", "testthat", "data", "NONMEM")
