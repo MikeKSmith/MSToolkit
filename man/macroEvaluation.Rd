@@ -41,13 +41,13 @@ further checked using the \code{\link{checkMacroFormat}} function.
 \examples{
 
   # example of micro data with interim
-
+  microData <- get0("microData", envir = asNamespace("MSToolkit"))
   mCode <- function(data) {
-    diffMeans <- data$MEAN[ data$DOSE == 100 & data$INTERIM == 0] -
-    data$MEAN[ data$DOSE == 0 & data$INTERIM == 0  ]
-    data.frame( SUCCESS = diffMeans > 10, NFINAL = sum(data$N) )
+    diffMeans <- data$MEAN[data$DOSE == 100 & data$INTERIM == 0] -
+    data$MEAN[data$DOSE == 0 & data$INTERIM == 0]
+    data.frame(SUCCESS = diffMeans > 10, NFINAL = sum(data$N))
   }
-  out <- macroEvaluation( MSToolkit:::microData, mCode)
+  out <- macroEvaluation(microData, mCode)
   stopifnot( nrow(out) == 1 )
 
 }
