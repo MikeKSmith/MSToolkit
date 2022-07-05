@@ -6,13 +6,13 @@ library(utils)
 library(here)
 
 # create a R script to access the data for the example of macroEvaluation function
-microData <- read.csv(here("tests/testthat/data/macroEvaluation/micro0001.csv"), header = TRUE)
+microData <- read.csv(here("data-raw/micro0001.csv"), header = TRUE)
 
 # Create this dataset to provide the data sample for testing the writeData/readData function.
-ReplicateSample <- read.csv(here("tests/testthat/testdata.datastorage/ReplicateSample.csv"))
+ReplicateSample <- read.csv(here("data-raw/ReplicateSample.csv"))
 
 # Create this dataset to provide test data for testing readData function (test.readData.CSV)
-microSummary <- read.csv(here("tests/testthat/testdata.datastorage/microSummary.csv"))
+microSummary <- read.csv(here("data-raw/microSummary.csv"))
 
 # Create the internal dataset 'testCovariates' to test the generateData function.
 #testCovariates <- utils::read.csv(here("tests/testthat/systemTest/data/testCovariates.csv"))
