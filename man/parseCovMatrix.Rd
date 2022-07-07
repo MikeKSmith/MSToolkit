@@ -49,6 +49,6 @@ positive definite symmetric matrices, an error will be printed.
 \code{\link{checkSymmetricPDMatrix}}
 }
 \author{
-Mike K Smith \email{mstoolkit@googlemail.com}
+Romain Francois
 }
 \keyword{datagen}

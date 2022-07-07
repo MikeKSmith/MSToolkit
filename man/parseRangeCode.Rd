@@ -58,6 +58,6 @@ eval( expr )
 \code{\link{subset}}, \code{\link{parse}}
 }
 \author{
-Mike K Smith \email{mstoolkit@googlemail.com}
+Romain Francois
 }
 \keyword{misc}

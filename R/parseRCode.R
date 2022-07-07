@@ -8,7 +8,7 @@
 #'
 #' @param code Character string containing R Code to parse
 #' @return An \link{expression} object
-#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#' @author Romain Francois, Rich Pugh
 #'
 #' @export
 "parseRCode" <- function(

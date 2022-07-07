@@ -25,7 +25,7 @@
 #' @return An expression constructed as detailed above.
 #' @section Warning: The character "|" is not allowed in any of the expressions
 #' contained in "code" for the \code{parseRangeCode} function.
-#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#' @author Romain Francois
 #' @seealso \code{\link{subset}}, \code{\link{parse}}
 #' @keywords misc
 #' @examples

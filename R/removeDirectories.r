@@ -17,7 +17,7 @@
 #' default)
 #' @return A logical vector the same length as the dirNames, indicating whether
 #' or not the corresponding directories were successfully removed
-#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#' @author Francisco Gochez
 #' @keywords data
 #' @examples
 #'

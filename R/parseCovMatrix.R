@@ -24,7 +24,7 @@
 #' @param tol (Optional) Numerical tolerance for the positive-definiteness
 #' check.  By default, the tolerance is used as 1e-06
 #' @return A positive definite symmetric matrix
-#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#' @author Romain Francois
 #' @seealso \code{\link{checkSymmetricPDMatrix}}
 #' @keywords datagen
 #' @examples
