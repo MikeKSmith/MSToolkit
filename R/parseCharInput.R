@@ -41,7 +41,6 @@
 #'     package = "MSToolkit"))
 #'   }
 #'
-#' @export
 parseCharInput <- function(input,
                            convertToNumeric = TRUE,
                            sort = FALSE,

@@ -41,7 +41,6 @@
 #' expr <- parseRCode("rnorm(30)")
 #' eval( expr )
 #'
-#' @export
 parseRangeCode <- function(
   code      #@ code to parse
 ){

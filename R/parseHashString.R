@@ -43,7 +43,6 @@
 #' parseHashString(list("1.5, 2, 3.2","5, 4.2","10,11"))
 #'
 #'
-#' @export
 parseHashString <- function(input,
                             ...,
                             missingMsg) {

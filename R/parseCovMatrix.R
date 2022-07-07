@@ -33,7 +33,7 @@
 #'   parseCovMatrix(c(1,2,3), nCov = 3)
 #'   parseCovMatrix(c(1,2,4), nCov = 2)
 #'
-#' @export
+#'
 parseCovMatrix <- function(
    values,        #@ values used
    nCov,          #@ number of covariates
