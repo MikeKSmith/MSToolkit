@@ -1,7 +1,7 @@
 Package: MSToolkit
 Type: Package
 Title: The MSToolkit Library For Clinical Trial Design
-Version: 3.3
+Version: 3.3.0
 Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                     role = c("aut", "cre")),
              person("Rich", "Pugh", email = "rpugh@mango-solutions.com",
@@ -11,6 +11,8 @@ Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                   person("Francisco", "Gochez", 
                     role = c("aut")),
                   person("Jian", "Li", 
+                    role = c("ctb")),
+                  person("Jinhao", "Luo",
                     role = c("ctb"))
                   )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
@@ -18,12 +20,28 @@ Description: Simulate data, analysis this data and assess operating
     characteristcs of clinical trials.
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 2.14.0)
 Suggests: 
     testthat (>= 3.0.0),
-    withr
+    withr,
+    knitr,
+    rmarkdown,
+    covr
 Imports: 
     parallel,
-    MASS
-RoxygenNote: 7.1.1
+    MASS,
+    methods,
+    ini,
+    tibble,
+    tidyr,
+    here,
+    utils,
+    stats
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
-License: GPL (>= 3)
+License: MIT + file LICENSE
+URL: https://github.com/MikeKSmith/MSToolkit
+BugReports: https://github.com/MikeKSmith/MSToolkit/issues
+VignetteBuilder: knitr

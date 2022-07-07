@@ -32,6 +32,7 @@
 #'   createEmptyMicro(doses = c(5, 25), doseCol = "D", microColumnNames = c("D", "MEAN", "SE",
 #'   "LOWER"))
 #'
+#' @export
 createEmptyMicro <- function(
   doses, # A numeric vector containing the DOSES column of the micro data
   doseCol = "DOSE", # The name of the dose column in the data frame
@@ -44,8 +45,8 @@ createEmptyMicro <- function(
   ###############################################################################
   # DESCRIPTION:  Creates a micro evaluation dataframe whose DOSE column is given by an argument and which
   # has the value NA for the rest of its entries.
-  # KEYWORDS: 
-  # Documented in Support Functions Design Specification 
+  # KEYWORDS:
+  # Documented in Support Functions Design Specification
   ###############################################################################
 {
   doses <- parseCharInput( doses )
@@ -55,13 +56,13 @@ createEmptyMicro <- function(
   # Check for duplicate doses and disallow
   if(any(duplicated(doses)))
     ectdStop("duplicated doses in argument")
-  
+
   # The names of the columns must include the string "doseCol"
   if(doseCol %!in% microColumnNames)
   	ectdStop(paste(doseCol, "does not occur in the microColumnNames"))
- 
+
   result <- as.data.frame(matrix(nrow = length(doses), ncol = length(microColumnNames)))
   names(result) <- microColumnNames
   result[doseCol] <- doses
   result
-}                                  
+}

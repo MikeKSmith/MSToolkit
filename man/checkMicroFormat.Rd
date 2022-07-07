@@ -40,7 +40,6 @@ If any of these fail it will stop or return a NULL structure
   doseCol = "DOSE",
   mustHaveDose = TRUE)
 
-
 }
 \seealso{
 \code{\link{createEmptyMicro}}

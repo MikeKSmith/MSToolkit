@@ -45,6 +45,7 @@ exported) \code{.log} function.
   setEctdLogFile   (oldlf  )
 
 }
+
 }
 \seealso{
 \code{\link{options}} provides a similar mechanism for R options.

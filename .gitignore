@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 MSToolkit.Rproj
+inst/doc
+docs

@@ -32,6 +32,7 @@ decomposition.
   C <- matrix( c( -2, 1, 0, 1, -2, 1, 0, 1, -2 ), nrow=3, byrow=TRUE )
   checkSymmetricPDMatrix(C)
   }
+
 }
 \author{
 Romain Francois

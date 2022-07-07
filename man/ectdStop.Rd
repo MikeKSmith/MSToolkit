@@ -43,11 +43,9 @@ they also do character interpolation. See examples.
 
 \examples{
 
-
   \dontrun{
      ectdStop("something wrong happened")
   }
-
 
 }
 \seealso{

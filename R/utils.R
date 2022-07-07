@@ -206,33 +206,34 @@
 	NULL
 }
 
-# .checkGridAvailable <- function(){
-#   suppressWarnings(require(parallel, quietly = TRUE))
-# }
+.checkGridAvailable <- function(){
+  suppressWarnings(requireNamespace("parallel", quietly = TRUE))
+  }
+
+
+.splitGridVector <- function(vec, nReps = 100) {
+  startVec <- rep(1:ceiling(length(vec)/nReps), each=nReps)[1:length(vec)]
+  if (any(startVec > 1) & sum(startVec == max(startVec)) < .1 * nReps) {
+    startVec[startVec == max(startVec)] <- max(startVec)-1
+  }
+  split(vec, startVec)
+}
 #
-# .splitGridVector <- function(vec, nReps = 100) {
-#   startVec <- rep(1:ceiling(length(vec)/nReps), each=nReps)[1:length(vec)]
-#   if (any(startVec > 1) & sum(startVec == max(startVec)) < .1 * nReps) {
-#     startVec[startVec == max(startVec)] <- max(startVec)-1
-#   }
-#   split(vec, startVec)
-# }
 #
-#
-# .ectdSasCall <- function(params,
-#   sasLoc = if (.Platform$OS.type == "windows") getEctdExternalPath("SASPATH_WIN") else getEctdExternalPath("SASPATH_UNIX"),
-#   macroLoc = file.path(path.package("MSToolkit"), "sasAnalysis.sas"),
-#   logFile = file.path(workingPath, "sasLogfile.log"),
-#   printFile = file.path(workingPath, "sasOutput.lst"),
-#   workingPath = getwd())
-# {
-# 	sasDir <- gsub( "\\\\[^\\]*$", "", sasLoc)
-# 	if(!file.exists(sasDir)) ectdStop("SAS is not available on the system: \n\t$sasLoc")
-# 	callOptions <- if (.Platform$OS.type == "windows") "-nosplash -icon -xmin -noxwait" else "-NOTERMINAL"
-# 	sasCall <- paste("\"", sasLoc, "\" -SYSIN \"", macroLoc, "\" -SYSPARM \"", params, "\" -LOG \"", logFile, "\" -PRINT \"", printFile, "\" ", callOptions, sep="")
-# 	.log("Calling SAS with call string: ", sasCall)
-# 	invisible(try(system(sasCall)))
-# }
+.ectdSasCall <- function(params,
+  sasLoc = if (.Platform$OS.type == "windows") getEctdExternalPath("SASPATH_WIN") else getEctdExternalPath("SASPATH_UNIX"),
+  macroLoc = file.path(path.package("MSToolkit"), "sasAnalysis.sas"),
+  logFile = file.path(workingPath, "sasLogfile.log"),
+  printFile = file.path(workingPath, "sasOutput.lst"),
+  workingPath = getwd())
+{
+	sasDir <- gsub( "\\\\[^\\]*$", "", sasLoc)
+	if(!file.exists(sasDir)) ectdStop("SAS is not available on the system: \n\t$sasLoc")
+	callOptions <- if (.Platform$OS.type == "windows") "-nosplash -icon -xmin -noxwait" else "-NOTERMINAL"
+	sasCall <- paste("\"", sasLoc, "\" -SYSIN \"", macroLoc, "\" -SYSPARM \"", params, "\" -LOG \"", logFile, "\" -PRINT \"", printFile, "\" ", callOptions, sep="")
+	.log("Calling SAS with call string: ", sasCall)
+	invisible(try(system(sasCall)))
+}
 
 
 .roundIt <- function( data, digits ){

@@ -106,6 +106,7 @@
 #'                               names = c("X", "Y", "Z"),
 #'                               digits = "2,3,2"  )
 #'
+#' @export
 createContinuousCovariates <- function(subjects,
                                        names,
                                        mean,
@@ -156,9 +157,15 @@ createContinuousCovariates <- function(subjects,
   if (maxDraws < 1)
     ectdStop("The maximum number of draws should be a positive integer")
 
-  if (!missing(digits) &&
-      digits < 0)
-    ectdStop("The `digits` argument must be positive")
+
+  if (!missing(digits)) {
+    for (i in 1:length(digits)) {
+      if (digits[i] < 0) {
+        ectdStop("The `digits` argument must be positive")
+      }
+      i = i + 1
+    }
+  }
 
   if (is.null(range)) {
     out <-

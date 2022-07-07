@@ -27,6 +27,7 @@
 #'
 #'   }
 #'
+#' @export
 "checkMacroFormat" <- function(
 	data    #@ Data to check
 )

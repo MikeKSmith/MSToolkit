@@ -2,7 +2,7 @@
 % Please edit documentation in R/parseCovMatrix.R
 \name{parseCovMatrix}
 \alias{parseCovMatrix}
-\title{Parse input to construct a covariance matrix}
+\title{Parse a covariance matrix}
 \usage{
 parseCovMatrix(values, nCov, tol = 1e-06)
 }

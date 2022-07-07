@@ -46,7 +46,6 @@ replicates are found
 }
 \examples{
 
-
   \dontrun{
 	 getReplicates()
   }

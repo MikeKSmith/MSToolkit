@@ -18,6 +18,7 @@
 #' 	  checkColNames(LETTERS, c("A", "Hello"))
 #' 	}
 #'
+#' @export
 checkColNames <- function(dNames, cols) {
   validNames(cols)		# Check column names are valid inputs
   colTest <- cols %in% dNames

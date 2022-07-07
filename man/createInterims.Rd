@@ -82,7 +82,6 @@ results are not ordered.
                 package = "MSToolkit") )
   }
 
-
 }
 \author{
 Romain Francois

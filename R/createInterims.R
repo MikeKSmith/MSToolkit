@@ -61,7 +61,7 @@
 #'                 package = "MSToolkit") )
 #'   }
 #'
-#'
+#' @export
 createInterims <- function(
   subjects,
   proportion,

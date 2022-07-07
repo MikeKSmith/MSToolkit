@@ -27,11 +27,11 @@
 #' @keywords Replicates
 #' @examples
 #'
-#'
 #'   \dontrun{
 #' 	 getReplicates()
 #'   }
 #'
+#' @export
 "getReplicates" <- function(
 		path = "ReplicateData", 			#@ Path within which replicates are stored
 		prefix = "replicate", 				#@ Prefix for files in the directory

@@ -87,6 +87,32 @@ assign(
   envir = .ectdEnv
 )
 
+############################################################
+
+# This sets the paths of external system
+## Read the paths of external system
+external_path <- ini::read.ini(here::here("inst/ECTD.ini"))
+
+## Convert the original format to dataframe
+external_path <- tibble::rownames_to_column(data.frame(unlist(external_path)))
+
+## Correct the name of paths and the format of the paths
+n <- nrow(external_path)
+for (i in 1:n){
+  if(i <= n) {
+    external_path[i,1] <- gsub("\\..*","",external_path[i,1])
+    se_remove <- gsub(",$","",external_path[i,2])
+    external_path[i,2] <- gsub("([[:print:]])\\1+","\\1",se_remove)
+  }
+}
+
+ectdIni <- tidyr::pivot_wider(external_path,
+                              names_from = names(external_path[1]),
+                              values_from = names(external_path[2]))
+
+## Assign the external paths
+assign("externalPaths", ectdIni, envir = .ectdEnv)
+############################################################
 #######################################################################################################
 
 ## The rest of this script sets the access functions for the meta layer
@@ -142,6 +168,8 @@ getEctdVerbose <- function()
 #'   setEctdLogFile   (oldlf  )
 #'
 #' }
+#'
+#' @export
 setEctdVerbose <- function(verbose) {
   if (missing(verbose))
     ectdStop("Must provide verbose flag")
@@ -206,6 +234,8 @@ getEctdDataMethod <-
 #' 	setEctdDataMethod(nowMethod)
 #'
 #' }
+#'
+#' @export
 setEctdDataMethod <- function(method) {
   if (missing(method))
     ectdStop("Must provide a data storage method: 'CSV', 'RData' or 'Internal'")
@@ -214,6 +244,7 @@ setEctdDataMethod <- function(method) {
   invisible(method)
 }
 
+#' @export
 # Get & Set external execution path
 getEctdExternalPath <- function(pathName) {
   getPaths <- get("externalPaths", envir = .ectdEnv)
@@ -224,10 +255,10 @@ getEctdExternalPath <- function(pathName) {
     if (!is.character(pathName) ||
         length(pathName) != 1)
       ectdStop("Single character value should be provided as the 'pathName' input")
-    if (pathName %in% names(getPaths))
-      return(getPaths[pathName])
-    else
-      ectdStop(paste("Could not find external path '", pathName, "'", sep = ""))
+    if (any(pathName %in% names(getPaths))){
+      return(noquote(strsplit(getPaths[pathName][[1]], "\\s*=\\s*")[[1]]))}
+    else{
+      ectdStop(paste("Could not find external path '", pathName, "'", sep = ""))}
   }
 }
 
@@ -262,6 +293,8 @@ getEctdExternalPath <- function(pathName) {
 #' 	getEctdExternalPath("SASPATH_WIN")		# Get the "SAS Execution on Windows" path
 #'
 #' }
+#'
+#' @export
 setEctdExternalPath <- function(pathName, Value) {
   if (missing(pathName) ||
       !is.character(pathName) ||
@@ -273,7 +306,15 @@ setEctdExternalPath <- function(pathName, Value) {
     ectdStop("Single character value should be provided as the 'Value' input")
   getPaths <- get("externalPaths", envir = .ectdEnv)
   getPaths <- getPaths [setdiff(names(getPaths), pathName)]
+  remaining_name <- names(getPaths[setdiff(names(getPaths), pathName)]) # Extract the remaining name of the paths
   getPaths <- c(getPaths, Value)
+  # Correct the format of the remaining path(s)
+  n = length(remaining_name)
+  for(i in 1:n){
+    if(i <=n){
+      getPaths[remaining_name][[i]] <- noquote(strsplit(getPaths[remaining_name][[i]], "\\s*=\\s*")[[1]])
+    }
+  }
   names(getPaths)[length(getPaths)] <- pathName
   assign("externalPaths", getPaths, envir = .ectdEnv)
   invisible(getPaths)
@@ -342,6 +383,8 @@ setEctdExternalPath <- function(pathName, Value) {
 #' 	getEctdPossibleColNames("Subject")
 #' 	matchEctdColNames ("Subject", c("A", "SUBJ", "B"))
 #' }
+#'
+#' @export
 getEctdColName <- function(colName) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -363,6 +406,8 @@ getEctdColName <- function(colName) {
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param Value (Required) Value to which to set the default column name
+#'
+#' @export
 setEctdColName <- function(colName, Value) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -390,6 +435,8 @@ setEctdColName <- function(colName, Value) {
 #'
 #' @param whichNames Column types for which to reset the default name (default
 #' all)
+#'
+#' @export
 resetEctdColNames <- function(whichNames = names(getNames)) {
   getNames <- get("colNames", envir = .ectdEnv)
   if (!is.character(whichNames))
@@ -408,6 +455,8 @@ resetEctdColNames <- function(whichNames = names(getNames)) {
 #' @param colName (Required) The "column type" of the variable name of interest
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
+#'
+#' @export
 getEctdPossibleColNames <- function(colName) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -431,6 +480,8 @@ getEctdPossibleColNames <- function(colName) {
 #' (one of 'Subject', 'Time', 'Dose', 'Interim', 'ParOmit', 'RespOmit',
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param Value (Required) Value to which to set the default column name
+#'
+#' @export
 setEctdPossibleColNames <- function(colName, Value) {
   if (missing(colName) ||
       !is.character(colName) ||
@@ -459,6 +510,8 @@ setEctdPossibleColNames <- function(colName, Value) {
 #' 'Response', 'Trt', 'Missing', 'Replicate', 'DrugName' and 'Drug')
 #' @param dataNames (Required) Column names against which to match the possible
 #' set of column names
+#'
+#' @export
 matchEctdColNames <- function(colName, dataNames) {
   colList <- getEctdPossibleColNames(colName)
   if (!any(myTest <- colList %in% dataNames))
@@ -466,4 +519,3 @@ matchEctdColNames <- function(colName, dataNames) {
   else
     colList[myTest][1]
 }
-

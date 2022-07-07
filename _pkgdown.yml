@@ -1,0 +1,24 @@
+url: ~
+template:
+  bootstrap: 5
+
+
+navbar:
+  components:
+    home: ~
+    intro:
+      text: Get started
+      href: articles/MSToolkit_intro_vig.html
+    articles:
+      text: Articles
+      menu:
+      - text: generateData
+        href: articles/generate_data.html
+      - text: analyzeData
+        href: articles/analyze_data.html
+      - text: -------
+      - text: "Background Reading"
+      - text: Simulation Overview
+        href: articles/simulation_overview.html
+      - text: References
+        href: articles/references.html

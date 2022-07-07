@@ -48,19 +48,28 @@ is multiplied by "1 + the residual error".
 \note{
 In earlier versions of MSToolkit, the "Proportional" Error Structure
 behaved differently (it assumed parameters passed were on the log scale).
-  
+
 MSToolkit currently has a limit of two residual error
-variances / covariances to create additive, proportional or combined 
-additive + proportional error structures. At this time MSToolkit cannot 
-simulate from time-series or complex residual variance structures i.e. 
+variances / covariances to create additive, proportional or combined
+additive + proportional error structures. At this time MSToolkit cannot
+simulate from time-series or complex residual variance structures i.e.
 multi-variate Normal distributions with number of error terms = number of
 observations.
 }
 \examples{
 
   myVec <- 1:10
-  addResidualError(response = myVec, covariance = "1" )
+  addResidualError(response = myVec, covariance = "1")
 
+}
+\seealso{
+This function is typically not directly called by the user, but
+rather called by the function \code{\link{createResponse}} that is the
+high-level function for the response component.
+
+The function \code{\link{createResponseVariable}} is also in the response
+component.  It create the the response onto which \code{addResidualError}
+adds error.
 }
 \author{
 Romain Francois, Rich Pugh
