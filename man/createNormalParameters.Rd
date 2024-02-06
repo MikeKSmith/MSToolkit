@@ -98,15 +98,16 @@ specifies between subject variability in the parameters.
 
 If fixed and between subject effects have been generated, the "errStruc"
 input will specify how the between subject effects are to be applied:
-
-  * None = Keep between subject effect separate (and use the "suffix"
-  supplied to name the variables)
-  * Additive = Add each between subject effect to the corresponding fixed
-  effect
-  * Proportional = Multiply the fixed effect by the exponentiated between
-  subject effect
-  * Log-Normal = Add "1 + each between subject effect" to the corresponding
-  fixed effect
+\itemize{
+\item None = Keep between subject effect separate (and use the "suffix"
+supplied to name the variables)
+\item Additive = Add each between subject effect to the corresponding fixed
+effect
+\item Proportional = Multiply the fixed effect by the exponentiated between
+subject effect
+\item Log-Normal = Add "1 + each between subject effect" to the corresponding
+fixed effect
+}
 
 If the "range" argument is provided, the output from the above algorithm
 (fixed + between) is checked against the acceptance range.  If the data is

@@ -52,7 +52,6 @@ exData[ eval(subs1, exData), ]
 
 expr <- parseRCode("rnorm(30)")
 eval( expr )
-
 }
 \seealso{
 \code{\link{subset}}, \code{\link{parse}}

@@ -38,7 +38,7 @@ CompileSummary does not return a value.
 This function reads all of the micro evaluation or macro evaluation data and
 amalgamates it into a single data frame which has an additional column
 indicating which replicate each row belongs to.  This data frame is then
-written to "m[ia]croSummary.csv".
+written to "microSummary.csv" or "macroSummary.csv".
 }
 \details{
 Builds the path to each existing Micro or Macro file to be compiled.  Reads

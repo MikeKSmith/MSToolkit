@@ -41,7 +41,7 @@ Summarize simulated trial mean responses
 The input data is checked, and the "alpha" value is parsed using
 \link{checkSimAlpha} Response means, medians, minima, maxima and "number of
 non-missing values" are calculated by any "by" variables (\code{bVar}) Lower
-and upper alpha\% intervals are calculated using either the "Gaussian" or
+and upper alpha\\% intervals are calculated using either the "Gaussian" or
 "Quantile" method
 }
 \author{

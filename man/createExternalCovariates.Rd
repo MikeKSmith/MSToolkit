@@ -53,7 +53,7 @@ by default}
 
 \item{percent}{(Optional) When a subset is performed on the input data, if
 the number of rows remaining in the dataset after subset is less than
-\code{percent} \%, the function will issue a warning.  By default, 20\% is
+\code{percent} \\%, the function will issue a warning.  By default, 20\\% is
 used}
 
 \item{seed}{(Optional) Random generator seed to use.  The current random

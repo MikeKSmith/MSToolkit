@@ -6,7 +6,7 @@
 \alias{MSToolkit-package}
 \title{MSToolkit: The MSToolkit Library For Clinical Trial Design}
 \description{
-Simulate data, analysis this data and assess operating characteristcs of clinical trials.
+Simulate data, analyse this data and assess operating characteristcs of clinical trials.
 }
 \seealso{
 Useful links:

@@ -62,13 +62,13 @@ readData <- function(
 		# Get the location of the file containing the specified data element
 		fullPath <- .dataGetFullPath(dataNumber = dataNumber, dataType = dataType, workingPath = workingPath, method = method)
 		# Read the data
-		try(.readAndCheckInputFile(fullPath, variables))
+		.readAndCheckInputFile(fullPath, variables)
 	},
 	"RData" = {
 		# Get the location of the file containing the specified data element
 		fullPath <- .dataGetFullPath(dataNumber = dataNumber, dataType = dataType, workingPath = workingPath, method = method)
 		# Read the data
-		try(.readFromRData(fullPath, variables))
+		.readFromRData(fullPath, variables)
 	},
 	"Internal" = {
 		try(.ectdEnv$DataStore[[dataNumber]])

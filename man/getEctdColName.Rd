@@ -52,48 +52,52 @@ data
 }
 \details{
 The functions provide the following capabilities:
-  * getEctdColName - Gets the current default column name given a column
-  type
-  * setEctdColName - Sets the current default column name for a column
-  type
-  * resetEctdColNames - Resets the current default column names to their
-   initial state
-   * getEctdPossibleColNames - Gets the set of possible column names given a
+\itemize{
+\item getEctdColName - Gets the current default column name given a column
+type
+\item setEctdColName - Sets the current default column name for a column
+type
+\item resetEctdColNames - Resets the current default column names to their
+initial state
+\item getEctdPossibleColNames - Gets the set of possible column names given a
 column type
-  * setEctdPossibleColNames - Sets the set of possible column names
+\item setEctdPossibleColNames - Sets the set of possible column names
 given a column type
-  * matchEctdColNames - Selects a column name from a set of
+\item matchEctdColNames - Selects a column name from a set of
 names that best matches the possible column type names
+}
 
 The set of possible "column types" are:
-  * Subject - Subject column
-  * Dose - Dose column
-  * Time - Time column
-  * Replicate - Replicate column names
-  * Interim - Interim allocation column name
-  * ParOmit - Parameter "omit" flag column name
-  * RespOmit - Response "omit" flag column name
-  * Response - Response column name
-  * Trt - Treatment column name
-  * Missing - Parameter "omit" flag column name
-  * DrugName - Name of column containing the "Drug Name" (used in typical
-  value simulations)
-  * Drug - Name of column containing the "Drug Value" (used in typical
-  value simulations)
+\itemize{
+\item Subject - Subject column
+\item Dose - Dose column
+\item Time - Time column
+\item Replicate - Replicate column names
+\item Interim - Interim allocation column name
+\item ParOmit - Parameter "omit" flag column name
+\item RespOmit - Response "omit" flag column name
+\item Response - Response column name
+\item Trt - Treatment column name
+\item Missing - Parameter "omit" flag column name
+\item DrugName - Name of column containing the "Drug Name" (used in typical
+value simulations)
+\item Drug - Name of column containing the "Drug Value" (used in typical
+value simulations)
+}
 }
 \section{Functions}{
 \itemize{
-\item \code{setEctdColName}: 
+\item \code{setEctdColName()}: 
 
-\item \code{resetEctdColNames}: 
+\item \code{resetEctdColNames()}: 
 
-\item \code{getEctdPossibleColNames}: 
+\item \code{getEctdPossibleColNames()}: 
 
-\item \code{setEctdPossibleColNames}: 
+\item \code{setEctdPossibleColNames()}: 
 
-\item \code{matchEctdColNames}: 
+\item \code{matchEctdColNames()}: 
+
 }}
-
 \examples{
 \dontrun{
 	getEctdColName("Subject")

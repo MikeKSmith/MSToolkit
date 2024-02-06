@@ -1,7 +1,7 @@
 setEctdDataMethod("CSV")
 
-unitTestPath <- MSToolkit:::testthat_path
-analyseRep.datapath <- file.path(unitTestPath, "data", "analyseRep")
+analyseRep.datapath <- test_path("data", "analyseRep")
+
 cat("analyseRep.datapath:", analyseRep.datapath, "\n")
 
 test_that("test_analyzeRep_rep", {

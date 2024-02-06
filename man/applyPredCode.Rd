@@ -34,7 +34,12 @@ dataset}
 \link{getEctdVerbose} by default)}
 
 \item{model}{File containing analysis code (for R or SAS) or an R function
-for analysis (R only)}
+for analysis (R only)
+parsePredCode(c(
+"X = 1",
+"IF (X.EQ.1.OR.Y.GT.0) STUD = 1",
+"NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
+))}
 }
 \value{
 A dataset with new columns added
@@ -52,12 +57,14 @@ statements to the data ("df"), producing a textual report of the process if
 are then returned
 }
 \examples{
-parsePredCode(c(
-	"X = 1",
-	"IF (X.EQ.1.OR.Y.GT.0) STUD = 1",
- 	"NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
-))
-
+applyPredCode(
+df = data.frame(X = 1:5, TH1 = rep(1, 5),
+ TH2 = rep(2, 5), ETA1 = rep(3, 5), EPS1 = rep(4, 5)), 
+pred = parsePredCode(c("TEST = 1","XCOPY = X","TH2COPY = THETA(2)",
+"Y = XCOPY + LOG(THETA(1)) + THETA(2)**2 + ETA(1) + SQRT(EPS(1)) + 1")),
+             respCol ="RESP",
+             report = FALSE, 
+             keepCols = c("TEST", "XCOPY", "TH2COPY", "RESP"))
 }
 \author{
 Mike K Smith \email{mstoolkit@googlemail.com}

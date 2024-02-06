@@ -64,7 +64,6 @@ numeric vector will be returned.
   file.show( system.file( "Runit", "runit.supportfunctions.R" ,
     package = "MSToolkit"))
   }
-
 }
 \seealso{
 \code{\link{parseHashString}} uses \code{parseCharInput}

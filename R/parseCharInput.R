@@ -40,7 +40,7 @@
 #'   file.show( system.file( "Runit", "runit.supportfunctions.R" ,
 #'     package = "MSToolkit"))
 #'   }
-#'
+#'@export
 parseCharInput <- function(input,
                            convertToNumeric = TRUE,
                            sort = FALSE,

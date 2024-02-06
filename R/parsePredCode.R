@@ -2,7 +2,12 @@
 #'
 #' @param model File containing analysis code (for R or SAS) or an R function
 #' for analysis (R only)
-#'
+#' parsePredCode(c(
+#' 	"X = 1",
+#' 	"IF (X.EQ.1.OR.Y.GT.0) STUD = 1",
+#'  	"NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
+#' ))
+#' @export
 "parsePredCode" <- function(
   model,
   respCol = getEctdColName("Response")

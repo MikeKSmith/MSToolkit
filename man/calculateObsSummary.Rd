@@ -70,8 +70,8 @@ If respType is "Continuous": * Mean responses are calculated by Subject
 (\code{idCol}), Dose (\code{doseCol}), Time (\code{timeCol}), and any by
 variables ((\code{bVar}) * The following summaries are then created (based
 on any by variables (\code{bVar})) - Mean - Median - Minimum - Maximum -
-Number of non-missing values - Lower alpha\% percent interval - Upper
-alpha\% percent interval
+Number of non-missing values - Lower alpha\\% percent interval - Upper
+alpha\\% percent interval
 
 When dealing with categorical responses, it is possible that the unique set
 of responses could be (say): 1, 2, 4, 5 In this case, it is unclear as to

@@ -38,9 +38,9 @@ they also do character interpolation. See examples.
 }
 \section{Functions}{
 \itemize{
-\item \code{ectdWarning}: Error handling functions for the ectd package.
-}}
+\item \code{ectdWarning()}: Error handling functions for the ectd package.
 
+}}
 \examples{
 
   \dontrun{

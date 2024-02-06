@@ -1,9 +1,8 @@
 setEctdDataMethod("CSV")
 resetEctdColNames()
 
-systemTestPath <- MSToolkit:::testthat_path
-interimPath <- file.path(systemTestPath, "systemTest", "data", "Interim")
-scriptsPath <- file.path(systemTestPath, "systemTest", "data", "Scripts")
+interimPath <- test_path("systemTest", "data", "Interim")
+scriptsPath <- test_path( "systemTest", "data", "Scripts")
 
 test_that("test.analyseData.BasicAnalysis", {
 

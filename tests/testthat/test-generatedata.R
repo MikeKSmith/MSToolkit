@@ -1,8 +1,8 @@
 setEctdDataMethod("CSV")
 
-systemTestPath <- MSToolkit:::systemTest_path
-covariatesDataFile <- file.path(systemTestPath, "data", "testCovariates.csv")
-parametersDataFile <- file.path(systemTestPath, "data", "testParam.csv")
+
+covariatesDataFile <- test_path("data","createCovariates" ,"testCovariates.csv")
+parametersDataFile <- test_path("data", "createParameters","testParam.csv")
 resetEctdColNames()
 
 test_that("test.generateData.call1", {
@@ -342,6 +342,7 @@ test_that("test.generateData.call3", {
   # Check refCol in parameters
   importPars <- read.csv(parametersDataFile, sep=",", header=TRUE)
   importPars <- importPars[!duplicated(importPars$ID), c("ID", "B1", "B2")]
+  
   names(importPars) <- c("ID", "Orig1", "Orig2")
   importPars <- merge(importPars, x5[,c("ID.refCol", "B1", "B2")], by.x="ID", by.y="ID.refCol")
   expect_true(all(round(importPars$B1 - importPars$Orig1, 3) == 0), info = "Check reference column functionality")
@@ -390,7 +391,7 @@ test_that("test.generateData.testDelimiters", {
 
   # Try a high level call for each file type
   for (i in otherFiles) {
-    file.copy( file.path(systemTestPath, "data", i), testDelims)
+    file.copy( test_path("systemTest","data", i), testDelims)
     genCall3 <- try(generateData(replicateN = 1, subjects = 10, treatDoses = 1,
                                  extParNames = "E0,ED50,EMAX", extParBtwNames = "B1,B2", extParBtwNums = c(1, 3),
                                  extParErrStruc = "None", extParDataId = "ID",
@@ -913,26 +914,25 @@ test_that("test.generateData.timevarying", {
   expect_equal(c("SUBJ", "TIME", "TRT", "DOSE", "T1", "T2", "DisCov1", "DisCov2" ), names(x[[1]])[1:8])
 
   resetEctdColNames()
-  genCalltime2 <- try(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,
-                                   disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
-                                   timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9", rep(5, 3)), timeCovVCov = list(1, 1:3), timeCovCrit = list("T1>0", "T2>0"),
-                                   genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
-                                   genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
-                                   respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
-                                   workingPath = workPath))
-  resetEctdColNames()
-  expect_true(inherits(genCalltime2, "try-error"))
+  
+ 
+  expect_error(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,
+                            disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
+                            timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9", rep(5, 3)), timeCovVCov = list(1, 1:3), timeCovCrit = list("T1>0", "T2>0"),
+                            genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
+                            genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
+                            respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
+                            workingPath = workPath))
 
+   
   resetEctdColNames()
-  genCalltime3 <- try(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30),
-                                   disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
-                                   timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9", rep(5, 3)), timeCovVCov = list(1, 1:3), timeCovCrit = list("T1>0", "T2>0"),
-                                   genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
-                                   genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
-                                   respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
-                                   workingPath = workPath))
-  resetEctdColNames()
-  expect_true(inherits(genCalltime3, "try-error"))
+  expect_error(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30),
+                           disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
+                           timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9", rep(5, 3)), timeCovVCov = list(1, 1:3), timeCovCrit = list("T1>0", "T2>0"),
+                           genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
+                           genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
+                           respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
+                           workingPath = workPath))
 
   resetEctdColNames()
   genCalltime4 <- try(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,

@@ -9,7 +9,7 @@ test_that("test.analysis.macro", {
   expect_error(macroEvaluation(interimCol = "=08fewik3"),
                info = "interim not valid")
 
-  microData <- MSToolkit:::microData
+  microData <- MSToolkit::microData
   expect_error(macroEvaluation(doseCol = "D", data = microData),
                info = "dose not in the data")
   expect_error(macroEvaluation(interimCol = "I", data = microData),

@@ -16,7 +16,7 @@ Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                     role = c("ctb"))
                   )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
-Description: Simulate data, analysis this data and assess operating 
+Description: Simulate data, analyse this data and assess operating 
     characteristcs of clinical trials.
 Encoding: UTF-8
 LazyData: true
@@ -39,7 +39,7 @@ Imports:
     utils,
     stats
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 License: MIT + file LICENSE
 URL: https://github.com/MikeKSmith/MSToolkit

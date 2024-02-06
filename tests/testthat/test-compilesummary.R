@@ -1,7 +1,6 @@
 setEctdDataMethod("CSV")
-unitTestPath <- MSToolkit:::testthat_path
-compileSummary.datapath <- file.path(unitTestPath, "data", "compileSummary")
-compileSummary2.datapath <- file.path(unitTestPath, "data", "compileSummary2")
+compileSummary.datapath <- test_path("data", "compileSummary")
+compileSummary2.datapath <- test_path("data", "compileSummary2")
 cat("compileSummary.datapath:", compileSummary.datapath, "\n")
 cat("compileSummary2.datapath:", compileSummary.datapath, "\n")
 

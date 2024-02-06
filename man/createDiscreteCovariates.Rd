@@ -46,14 +46,16 @@ A data frame.
 \description{
 The \code{values} and \code{probs} argument are parsed using the
 \code{\link{parseHashString}} helper function. They could be either :
-  - a vector giving the values for each variable.
-    \code{c("1,2", "1,2,3")} would mean that the first variable takes values
-    1 and 2, and the second variable takes values 1, 2 and 3.
-  - a list giving the values for each variable.
-  \code{list(c(1,2), c(1,2,3))} would mean that the first variable takes
-  values 1 and 2, and the second variable takes values 1, 2 and 3.
-  - a compact notation using the hash symbol to separate variables
-  \code{"1,2#1,2,3"}
+\itemize{
+\item a vector giving the values for each variable.
+\code{c("1,2", "1,2,3")} would mean that the first variable takes values
+1 and 2, and the second variable takes values 1, 2 and 3.
+\item a list giving the values for each variable.
+\code{list(c(1,2), c(1,2,3))} would mean that the first variable takes
+values 1 and 2, and the second variable takes values 1, 2 and 3.
+\item a compact notation using the hash symbol to separate variables
+\code{"1,2#1,2,3"}
+}
 }
 \details{
 Additionally for the \code{probs} argument, a check is performed to make
