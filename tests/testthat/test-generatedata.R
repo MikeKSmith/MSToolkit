@@ -922,7 +922,8 @@ test_that("test.generateData.timevarying", {
                             genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
                             genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
                             respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
-                            workingPath = workPath))
+                            workingPath = workPath),
+               regexp = "the length of `treatPeriod` must be equal to the number of time points")
 
    
   resetEctdColNames()
@@ -932,20 +933,33 @@ test_that("test.generateData.timevarying", {
                            genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
                            genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
                            respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
-                           workingPath = workPath))
+                           workingPath = workPath),
+               regexp = "`treatPeriod` is required when creating time-varying covariates")
 
   resetEctdColNames()
-  genCalltime4 <- try(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,
+  expect_warning(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,
                                    disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
                                    timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9,3.1", rep(5, 4)), timeCovCrit = list("T1>0", "T2>0"),
                                    genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
                                    genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
                                    respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
-                                   workingPath = workPath))
+                                   workingPath = workPath),
+               regexp = "there is only 1 covariance matrix, use it for all the time point")
+  
   resetEctdColNames()
-  x <- lapply(3:4, readData, dataType="Replicate", workingPath = workPath)
-  expect_equal(parseCharInput("2.3,2.5,2.9,3.1"), unique(x[[1]]$T1))
+  unlink(file.path(workPath, "ReplicateData"), recursive = TRUE)
+  suppressWarnings(generateData(replicateN = 2, subjects = 500, treatDoses = c(0, 15, 30), treatPeriod = 0:3,
+               disCovNames = "DisCov1,DisCov2", disCovVals="1,2#1,2,3", disCovProbArray = rbind(c(.1, .1, .3), c(.3, .1, .1)),
+               timeCovNames = "T1,T2", timeCovMean  = list("2.3,2.5,2.9,3.1", rep(5, 4)),
+               timeCovCrit = list("T1>0", "T2>0"), timeCovVCov = 0,
+               genParNames = c("E0","ED50","EMAX"), genParMean = c(0, 50, 10), genParVCov=diag(c(1, 0, 0)),
+               genParBtwNames = c("E0", "EMAX"), genParBtwVCov = diag(2), genParErrStruc = "None",
+               respEqn = respFun, covDiff = FALSE, treatDiff = FALSE, seed=1, parBtwSuffix=".Extra", deleteCurrData = FALSE,
+               workingPath = workPath))
+  
+  x <- readData(dataNumber = 1, dataType="Replicate", workingPath = workPath)
+  expect_equal(parseCharInput("2.3,2.5,2.9,3.1"), unique(x$T1))
   cat(workPath)
-  unlink(workPath, recursive = TRUE)
+  unlink(file.path(workPath), recursive = TRUE)
   invisible(NULL)
 })

@@ -1,5 +1,6 @@
 test_that("test.summarizeTrialMeans", {
 
+  set.seed(12345)
   # Generate summary data
   myDf <- data.frame(Y1=rnorm(100), Y2=rnorm(100), Y3=rnorm(100),
                      X1=sample(1:3, 100, T), X2=sample(1:3, 100, T), X3=sample(1:3, 100, T))
@@ -24,14 +25,14 @@ test_that("test.summarizeTrialMeans", {
   expect_error(summarizeTrialMeans(myDf, "Y1", bVar = "X1", alpha = "hello"), info = "Wrong alpha")
 
   # Calculate summaries using summarizeTrialMeans
-  qSummaryList <- lapply(1:3,
+  qSummaryList <- suppressWarnings(lapply(1:3,
                          function(i, df, yVars, xVars, alphaVec)
                            summarizeTrialMeans(df, yVars[i], xVars[1:i], alpha=alphaVec[i], digits=i + 1, method="Q"),
-                         df=myDf, yVars = yVars, xVars = xVars, alphaVec = alphaVec)
-  gSummaryList <- lapply(1:3,
+                         df=myDf, yVars = yVars, xVars = xVars, alphaVec = alphaVec))
+  gSummaryList <- suppressWarnings(lapply(1:3,
                          function(i, df, yVars, xVars, alphaVec)
                            summarizeTrialMeans(df, yVars[i], xVars[1:i], alpha=alphaVec[i], digits=i + 1, method="G"),
-                         df=myDf, yVars = yVars, xVars = xVars, alphaVec = alphaVec)
+                         df=myDf, yVars = yVars, xVars = xVars, alphaVec = alphaVec))
 
   # Function for recreating data explicitly
   summaryFun <- function(x, method="q", alpha=95, digits=2) {
@@ -97,3 +98,4 @@ test_that("test.summarizeTrialMeans", {
   dimnames(check6) <- NULL
   expect_equal(check6, gData.Y3.99, info = "Gaussian method, alpha = 99%, digits = 4")
 })
+

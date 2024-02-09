@@ -28,9 +28,8 @@ test_that("test.performAnalysis", {
   myDf$RESP <- log(with(myDf, abs(exp(sqrt(DOSE) + 1 + rnorm(nrow(myDf))))))
 
   # Perform analysis
-  whichPath <- test_path("SystemTest","data","Scripts")
+  whichPath <- test_path("systemTest","data","Scripts")
   out1 <- performAnalysis("rAnalysisScript.R", data = myDf, workingPath = whichPath)
-
   # Tests
   expect_true(is.data.frame(out1) & all(names(out1) == c("DOSE", "Mean", "Lower", "Upper", "N")))
   expect_true(all(out1$N == 20))
