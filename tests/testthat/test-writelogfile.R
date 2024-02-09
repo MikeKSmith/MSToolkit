@@ -23,11 +23,14 @@ test_that("test.writeLogFile", {
   # Test2: check invalid values
   testVec2 <- c("PEND", "WAIT", "X", "Y", "Z", "ZOMBI")
   expect_error(writeLogFile(testVec2, Sys.time(), workingPath = tempDir),
-               info = "Check invalid values for status input", silent = TRUE)
+               regexp = "Input vector contains unknown status values", 
+               fixed = TRUE)
   expect_error(writeLogFile(testVec1, 1:5, workingPath = tempDir),
-               info = "Check invalid input for starting time", silent = TRUE)
+               regexp = "Must supply a single starting time",
+               fixed = TRUE)
   expect_error(writeLogFile(character(0), Sys.time(), workingPath = tempDir),
-               info = "Check no input for status field", silent = TRUE)
+               regexp = "Input vector is empty", 
+               fixed = TRUE)
 
   # Test3: All jobs completed
   testVec3 <- rep(c("DONE", "EXIT"), each = 10)

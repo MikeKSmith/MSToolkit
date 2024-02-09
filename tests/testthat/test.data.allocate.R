@@ -16,8 +16,10 @@ test_that("test.data.allocate.names", {
 })
 
 test_that("test.data.allocate.ordered", {
-    al <- allocateTreatments(trts = 4, subjects = 10, prop = ".3,.3,.1,.3",
-        ordered = TRUE)
+    al <- try(allocateTreatments(trts = 4, 
+                                 subjects = 10, 
+                                 prop = ".3,.3,.1,.3",
+                                 ordered = TRUE))
     expect_false(is.unsorted(al$TRT))
     al <- allocateTreatments(trts = 4, subjects = c(2, 2, 3,
         4), ordered = TRUE)
@@ -32,22 +34,22 @@ test_that("test.data.allocate.ordered", {
     expect_true(all(names(al) == c("ID", "tr")))
 })
 #
-# test_that("test.data.allocate.repeatedTreatments", {
-#     generateData(5, 20, treatSubj = c(3, 4, 3), treatDoses = c(0,
-#         15, 30), respEqn = "DOSE")
-#     x <- readAllData()
-#     expect_true(all(sapply(split(x$TRT, x$Replicate), function(x) all(x[1:10] ==
-#         x[11:20]))))
-#     expect_false(all(x$TRT[x$Replicate == 1] == x$TRT[x$Replicate ==
-#         2]))
-#     generateData(5, 20, treatSubj = c(3, 4, 3), treatDoses = c(0,
-#         15, 30), respEqn = "DOSE", treatDiff = FALSE)
-#     x <- readAllData()
-#     expect_true(all(sapply(split(x$TRT, x$Replicate), function(x) all(x[1:10] ==
-#         x[11:20]))))
-#     expect_true(all(x$TRT[x$Replicate == 1] == x$TRT[x$Replicate ==
-#         2]))
-# })
+test_that("test.data.allocate.repeatedTreatments", {
+    generateData(5, 20, treatSubj = c(3, 4, 3), treatDoses = c(0,
+        15, 30), respEqn = "DOSE")
+    x <- readAllData()
+    expect_true(all(sapply(split(x$TRT, x$Replicate), function(x) all(x[1:10] ==
+        x[11:20]))))
+    expect_false(all(x$TRT[x$Replicate == 1] == x$TRT[x$Replicate ==
+        2]))
+    generateData(5, 20, treatSubj = c(3, 4, 3), treatDoses = c(0,
+        15, 30), respEqn = "DOSE", treatDiff = FALSE)
+    x <- readAllData()
+    expect_true(all(sapply(split(x$TRT, x$Replicate), function(x) all(x[1:10] ==
+        x[11:20]))))
+    expect_true(all(x$TRT[x$Replicate == 1] == x$TRT[x$Replicate ==
+        2]))
+})
 
 test_that("test.data.allocate.vectorOfVals", {
     al <- allocateTreatments(trts = 1:2, subjects = 10)
