@@ -4,15 +4,6 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/MSToolkit_intro_vig.html</loc>
-  </url>
-  <url>
     <loc>/articles/analyze_data.html</loc>
   </url>
   <url>
@@ -20,6 +11,9 @@
   </url>
   <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/MSToolkit_intro_vig.html</loc>
   </url>
   <url>
     <loc>/articles/references.html</loc>
@@ -34,10 +28,13 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/reference/MSToolkit-package.html</loc>
+    <loc>/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>/news/index.html</loc>
   </url>
   <url>
     <loc>/reference/addResidualError.html</loc>
@@ -169,6 +166,15 @@
     <loc>/reference/macroEvaluation.html</loc>
   </url>
   <url>
+    <loc>/reference/microData.html</loc>
+  </url>
+  <url>
+    <loc>/reference/microSummary.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MSToolkit-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/parseCharInput.html</loc>
   </url>
   <url>
@@ -178,10 +184,10 @@
     <loc>/reference/parseHashString.html</loc>
   </url>
   <url>
-    <loc>/reference/parseRCode.html</loc>
+    <loc>/reference/parseRangeCode.html</loc>
   </url>
   <url>
-    <loc>/reference/parseRangeCode.html</loc>
+    <loc>/reference/parseRCode.html</loc>
   </url>
   <url>
     <loc>/reference/performAnalysis.html</loc>
@@ -194,6 +200,9 @@
   </url>
   <url>
     <loc>/reference/removeDirectories.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ReplicateSample.html</loc>
   </url>
   <url>
     <loc>/reference/setEctdDataMethod.html</loc>

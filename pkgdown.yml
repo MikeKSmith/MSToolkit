@@ -1,11 +1,11 @@
-pandoc: 2.7.3
-pkgdown: 2.0.5
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  MSToolkit_intro_vig: MSToolkit_intro_vig.html
   analyze_data: analyze_data.html
   generate_data: generate_data.html
+  MSToolkit_intro_vig: MSToolkit_intro_vig.html
   references: references.html
   simulation_overview: simulation_overview.html
-last_built: 2022-07-07T18:36Z
+last_built: 2024-02-09T06:16Z
 
