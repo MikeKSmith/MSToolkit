@@ -1,7 +1,7 @@
 Package: MSToolkit
 Type: Package
 Title: The MSToolkit Library For Clinical Trial Design
-Version: 3.3.0
+Version: 3.3.1
 Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                     role = c("aut", "cre")),
              person("Rich", "Pugh", email = "rpugh@mango-solutions.com",
@@ -13,7 +13,9 @@ Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                   person("Jian", "Li", 
                     role = c("ctb")),
                   person("Jinhao", "Luo",
-                    role = c("ctb"))
+                    role = c("ctb")),
+                  person("Iyer","Narayanan Seshan",
+                  role = c("ctb"))
                   )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
 Description: Simulate data, analyse this data and assess operating 
@@ -32,10 +34,10 @@ Imports:
     parallel,
     MASS,
     methods,
-    ini,
+    ini::read.ini,
     tibble,
     tidyr,
-    here,
+    here::here,
     utils,
     stats
 Roxygen: list(markdown = TRUE)

@@ -16,10 +16,10 @@ test_that("test.data.allocate.names", {
 })
 
 test_that("test.data.allocate.ordered", {
-    al <- try(allocateTreatments(trts = 4, 
+    al <- suppressWarnings((allocateTreatments(trts = 4, 
                                  subjects = 10, 
                                  prop = ".3,.3,.1,.3",
-                                 ordered = TRUE))
+                                 ordered = TRUE)))
     expect_false(is.unsorted(al$TRT))
     al <- allocateTreatments(trts = 4, subjects = c(2, 2, 3,
         4), ordered = TRUE)

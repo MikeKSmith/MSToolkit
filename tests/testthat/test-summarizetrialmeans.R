@@ -85,14 +85,14 @@ test_that("test.summarizeTrialMeans", {
   expect_equal(check4, gData.Y2.95, info = "Gaussian method, alpha = 95%, digits = 3")
 
   # Compare created summaries: Quantile method, alpha = 99%, digits = 4
-  qData.Y3.99 <- tapply(myDf$Y3, list(myDf$X3, myDf$X2, myDf$X1), summaryFun, method="q", alpha=99, digits=4)
+  qData.Y3.99 <- suppressWarnings(tapply(myDf$Y3, list(myDf$X3, myDf$X2, myDf$X1), summaryFun, method="q", alpha=99, digits=4))
   qData.Y3.99 <- matrix(unlist(qData.Y3.99), ncol=7, byrow=T)
   check5 <- as.matrix(qSummaryList[[3]][,-(1:3)])
   dimnames(check5) <- NULL
   expect_equal(check5, qData.Y3.99, info = "Quantile method, alpha = 99%, digits = 4")
 
   # Compare created summaries: Gaussian method, alpha = 99%, digits = 4
-  gData.Y3.99 <- tapply(myDf$Y3, list(myDf$X3, myDf$X2, myDf$X1), summaryFun, method="g", alpha=99, digits=4)
+  gData.Y3.99 <- suppressWarnings(tapply(myDf$Y3, list(myDf$X3, myDf$X2, myDf$X1), summaryFun, method="g", alpha=99, digits=4))
   gData.Y3.99 <- matrix(unlist(gData.Y3.99), ncol=7, byrow=T)
   check6 <- as.matrix(gSummaryList[[3]][,-(1:3)])
   dimnames(check6) <- NULL
