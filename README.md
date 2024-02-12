@@ -9,6 +9,10 @@
 status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/jluo0015/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jluo0015/MSToolkit?branch=Dev)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/MSToolkit)](https://CRAN.R-project.org/package=MSToolkit)
+[![Codecov test
+coverage](https://codecov.io/gh/MikeKSmith/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/MikeKSmith/MSToolkit?branch=master)
 <!-- badges: end -->
 
 ## Overview
@@ -18,23 +22,23 @@ trials, evaluate designs, analysis methodology and quantify operating
 characteristics through the application of dose and study level decision
 criteria.
 
--   Can simulate parallel group, crossover and longitudinal designs.
+- Can simulate parallel group, crossover and longitudinal designs.
 
--   Flexibility in defining data generation processes using parametric
-    models.
+- Flexibility in defining data generation processes using parametric
+  models.
 
--   Data generation model parameters can vary across simulation
-    replicates; parameters can vary between subjects.
+- Data generation model parameters can vary across simulation
+  replicates; parameters can vary between subjects.
 
--   The data generation function specifies the linear predictor for the
-    mean response given inputs (dose, time, covariates); inverse link
-    functions allow generation of continuous, binary and count data.
-    User-written inverse link functions allow data generation from a
-    variety of other distributions.
+- The data generation function specifies the linear predictor for the
+  mean response given inputs (dose, time, covariates); inverse link
+  functions allow generation of continuous, binary and count data.
+  User-written inverse link functions allow data generation from a
+  variety of other distributions.
 
--   Model parameters and covariates for each subject / replicate can be
-    generated from multivariate normal distributions or sampled from
-    external data files e.g. existing data files.
+- Model parameters and covariates for each subject / replicate can be
+  generated from multivariate normal distributions or sampled from
+  external data files e.g. existing data files.
 
 ## Installation
 

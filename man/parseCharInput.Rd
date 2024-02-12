@@ -56,10 +56,11 @@ numeric vector will be returned.
 }
 \examples{
 
-  parseCharInput( "1,2,4")
-  parseCharInput( "1,6,4", sort = TRUE )
+  
 
   \dontrun{
+  parseCharInput( "1,2,4")
+  parseCharInput( "1,6,4", sort = TRUE )
   ## see also the unit tests for more examples
   file.show( system.file( "Runit", "runit.supportfunctions.R" ,
     package = "MSToolkit"))

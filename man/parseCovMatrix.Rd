@@ -39,11 +39,11 @@ conditions hold or if the entries of "values" are not compatible with
 positive definite symmetric matrices, an error will be printed.
 }
 \examples{
-
+\dontrun{
   parseCovMatrix(2, nCov = 3)
   parseCovMatrix(c(1,2,3), nCov = 3)
   parseCovMatrix(c(1,2,4), nCov = 2)
-
+}
 }
 \seealso{
 \code{\link{checkSymmetricPDMatrix}}

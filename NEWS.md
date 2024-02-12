@@ -1,3 +1,7 @@
+# MSToolkit 3.3.1
+
+`MSToolkit` 3.3.1 is in development on [GitHub](https://github.com/MikeKSmith/MSToolkit). The 3.3.1 version refactors some of the tests and directory structure. Some Internal functions are now exported.
+
 # MSToolkit 3.0.0
 
 `MSToolkit` 3.0.0 is in development on [GitHub](https://github.com/MikeKSmith/MSToolkit). The 3.0.0 version removes the NONMEM $PRED parsing and related code. The rationale behind this is to try to revert `MSToolkit` to a more dedicated trial design simulation, analysis and operating characteristic evaluation tool. Other simulation tools are available to simulate from NONMEM models - for example: [Perl speaks NONMEM or PsN](https://github.com/UUPharmacometrics/PsN).

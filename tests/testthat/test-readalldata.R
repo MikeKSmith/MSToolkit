@@ -7,7 +7,7 @@ test_that("test.readAllData.CSV", {
   tempDir <- file.path(tempdir(), "DataStorageTemp")
   if (file.exists(tempDir)) try(unlink(tempDir, recursive = TRUE), silent = TRUE)
   expect_true(dir.create(tempDir))
-  microData <- MSToolkit::microSummary [1:12,-c(2,13)]
+  microData <- MSToolkit:::microSummary [1:12,-c(2,13)]
   createDirectories("MicroEvaluation", workingPath = tempDir)
 
   writeData(microData[1:3,], dataNumber = 1, dataType = "Micro", workingPath=tempDir)

@@ -6,7 +6,7 @@ test_that("test.readData.CSV", {
 
   setEctdDataMethod("CSV")
   datapath <- test_path("testdata.datastorage")
-  x <- MSToolkit::microSummary
+  x <- MSToolkit:::microSummary
   y <- readData(dataType = "Micro", dataNumber = 1,
                 workingPath = datapath)
 
@@ -18,7 +18,7 @@ test_that("test.readData.CSV", {
                                   workingPath = datapath)))
   expect_error(readData(dataType = "microeval", dataNumber = 1))
 
-  x <- MSToolkit::ReplicateSample
+  x <- MSToolkit:::ReplicateSample
   x1 <- x[20:80, ]
   rownames(x1) <- 1:61
   y <- readData(dataType = "Replicate", dataNumber = 10,

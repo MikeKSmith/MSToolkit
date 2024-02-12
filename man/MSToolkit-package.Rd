@@ -30,6 +30,7 @@ Other contributors:
 \itemize{
   \item Jian Li [contributor]
   \item Jinhao Luo [contributor]
+  \item Iyer Narayanan Seshan [contributor]
 }
 
 }

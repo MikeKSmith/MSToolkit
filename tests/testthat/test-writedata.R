@@ -11,7 +11,7 @@ test_that("test.writeData.CSV", {
   if (file.exists(tempDir)) try(unlink(tempDir, recursive = TRUE), silent = TRUE)
   expect_true(dir.create(tempDir))
 
-  x <- MSToolkit::ReplicateSample[20:30,]
+  x <- MSToolkit:::ReplicateSample[20:30,]
   createDirectories("ReplicateData", workingPath = tempDir)
   writeData(x, dataNumber = 1001, dataType = "Replicate", workingPath = tempDir)
   expect_true(file.exists(writtenFile <- paste(tempDir, "/ReplicateData/replicate1001.csv", sep="")))

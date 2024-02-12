@@ -32,8 +32,8 @@
 #' @keywords misc
 #' @examples
 #'
-#'   parseCharInput( "1,2,4")
-#'   parseCharInput( "1,6,4", sort = TRUE )
+#'   MSToolkit:::parseCharInput( "1,2,4")
+#'   MSToolkit:::parseCharInput( "1,6,4", sort = TRUE )
 #'
 #'   \dontrun{
 #'   ## see also the unit tests for more examples

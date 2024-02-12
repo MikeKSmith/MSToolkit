@@ -16,8 +16,8 @@ knitr::opts_chunk$set(
 # MSToolkit
 
 <!-- badges: start -->
-[![R build status](https://github.com/jluo0015/MSToolkit/workflows/R-CMD-check/badge.svg)](https://github.com/jluo0015/MSToolkit/actions)
-[![Codecov test coverage](https://codecov.io/gh/jluo0015/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jluo0015/MSToolkit?branch=Dev)
+[![Codecov test coverage](https://codecov.io/gh/MikeKSmith/MSToolkit/branch/master/graph/badge.svg)](https://app.codecov.io/gh/MikeKSmith/MSToolkit?branch=master)
+[![R-CMD-check](https://github.com/MikeKSmith/MSToolkit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MikeKSmith/MSToolkit/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview

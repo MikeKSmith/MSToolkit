@@ -10,7 +10,6 @@
 #' @return An \link{expression} object
 #' @author Romain Francois, Rich Pugh
 #'
-#'@export
 "parseRCode" <- function(
 	code     #@ code to parse
 ){

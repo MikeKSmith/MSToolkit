@@ -338,5 +338,3 @@
 }
 
 
-#' @export
-analyseData <- analyzeData

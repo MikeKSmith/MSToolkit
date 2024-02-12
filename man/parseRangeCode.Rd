@@ -43,6 +43,7 @@ contained in "code" for the \code{parseRangeCode} function.
 \examples{
 
 # Examples of using subsets
+ \dontrun{
 exData <- data.frame( Y = rnorm(200), B = rnorm( 200 ) )
 subs1 <- parseRangeCode("1 < Y < 10 & 1 > B > -2")
 exData[ eval(subs1, exData), ]
@@ -51,7 +52,7 @@ subs2 <- parseRangeCode(c("1 < Y < 10", "1 > B > -2"))
 exData[ eval(subs1, exData), ]
 
 expr <- parseRCode("rnorm(30)")
-eval( expr )
+eval( expr ) }
 }
 \seealso{
 \code{\link{subset}}, \code{\link{parse}}

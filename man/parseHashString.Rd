@@ -48,11 +48,11 @@ the same as in (2).
 without modification.
 }
 \examples{
-
+\dontrun{
 parseHashString("1.5, 2, 3.2#5, 4.2#10,11")
 parseHashString(c("1.5, 2, 3.2","5, 4.2","10,11"))
 parseHashString(list("1.5, 2, 3.2","5, 4.2","10,11"))
-
+}
 }
 \seealso{
 \code{\link{parseCharInput}}

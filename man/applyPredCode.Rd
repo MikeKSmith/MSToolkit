@@ -35,7 +35,8 @@ dataset}
 
 \item{model}{File containing analysis code (for R or SAS) or an R function
 for analysis (R only)
-parsePredCode(c(
+
+MSToolkit:::parsePredCode(c(
 "X = 1",
 "IF (X.EQ.1.OR.Y.GT.0) STUD = 1",
 "NEWVAR = THETA(1) + EXP(ETA(2))**LOG(EPS(1))"
@@ -60,7 +61,7 @@ are then returned
 applyPredCode(
 df = data.frame(X = 1:5, TH1 = rep(1, 5),
  TH2 = rep(2, 5), ETA1 = rep(3, 5), EPS1 = rep(4, 5)), 
-pred = parsePredCode(c("TEST = 1","XCOPY = X","TH2COPY = THETA(2)",
+pred = MSToolkit:::parsePredCode(c("TEST = 1","XCOPY = X","TH2COPY = THETA(2)",
 "Y = XCOPY + LOG(THETA(1)) + THETA(2)**2 + ETA(1) + SQRT(EPS(1)) + 1")),
              respCol ="RESP",
              report = FALSE, 

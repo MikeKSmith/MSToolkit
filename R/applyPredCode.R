@@ -27,7 +27,7 @@
 #' applyPredCode(
 #' df = data.frame(X = 1:5, TH1 = rep(1, 5),
 #'  TH2 = rep(2, 5), ETA1 = rep(3, 5), EPS1 = rep(4, 5)), 
-#'pred = parsePredCode(c("TEST = 1","XCOPY = X","TH2COPY = THETA(2)",
+#'pred = MSToolkit:::parsePredCode(c("TEST = 1","XCOPY = X","TH2COPY = THETA(2)",
 #'"Y = XCOPY + LOG(THETA(1)) + THETA(2)**2 + ETA(1) + SQRT(EPS(1)) + 1")),
 #'              respCol ="RESP",
 #'              report = FALSE, 
