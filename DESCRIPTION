@@ -44,6 +44,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 License: MIT + file LICENSE
-URL: https://github.com/MikeKSmith/MSToolkit
+URL: https://github.com/MikeKSmith/MSToolkit,
+    http://mikeksmith.github.io/MSToolkit/
 BugReports: https://github.com/MikeKSmith/MSToolkit/issues
 VignetteBuilder: knitr
