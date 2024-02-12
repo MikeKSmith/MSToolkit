@@ -1,6 +1,6 @@
 # MSToolkit 3.3.1
 
-`MSToolkit` 3.3.1 is in development on [GitHub](https://github.com/MikeKSmith/MSToolkit). The 3.3.1 version refactors some of the tests and directory structure. Some Internal functions are now exported.
+`MSToolkit` 3.3.1 is in development on [GitHub](https://github.com/MikeKSmith/MSToolkit). The 3.3.1 version refactors some of the tests and directory structure.
 
 # MSToolkit 3.0.0
 
