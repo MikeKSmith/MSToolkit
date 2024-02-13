@@ -1,5 +1,5 @@
 # Create the tvDefinition class
-setClass("tvDefinition", 
+setClass("tvDefinition",
 	representation(Name = "character", Value = "numeric", trtCall = "list"),
 	validity = function(object) {
 		test1 <- length(object@Name) == 1
@@ -14,11 +14,35 @@ setClass("tvDefinition",
 	}
 )
 
+
+
+#' Create "Typical Value" Definition
+#'
+#' Create "Typical Value" Definition for use with "SIMON" typical value
+#' simulation
+#'
+#' Constructs "tvDefinition" object
+#'
+#' @param drugName ...
+#' @param drugValue ...
+#' @param doses ...
+#' @param times ...
+#' @param type ...
+#' @param sequence ...
+#' @param testCall ...
+#' @return A "tvDefinition" object
+#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#' @keywords Typical Value
+#' @examples
+#'
+#' createTvDefinition("A", 1, 1:3)
+#'
+#' @export
 "createTvDefinition" <- function(
-	drugName,								#@ Name of drug  
-	drugValue,								#@ Value to be associated with this drug  
-	doses,									#@ Vector of dose values  
-	times = NULL,							#@ Optional vector of times  
+	drugName,								#@ Name of drug
+	drugValue,								#@ Value to be associated with this drug
+	doses,									#@ Vector of dose values
+	times = NULL,							#@ Optional vector of times
 	type = c("Parallel", "Crossover"),  	#@ Dosing Method: "Parallel" (default) or "Crossover"
 	sequence,								#@ Optional sequence matrix for crossover trials
 	testCall = TRUE
@@ -30,7 +54,7 @@ setClass("tvDefinition",
 	if (type == "Crossover" & missing(sequence)) ectdStop("Sequence matrix must be provided for crossover design")
 	tcList <- list(doses = doses, times = times, type = type)
 	if (!missing(sequence)) tcList$sequence <- sequence
-	tvObject <- new("tvDefinition", Name = drugName, Value = drugValue, trtCall = tcList)
+	tvObject <- methods::new("tvDefinition", Name = drugName, Value = drugValue, trtCall = tcList)
 	if (testCall) {
 		tryCall <- try(do.call("createTreatments", tvObject@trtCall), silent = TRUE)
 		if (class(tryCall) == "try-error") ectdStop("Generated definition fails on test call to 'createTreatments'")

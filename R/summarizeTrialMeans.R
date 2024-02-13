@@ -1,9 +1,35 @@
+#' Summarize Trial Mean Data
+#'
+#' Summarize simulated trial mean responses
+#'
+#' The input data is checked, and the "alpha" value is parsed using
+#' \link{checkSimAlpha} Response means, medians, minima, maxima and "number of
+#' non-missing values" are calculated by any "by" variables (\code{bVar}) Lower
+#' and upper alpha\% intervals are calculated using either the "Gaussian" or
+#' "Quantile" method
+#'
+#' @aliases summariseTrialMeans
+#'
+#' @param data Simulated data to summarize (data frame)
+#' @param respCol Response column names (given by \link{getEctdColName} by
+#' default)
+#' @param bVar Variables by which summary should be produced ("Dose" by
+#' default)
+#' @param alpha Alpha value for calculation of lower and upper intervals
+#' (default 95)
+#' @param digits Number of digits to round summary data
+#' @param method Method to use when calculating lower/upper intervals: Quantile
+#' or Gaussian
+#' @return A data frame containing the response summaries
+#' @author Mike K Smith \email{mstoolkit@@googlemail.com}
+#'
+#' @export
 "summarizeTrialMeans" <- function(
-		data, 
-		respCol = getEctdColName("Response"), 
+		data,
+		respCol = getEctdColName("Response"),
 		bVar = getEctdColName("Dose"),
-		alpha = 95, 
-		digits = 3, 
+		alpha = 95,
+		digits = 3,
 		method = "Quantile"
 )
 {
@@ -24,29 +50,29 @@
 	if (!all(bVar %in% names(data))) ectdStop("Could not find all 'by' variables in input dataset")
 	method <- match.arg(method, c("Quantile", "Gaussian"))
 	alpha <- checkSimAlpha(alpha)	# Parse alpha
-	
+
 	# Build basic summary functions to use
 	meanFun <- function(x, digits) round(mean(x, na.rm = T), digits)			# Mean function
-	medianFun <- function(x, digits) round(median(x, na.rm = T), digits)		# Median function
+	medianFun <- function(x, digits) round(stats::median(x, na.rm = T), digits)		# Median function
 	minFun <- function(x, digits) round(min(x, na.rm = T), digits)				# Minimum function
 	maxFun <- function(x, digits) round(max(x, na.rm = T), digits)				# Maximum function
 	nFun <- function(x) sum(!is.na(x))								# Number of non-missings
-	
+
 	# Stop if unrecognised summary method
 	if(method == "Quantile") {			# Quantile method
-		loFun <- function(x, alp, digits) round(quantile(x, prob = (1 - alp)/2, na.rm = T), digits) # "Lower" function
-		upFun <- function(x, alp, digits) round(quantile(x, prob = (1 + alp)/2, na.rm = T), digits) # "Upper" function
+		loFun <- function(x, alp, digits) round(stats::quantile(x, prob = (1 - alp)/2, na.rm = T), digits) # "Lower" function
+		upFun <- function(x, alp, digits) round(stats::quantile(x, prob = (1 + alp)/2, na.rm = T), digits) # "Upper" function
 	}
 	else {								# Gaussian method
 		loFun <- function(x, alp, digits) {
 			naTest <- !is.na(x)
 			if(sum(naTest) == 1) round(x[naTest], digits)
-			else round(mean(x, na.rm = T) + qnorm((1 - alp)/2) * sd(x, na.rm = T), digits)
+			else round(mean(x, na.rm = T) + stats::qnorm((1 - alp)/2) * stats::sd(x, na.rm = T), digits)
 		}
 		upFun <- function(x, alp, digits) {
 			naTest <- !is.na(x)
 			if(sum(naTest) == 1) round(x[naTest], digits)
-			else round(mean(x, na.rm = T) + qnorm((1 + alp)/2) * sd(x, na.rm = T), digits)
+			else round(mean(x, na.rm = T) + stats::qnorm((1 + alp)/2) * stats::sd(x, na.rm = T), digits)
 		}
 	}
 
@@ -64,3 +90,4 @@
 	simData[do.call("order", simData[bVar]),  , drop = FALSE]
 }
 
+summariseTrialMeans <- summarizeTrialMeans

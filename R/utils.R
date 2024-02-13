@@ -2,24 +2,24 @@
 # Mango Solutions, Chippenham SN14 0SQ 2006
 # utils.R Fri Jun 01 10:57:12 BST 2007 @456 /Internet Time/
 #
-# Author: Romain
+# Author: Romain Francois
 ###############################################################################
 # DESCRIPTION: set of utility functions, not exported
-# KEYWORDS: component:helper 
+# KEYWORDS: component:helper
 ###############################################################################
 
 .nonCumulativeFromCumulative <- function( proportion ){
-  
+
   ## format it correctly
-  proportion <- parseCharInput( proportion ) 
-  
+  proportion <- parseCharInput( proportion )
+
   ## check that the numbers are probabilities \in (0,1]
   if(max(proportion) >  1) ectdStop("Proportion greater than 1")
   if(min(proportion) <= 0) ectdStop("Proportion lower than 0")
-  
+
   ## append 1 if needed
   if(max(proportion) != 1) proportion <- c(proportion, 1)
-  
+
   ## generate the non-cumulative proportions
   proportion <- diff( c(0, proportion)  )
   if(any(proportion <= 0)) ectdStop("Proportion not increasing")
@@ -27,20 +27,23 @@
 }
 
 .deriveFromMasterSeed <- function(){
-  runif(n=1,min=1, max=.Machine$integer.max )
+  stats::runif(n=1,min=1, max=.Machine$integer.max )
 }
- 
-### regular expression toys
-                                
+
+### regular expressions
+
 .quotes <- "(\\\"|\')"
-        
+
 
 .strinterp <- function(txt){
   myrx <- "\\$(\\{(.*?)\\}|[\\.]?[a-zA-Z][\\.0-9a-zA-Z]*)"
-  
+
   gx  <- gregexpr( myrx , txt, perl = TRUE)[[1]]
-  va  <- substring( txt, gx + 1, gx + attr(gx, "match.length")-1) %-~% "[\\{\\}]"
-  spl <- strsplit( txt, myrx , perl = TRUE )[[1]]
+  va  <- substring( txt,
+                    gx + 1,
+                    gx + attr(gx, "match.length")-1) %-~% "[\\{\\}]"
+
+    spl <- strsplit( txt, myrx , perl = TRUE )[[1]]
   if(length(va) == 1 && va == "") return(txt)
   if(length(va) == length(spl)) spl <- c(spl, "")
 
@@ -54,14 +57,14 @@
 }
 
 .allSameLength <- function( ... ){
-  all( diff( sapply(list(...), length)) == 0 ) 
+  all( diff( sapply(list(...), length)) == 0 )
 }
 
 .requiredArgs <- function(arg, msg){
   if( missing(arg) ) {
     sc <- sys.call()
     nameArg <- as.character(sys.call()[2])
-    if( missing(msg) ) msg <- "The argument `" %.% nameArg %.% "` is missing" 
+    if( missing(msg) ) msg <- "The argument `" %.% nameArg %.% "` is missing"
     ectdStop(msg)
   }
 }
@@ -71,7 +74,7 @@
 .expandSubjects <- function(subjects){
   if(length(subjects) == 1) {
     if(subjects < 1) ectdStop("subjects must be positive")
-    subjects <- 1:subjects 
+    subjects <- 1:subjects
   } else {
     subjects
   }
@@ -88,15 +91,21 @@
 				values <- sapply( dim(probArray), seq)
 			}
 		}
-		if( !all(  dim(probArray)  == sapply(values, length)  )) ectdStop("Dimension problem between `probArray` and `values`")
+		if( !all(  dim(probArray)  == sapply(values, length)  )) ectdStop(
+		  "Dimension problem between `probArray` and `values`"
+		  )
+
 		out <- cbind( do.call( expand.grid, values ), probs = as.vector( probArray) )
 		out <- subset( out, probs > 0)
-		
-	} else { 
+
+	} else {
 		## make tests on the probArray or build it
     	if ( missing(probArray) ) {
 			# try to build it
-			if(missing(values) || missing(probs) ) ectdStop("`values` and `probs` must be supplied if probArray is missing")
+			if(missing(values) || missing(probs) ) ectdStop(
+			  "`values` and `probs` must be supplied if probArray is missing"
+			  )
+
 			probArray <- probs[[1]]
 			lp <- length(probs)
 			if(lp>1) {
@@ -107,18 +116,26 @@
 		} else {
 			# check the probArray
 			if (is.data.frame(probArray)) {
-				if(sum(probArray[,ncol(probArray)]) != 1) ectdStop("the probArray does not sum up to one")
-				if(ncol(probArray) - 1 != length(values)) ectdStop("The `probArray` has wrong dimensions")
+				if(sum(probArray[,ncol(probArray)]) != 1) ectdStop(
+				  "the probArray does not sum up to one"
+				  )
+				if(ncol(probArray) - 1 != length(values)) ectdStop(
+				  "The `probArray` has wrong dimensions"
+				  )
 			}
-			
+
 			if (is.array(probArray)) {
-				if(sum(probArray) != 1) ectdStop("the probArray does not sum up to one")
-				if(length(dim(probArray)) != length(values)) ectdStop("The `probArray` has wrong dimensions")
+				if(sum(probArray) != 1) ectdStop(
+				  "the probArray does not sum up to one"
+				  )
+				if(length(dim(probArray)) != length(values)) ectdStop(
+				  "The `probArray` has wrong dimensions"
+				  )
 			}
-			
+
 		}
-    
-		## make the grid                               
+
+		## make the grid
 		out <- cbind( do.call( expand.grid, values ), probs = as.vector(probArray) )
 	}
 	## make sure they are all factors
@@ -133,11 +150,13 @@
 }
 
 .dummy <- function(...){
-  cat( "\n\nFunction `"%.% as.character(match.call()[1]) %.% "` not yet implemented\n\n" ) 
+  cat( "\n\nFunction `"%.%
+         as.character(match.call()[1]) %.%
+         "` not yet implemented\n\n" )
 }
 
 .log <- function( ... , file = getEctdLogFile(), verbose = getEctdVerbose()){
-  if( verbose ){ 
+  if( verbose ){
     msg <- paste( ..., "\n", sep = "" )
     msg <- .strinterp( msg )
     msg <- sprintf( "[%s] %s", format( Sys.time(), getEctdDateFormat() ) , msg )
@@ -147,22 +166,27 @@
 }
 
 ".checkFun" <- function(
-	fun, 
+	fun,
 	expectedArgs
 ){
 	fun <- try( eval( match.fun(fun), parent.frame() ), silent = TRUE )
-	if (class(fun) == "try-error") ectdStop("not a valid function")   
-	if( !missing(expectedArgs) ){  
-		expectedArgs <- parseCharInput( expectedArgs, convertToNumeric = FALSE )           
-		if( !all(expectedArgs %in% names(formals(fun))) ) 
+	if (class(fun) == "try-error") ectdStop("not a valid function")
+	if( !missing(expectedArgs) ){
+		expectedArgs <- parseCharInput( expectedArgs, convertToNumeric = FALSE )
+		if( !all(expectedArgs %in% names(formals(fun))) )
 			ectdStop("Problem with the arguments of the function")
 	}
 	fun
 }
-".checkReplicates" <- function( replicates, workingPath = getwd(), method = getEctdDataMethod() )
+".checkReplicates" <- function( replicates,
+                                workingPath = getwd(),
+                                method = getEctdDataMethod() )
 {
 	## Ensure the replicate files exist
-	repsExist <- try(getReplicates(workingPath = workingPath, method = method), silent = TRUE)
+	repsExist <- try(getReplicates(workingPath = workingPath,
+	                               method = method),
+	                 silent = TRUE)
+
 	if (class(repsExist) == "try-error") ectdStop("No replicates found")
 	if (is.character(replicates)) {
 		if (length(replicates) == 1 && replicates == "*") return(repsExist)
@@ -170,17 +194,22 @@
 	}
 	else {
 		if (is.numeric(replicates)) {
-			if (!all(replicates %in% repsExist)) ectdStop("Could not find all replicates specified")
+			if (!all(replicates %in% repsExist)) ectdStop(
+			  "Could not find all replicates specified"
+			  )
 			else return(replicates)
 		}
-		else ectdStop("'replicates' input must be a numeric vector or a single character ('*')")
+		else ectdStop(
+		  "'replicates' input must be a numeric vector or a single character ('*')"
+		  )
 	}
 	NULL
 }
 
 .checkGridAvailable <- function(){
-  suppressWarnings(require(parallel, quietly = TRUE))
-}
+  suppressWarnings(requireNamespace("parallel", quietly = TRUE))
+  }
+
 
 .splitGridVector <- function(vec, nReps = 100) {
   startVec <- rep(1:ceiling(length(vec)/nReps), each=nReps)[1:length(vec)]
@@ -189,14 +218,14 @@
   }
   split(vec, startVec)
 }
-
-
-.ectdSasCall <- function(params, 
-  sasLoc = if (.Platform$OS.type == "windows") getEctdExternalPath("SASPATH_WIN") else getEctdExternalPath("SASPATH_UNIX"), 
-  macroLoc = file.path(path.package("MSToolkit"), "sasAnalysis.sas"), 
+#
+#
+.ectdSasCall <- function(params,
+  sasLoc = if (.Platform$OS.type == "windows") getEctdExternalPath("SASPATH_WIN") else getEctdExternalPath("SASPATH_UNIX"),
+  macroLoc = file.path(path.package("MSToolkit"), "sasAnalysis.sas"),
   logFile = file.path(workingPath, "sasLogfile.log"),
   printFile = file.path(workingPath, "sasOutput.lst"),
-  workingPath = getwd()) 
+  workingPath = getwd())
 {
 	sasDir <- gsub( "\\\\[^\\]*$", "", sasLoc)
 	if(!file.exists(sasDir)) ectdStop("SAS is not available on the system: \n\t$sasLoc")
@@ -208,7 +237,7 @@
 
 
 .roundIt <- function( data, digits ){
-  if(!missing(digits)){   
+  if(!missing(digits)){
     digits <- parseCharInput( digits, convertToNumeric = TRUE )
     nCov <- ncol( data )
     if(any(digits < 0 )) ectdStop("`digits` should be a positive vector")
@@ -227,21 +256,25 @@
 }
 
 
-.cleanup <- function( 
+.cleanup <- function(
   cleanUp = TRUE,       # do I do any cleanup
   grid = FALSE,         # was the grid used
-  workingPath = getwd(), # where to work 
+  workingPath = getwd(), # where to work
   method = getEctdDataMethod()  # Method of data storage to "clean"
   ){
-  
+
 	if( cleanUp ){
 		if (method %in% c("CSV", "RData")) {
 			.log("removing micro and macro directories")
-			removeDirectories(c("MicroEvaluation", "MacroEvaluation"), workingPath = workingPath)
-			if(grid){ 
+			removeDirectories(c("MicroEvaluation",
+			                    "MacroEvaluation"),
+			                  workingPath = workingPath)
+			if(grid){
 				allconns <- showConnections()
-				sockconns <- rownames(allconns)[which(allconns[, "class"] == "sockconn")]
-				if (length(sockconns) > 0) for (i in sockconns) try(close(getConnection(i)))
+			sockconns <- rownames(allconns)[which(allconns[, "class"] == "sockconn")]
+		    if (length(sockconns) > 0) for (i in sockconns) try(
+		      close(getConnection(i))
+		      )
 				.log("clusters were shut down")
 			}
 		}
@@ -249,7 +282,7 @@
 			ectdStop("Have not yet implemented the cleanup of 'Internal' data stored")
 		}
 	}
-  
+
 }
 
 .applyDataSubset <- function(df, subset) {
@@ -264,7 +297,7 @@
 
 # A replacement for aggregate.data.frame
 .dataAggregate <- function(resp, by, fun, ..., bound = 10^5) {
-	if (length(by) == 1) return(aggregate(resp, by, fun, ...))
+	if (length(by) == 1) return(stats::aggregate(resp, by, fun, ...))
 	uniCols <- sapply(by, function(x) length(unique(x)))
 	byProd <- prod(uniCols)
 	if (byProd > bound) {
@@ -272,7 +305,7 @@
 		allData <- data.frame(resp, by)
 		splitData <- split(allData, by[[whichSplit]])
 		splitAgg <- lapply(splitData, function(df, respCol, byCol, fun, ...) {
-					aggregate(df[respCol], df[byCol], fun, ...)
+		  stats::aggregate(df[respCol], df[byCol], fun, ...)
 				}, respCol = names(resp), byCol = names(by), fun = fun, ...)
 		outDf <- do.call("rbind", splitAgg)
 		theOrder <- do.call("order", outDf[rev(names(by))])
@@ -280,14 +313,14 @@
 		row.names(outDf) <- 1:nrow(outDf)
 		outDf
 	}
-	else return(aggregate(resp, by, fun, ...))
+	else return(stats::aggregate(resp, by, fun, ...))
 }
 
-# Image Comparison Function
-.compareImages <- function(result, target, 
-		exeLoc = system.file(package = "MSToolkit", "ImageCompare", "diff.exe")) {
-	if (!file.exists(result) | !file.exists(target)) return(FALSE)
-	buildCall <- paste(exeLoc, shortPathName(result), shortPathName(target))
-	x <- system(buildCall, intern = TRUE, wait = TRUE)
-	!(length(x) && length(grep(" differ", x)))
-}
+# # Image Comparison Function
+# .compareImages <- function(result, target,
+# 		exeLoc = system.file(package = "MSToolkit", "ImageCompare", "diff.exe")) {
+# 	if (!file.exists(result) | !file.exists(target)) return(FALSE)
+# 	buildCall <- paste(exeLoc, shortPathName(result), shortPathName(target))
+# 	x <- system(buildCall, intern = TRUE, wait = TRUE)
+# 	!(length(x) && length(grep(" differ", x)))
+# }

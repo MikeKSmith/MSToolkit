@@ -1,4 +1,16 @@
-"parseRCode" <- function( 
+#' Parse R Code
+#'
+#' Parses character string to ensure it is valid R code, returning an R
+#' "expression" object
+#'
+#' The \code{parseRCode} function wraps "parse" and checks to ensure a valid
+#' expression is created
+#'
+#' @param code Character string containing R Code to parse
+#' @return An \link{expression} object
+#' @author Romain Francois, Rich Pugh
+#'
+"parseRCode" <- function(
 	code     #@ code to parse
 ){
 	###############################################################################
@@ -8,9 +20,9 @@
 	# Author: Romain/Rich P
 	###############################################################################
 	# DESCRIPTION: parse R code
-	# KEYWORDS: component:support 
+	# KEYWORDS: component:support
 	###############################################################################
 	result <- try( parse( text = code ),  silent = TRUE )
-	if( class(result) == "try-error" ) ectdStop(paste('parsing problem:', ( result %-~% "^[^:]*:" ), sep="")) 
+	if( class(result) == "try-error" ) ectdStop(paste('parsing problem:', ( result %-~% "^[^:]*:" ), sep=""))
 	result
 }

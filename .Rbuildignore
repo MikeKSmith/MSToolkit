@@ -1,2 +1,12 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+^\.Rhistory$
+^WiP_STASH$
+^README\.Rmd$
+^\.github$
+^data-raw$
+^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

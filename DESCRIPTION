@@ -1,13 +1,50 @@
 Package: MSToolkit
 Type: Package
-Title: The MSToolkit library for clinical trial design
-Version: 3.2.4
-Date: 2016-04-08
-Author: Mike K Smith <mstoolkit@gmail.com>
+Title: The MSToolkit Library For Clinical Trial Design
+Version: 3.3.1
+Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
+                    role = c("aut", "cre")),
+             person("Rich", "Pugh", email = "rpugh@mango-solutions.com",
+                    role = c("aut")),
+                  person("Roman", "Francois",
+                    role = c("aut")),
+                  person("Francisco", "Gochez", 
+                    role = c("aut")),
+                  person("Jian", "Li", 
+                    role = c("ctb")),
+                  person("Jinhao", "Luo",
+                    role = c("ctb")),
+                  person("Iyer","Narayanan Seshan",
+                  role = c("ctb"))
+                  )
 Maintainer: Mike K Smith <mstoolkit@gmail.com>
-Description: MSToolkit library for Clinical Trial Design
-Depends: R (>= 2.14.0), MASS, methods
-Suggests: RUnit, parallel,
-    testthat, digest
-Enhances: RNMImport
-License: GPL
+Description: Simulate data, analyse this data and assess operating 
+    characteristcs of clinical trials.
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 2.14.0)
+Suggests: 
+    testthat (>= 3.0.0),
+    withr,
+    knitr,
+    rmarkdown,
+    covr
+Imports: 
+    parallel,
+    MASS,
+    methods,
+    ini,
+    tibble,
+    tidyr,
+    here,
+    utils,
+    stats
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Config/testthat/edition: 3
+License: MIT + file LICENSE
+URL: https://github.com/MikeKSmith/MSToolkit,
+    http://mikeksmith.github.io/MSToolkit/
+BugReports: https://github.com/MikeKSmith/MSToolkit/issues
+VignetteBuilder: knitr
