@@ -1,7 +1,7 @@
 Package: MSToolkit
 Type: Package
 Title: The MSToolkit Library For Clinical Trial Design
-Version: 3.3.1
+Version: 3.3.1.9000
 Authors@R: c(person("Mike K", "Smith", email = "mstoolkit@gmail.com",
                     role = c("aut", "cre")),
              person("Rich", "Pugh", email = "rpugh@mango-solutions.com",

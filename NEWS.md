@@ -1,3 +1,7 @@
+# MSToolkit (development version)
+
+* Deprecate startup message(#23)
+
 # MSToolkit 3.3.1
 
 `MSToolkit` 3.3.1 is in development on [GitHub](https://github.com/MikeKSmith/MSToolkit). The 3.3.1 version refactors some of the tests and directory structure.
