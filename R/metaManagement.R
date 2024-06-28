@@ -4,6 +4,8 @@
 ## Set the Environment - this code executes on build to ensure it exists in the MSToolkit library!
 
 # This line sets the initial (empty) environment
+
+#' @export
 .ectdEnv <- new.env( )
 
 # This line sets the default "logging" file to "ectd.log"
